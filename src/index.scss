@@ -1,0 +1,24 @@
+@import "styles";
+@import "https://fonts.googleapis.com/css?family=Open Sans";
+
+html,
+body,
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $off-white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans", "DM Sans",sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
