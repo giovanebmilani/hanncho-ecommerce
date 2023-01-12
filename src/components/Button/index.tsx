@@ -4,7 +4,7 @@ import './index.scss'
 export interface ButtonProps {
 	children?: ReactNode
 	onClick?: VoidFunction
-	type?: 'primary' | 'secondary'
+	type?: 'primary' | 'secondary' | 'tertiary' | 'danger'
 	disabled?: boolean
 }
 

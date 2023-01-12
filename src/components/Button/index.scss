@@ -13,7 +13,7 @@
 
 	&.primary {
 		background-color: $green;
-		color: $white;
+		color: rgba($white, .7);
 		border: none;
 
 		&:hover {
@@ -28,10 +28,41 @@
 	&.secondary {
 		background-color: $blue;
 		border: none;
-		color: $white;
+		color: rgba($white, .7);
 
+		&:hover {
+			background-color: color.adjust($color: $blue, $saturation: 10%);
+		}
 		&:disabled {
 			background-color: color.adjust($color: $blue, $saturation: -50%);
+			color: $grey;
+		}
+	}
+
+	&.tertiary {
+		background-color: $yellow;
+		border: none;
+		color: rgba($black, .7);
+
+		&:hover {
+			background-color: color.adjust($color: $yellow, $saturation: 10%);
+		}
+		&:disabled {
+			background-color: color.adjust($color: $yellow, $saturation: -50%);
+			color: $grey;
+		}
+	}
+
+	&.danger {
+		background-color: $red;
+		border: none;
+		color: rgba($white, .7);
+
+		&:hover {
+			background-color: color.adjust($color: $red, $saturation: 10%);
+		}
+		&:disabled {
+			background-color: color.adjust($color: $red, $saturation: -50%);
 			color: $grey;
 		}
 	}

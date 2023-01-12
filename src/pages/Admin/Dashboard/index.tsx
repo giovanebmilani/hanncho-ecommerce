@@ -12,7 +12,16 @@ const Dashboard: React.FC = () => {
 	return (
 		<div className='dashboard-container'>
 			<div className='content'>
+			<Button type='primary' onClick={onStockClick}>
+					ESTOQUE
+				</Button>
 				<Button type='secondary' onClick={onStockClick}>
+					ESTOQUE
+				</Button>
+				<Button type='tertiary' onClick={onStockClick}>
+					ESTOQUE
+				</Button>
+				<Button type='danger' onClick={onStockClick}>
 					ESTOQUE
 				</Button>
 			</div>
