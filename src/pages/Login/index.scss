@@ -1,0 +1,40 @@
+@import '../../sass/index.scss';
+
+.login-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.content {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin: 8rem;
+	}
+
+	.title {
+		margin-bottom: 2rem;
+		color: $white;
+		text-align: center;
+		font-size: 20px;
+		font-weight: 800;
+	}
+
+	.inputs {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		max-width: 300px;
+		row-gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.buttons {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		max-width: 300px;
+	}
+}

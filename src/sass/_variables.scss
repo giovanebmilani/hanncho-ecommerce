@@ -5,5 +5,70 @@ $red: #cc2936;
 $yellow: #ffd166;
 $blue: #3e6680;
 $green: #566e3e;
+$grey: #9f9f9f;
 
 $bg-color: #000;
+
+// Timing
+$animation-timing: 0.25s;
+
+// Animations
+@keyframes appear-left {
+	from {
+		clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 100% 0%);
+		opacity: 0;
+	}
+
+	to {
+		clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 0%);
+		opacity: 1;
+	}
+}
+
+@keyframes appear-right {
+	from {
+		clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
+		opacity: 0;
+	}
+
+	to {
+		clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+		opacity: 1;
+	}
+}
+
+@keyframes appear-up {
+	from {
+		clip-path: polygon(0% 100%, 0% 100%, 100% 100%, 100% 100%);
+		opacity: 0;
+	}
+
+	to {
+		clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%);
+		opacity: 1;
+	}
+}
+
+@keyframes appear-down {
+	from {
+		clip-path: polygon(0% 0%, 0% 0%, 100% 0%, 100% 0%);
+		opacity: 0;
+	}
+
+	to {
+		clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+		opacity: 1;
+	}
+}
+
+@keyframes popup {
+	from {
+		opacity: 0;
+		transform: scale(0.5);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
