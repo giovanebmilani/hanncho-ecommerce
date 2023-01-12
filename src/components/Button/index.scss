@@ -4,9 +4,12 @@
 .button-container {
 	display: block;
 	padding: 16px 24px;
-	border-radius: 12px;
+	border-radius: 4px;
+	font-size: 16px;
 	font-weight: bold;
 	cursor: pointer;
+	background-image: url(../../../public/assets/button-container.png);
+	background-size: 100% 100%;
 
 	&.primary {
 		background-color: $green;
@@ -14,7 +17,7 @@
 		border: none;
 
 		&:hover {
-			background-color: color.adjust($color: $green, $saturation: 5%);
+			background-color: color.adjust($color: $green, $saturation: 10%);
 		}
 		&:disabled {
 			background-color: color.adjust($color: $green, $saturation: -50%);
