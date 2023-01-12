@@ -2,6 +2,7 @@ import { RouteProps } from 'react-router-dom'
 import PAGES from '../utils/constants/pages'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import Dashboard from '../pages/Admin/Dashboard'
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
 	requireAuth?: boolean
@@ -18,5 +19,10 @@ export const routes: RouteConfig[] = [
 		component: <Login />,
 		path: PAGES.login,
 		requireAuth: false
+	},
+	{
+		component: <Dashboard />,
+		path: PAGES.admin,
+		requireAuth: true
 	}
 ]
