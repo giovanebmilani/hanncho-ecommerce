@@ -1,0 +1,110 @@
+@import '../../sass/index.scss';
+
+.input-container {
+	width: 100%;
+	display: inline-flex;
+	z-index: 1;
+	position: relative;
+	flex-direction: column;
+	justify-content: center;
+	vertical-align: bottom;
+
+	> .label {
+		color: $white;
+		position: absolute;
+		font-size: 12px;
+		left: 20px;
+		letter-spacing: 0.2px;
+		pointer-events: none;
+
+		// Disable selection highlight
+		-webkit-touch-callout: none;
+		user-select: none;
+	}
+
+	> .input {
+		color: $white;
+		outline: none;
+		padding: 18px 16px;
+		font-size: 14px;
+		background: none;
+		transition: color $animation-timing, border $animation-timing;
+		border: 1px solid $white;
+		border-radius: 12px;
+
+		&:focus {
+			border-color: $yellow;
+		}
+
+		&:focus,
+		&.filled {
+			padding: 24px 16px 12px;
+
+			~ .label {
+				transform: translate(-15%, -90%);
+				transition: transform 100ms ease-in-out;
+				font-size: 10px;
+			}
+		}
+
+		&.search > .input {
+			&::-ms-clear,
+			&::-ms-reveal {
+				width: 0;
+				height: 0;
+				display: none;
+			}
+
+			&::-webkit-search-decoration,
+			&::-webkit-search-cancel-button,
+			&::-webkit-search-results-button,
+			&::-webkit-search-results-decoration {
+				display: none;
+			}
+		}
+
+		&.number > .input {
+			appearance: textfield;
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				display: none;
+			}
+		}
+
+		&.date > .input {
+			appearance: none;
+			line-height: 22px;
+
+			&::-webkit-clear-button,
+			&::-webkit-inner-spin-button,
+			&::-webkit-calendar-picker-indicator {
+				display: none;
+			}
+
+			&::-webkit-datetime-edit-day-field,
+			&::-webkit-datetime-edit-year-field,
+			&::-webkit-datetime-edit-month-field {
+				padding: 0;
+			}
+
+			&:not(:focus, .filled)::-webkit-datetime-edit {
+				opacity: 0;
+			}
+		}
+
+		&.readonly,
+		&.disabled {
+			> .input,
+			> .input:focus,
+			> .label {
+				color: $grey;
+				border-color: transparent;
+				opacity: 1;
+				background: none;
+				touch-action: none;
+				pointer-events: none;
+			}
+		}
+	}
+}
