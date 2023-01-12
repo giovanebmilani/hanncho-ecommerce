@@ -1,0 +1,28 @@
+@import '../../sass/index.scss';
+
+.header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $black;
+	background-image: url(../../../public/assets/header-container.png);
+	background-size: 100%;
+	background-position: 100% 100%;
+
+	.left-content {
+		width: 100%;
+		padding: 1rem 4rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.right-content {
+		width: 100%;
+		padding: 1rem 4rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+}

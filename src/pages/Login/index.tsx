@@ -1,7 +1,7 @@
+import './index.scss'
 import { useState } from 'react'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import './index.scss'
 
 const Login: React.FC = () => {
 	const [login, setLogin] = useState<string>('')

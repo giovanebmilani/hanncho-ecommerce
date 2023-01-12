@@ -1,6 +1,8 @@
 const PAGES = {
 	home: '/',
-	login: '/login'
+	login: '/login',
+	shop: '/loja',
+	cart: '/carrinho'
 }
 
 export default PAGES
