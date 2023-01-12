@@ -23,8 +23,8 @@ const Login: React.FC = () => {
 			<div className='content'>
 				<h1 className='title'>Acesse como administrador:</h1>
 				<div className='inputs'>
-					<Input label='Login' value={login} onChange={handleLoginChange} />
-					<Input label='Senha' type='password' value={password} onChange={handlePasswordChange} />
+					<Input label='LOGIN' value={login} onChange={handleLoginChange} />
+					<Input label='SENHA' type='password' value={password} onChange={handlePasswordChange} />
 				</div>
 				<div className='buttons'>
 					<Button type='primary' disabled={isLoginButtonDisabled}>
