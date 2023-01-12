@@ -1,11 +1,15 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { routes } from './routes'
 
 const Router: React.FC = () => {
-	const teste = 'teste'
 	return (
 		<BrowserRouter>
-			<>{teste}</>
+			<Routes>
+				{routes.map((route, index) => (
+					<Route key={index} path={route.path} element={route.component} />
+				))}
+			</Routes>
 		</BrowserRouter>
 	)
 }
