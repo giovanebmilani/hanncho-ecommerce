@@ -11,8 +11,12 @@ const Login: React.FC = () => {
 	const navigate = useNavigate()
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-	const { setAuthToken } = useAuth()
+	const { setAuthToken, isLogged } = useAuth()
 	const { isLoading, data, mutate } = useLoginMutation({ username, password })
+
+	useEffect(() => {
+		if (isLogged?.()) navigate(PAGES.admin)
+	}, [isLogged])
 
 	useEffect(() => {
 		if (!data) return

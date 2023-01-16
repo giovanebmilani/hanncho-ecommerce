@@ -9,21 +9,26 @@ const Dashboard: React.FC = () => {
 	const onStockClick = () => {
 		navigate(PAGES.stock)
 	}
+
+	const onColorClick = () => {
+		navigate(PAGES.color)
+	}
+
 	return (
 		<div className='dashboard-container'>
 			<div className='content'>
-			<Button type='primary' onClick={onStockClick}>
-					ESTOQUE
-				</Button>
-				<Button type='secondary' onClick={onStockClick}>
-					ESTOQUE
-				</Button>
-				<Button type='tertiary' onClick={onStockClick}>
-					ESTOQUE
-				</Button>
-				<Button type='danger' onClick={onStockClick}>
-					ESTOQUE
-				</Button>
+				<p className='title'>Dashboard</p>
+				<div className='buttons'>
+					<Button type='primary' onClick={onStockClick}>
+						ESTOQUE
+					</Button>
+					<Button type='secondary' onClick={onColorClick}>
+						CORES
+					</Button>
+					<Button type='tertiary' onClick={onStockClick}>
+						CATEGORIAS
+					</Button>
+				</div>
 			</div>
 		</div>
 	)

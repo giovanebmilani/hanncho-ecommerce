@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Dashboard from '../pages/Admin/Dashboard'
 import Stock from '../pages/Admin/Stock'
+import ColorDashboard from '../pages/Admin/Color'
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
 	requireAuth?: boolean
@@ -29,6 +30,11 @@ export const routes: RouteConfig[] = [
 	{
 		component: <Stock />,
 		path: PAGES.stock,
+		requireAuth: true
+	},
+	{
+		component: <ColorDashboard />,
+		path: PAGES.color,
 		requireAuth: true
 	}
 ]
