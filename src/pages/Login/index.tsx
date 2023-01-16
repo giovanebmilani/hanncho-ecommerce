@@ -4,7 +4,7 @@ import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
-import { useLoginMutation } from '../../api/admin/account/mutations'
+import { useLoginMutation } from '../../api/core/account/mutations'
 import { setAuthToken } from '../../utils/stores/auth'
 
 const Login: React.FC = () => {
