@@ -5,17 +5,18 @@ import Input from '../../components/Input'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
 import { useLoginMutation } from '../../api/core/account/mutations'
-import { setAuthToken } from '../../utils/stores/auth'
+import { useAuth } from '../../providers/auth/AuthProvider'
 
 const Login: React.FC = () => {
 	const navigate = useNavigate()
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
+	const { setAuthToken } = useAuth()
 	const { isLoading, data, mutate } = useLoginMutation({ username, password })
 
 	useEffect(() => {
 		if (!data) return
-		setAuthToken(data.token)
+		setAuthToken?.(data.token)
 		navigate(PAGES.admin)
 	}, [data])
 

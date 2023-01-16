@@ -5,12 +5,15 @@ import reportWebVitals from './reportWebVitals'
 import Router from './router'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from './api/query-client'
+import { AuthProvider } from './providers/auth/AuthProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<Router />
+			<AuthProvider>
+				<Router />
+			</AuthProvider>
 		</QueryClientProvider>
 	</React.StrictMode>
 )
