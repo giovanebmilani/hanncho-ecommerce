@@ -1,17 +1,26 @@
 import './index.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
+import { useLoginMutation } from '../../api/admin/account/mutations'
+import { setAuthToken } from '../../utils/stores/auth'
 
 const Login: React.FC = () => {
 	const navigate = useNavigate()
-	const [login, setLogin] = useState<string>('')
+	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
+	const { isLoading, data, mutate } = useLoginMutation({ username, password })
 
-	const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setLogin(e.target.value)
+	useEffect(() => {
+		if (!data) return
+		setAuthToken(data.token)
+		navigate(PAGES.admin)
+	}, [data])
+
+	const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setUsername(e.target.value)
 	}
 
 	const handlePasswordChange = (e?: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,22 +28,18 @@ const Login: React.FC = () => {
 		setPassword(e.target.value)
 	}
 
-	const onLoginClick = () => {
-		navigate(PAGES.admin)
-	}
-
-	const isLoginButtonDisabled = !login || !password
+	const isLoginButtonDisabled = isLoading || !username || !password
 
 	return (
 		<div className='login-container'>
 			<div className='content'>
 				<h1 className='title'>Acesse como administrador:</h1>
 				<div className='inputs'>
-					<Input label='LOGIN' value={login} onChange={handleLoginChange} />
+					<Input label='USUÁRIO' value={username} onChange={handleUsernameChange} />
 					<Input label='SENHA' type='password' value={password} onChange={handlePasswordChange} />
 				</div>
 				<div className='buttons'>
-					<Button type='primary' disabled={isLoginButtonDisabled} onClick={onLoginClick}>
+					<Button type='primary' disabled={isLoginButtonDisabled} onClick={mutate}>
 						ACESSAR
 					</Button>
 				</div>
