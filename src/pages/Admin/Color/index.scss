@@ -21,4 +21,50 @@
 		font-size: 40px;
 		font-weight: 800;
 	}
+
+	.row-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 3rem;
+	}
+
+	.color-list {
+		display: flex;
+		flex-direction: column;
+		width: 30rem
+	}
+
+	.color-list-item {
+		display: flex;
+		padding: .5rem 2rem;
+		width: 100%;
+		text-align: left;
+		align-items: center;
+
+		&:hover {
+			background-color: rgb(24, 24, 24);
+		}
+
+		.left-content {
+			width: 10%;
+		}
+
+		.middle-content {
+			width: 50%;
+		}
+
+		.right-content {
+			display: flex;
+			width: 40%;
+			justify-content: space-evenly;
+
+			.icon-button-container {
+				img {
+					margin-top: .3rem;
+					width: 1.3rem;
+					height: 1.3rem;
+				}
+			}
+		}
+	}
 }
