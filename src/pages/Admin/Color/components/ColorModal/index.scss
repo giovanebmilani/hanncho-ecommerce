@@ -1,0 +1,30 @@
+@import '../../../../../sass/index.scss';
+
+.color-modal {
+	display: flex;
+	width: 40rem;
+	flex-direction: column;
+	gap: 2rem;
+	background-color: $dark-grey;
+	padding: 4rem;
+	border-radius: 2rem;
+
+	.title {
+		color: $white;
+		text-align: left;
+		font-size: 30px;
+		font-weight: 800;
+	}
+
+	.buttons {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		gap: 2rem;
+		justify-content: flex-start;
+
+		& button {
+			width: 100%;
+		}
+	}
+}

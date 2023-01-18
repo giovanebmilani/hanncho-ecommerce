@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../providers/auth/AuthProvider'
+import { useAuth } from '../providers/Auth/AuthProvider'
 import PAGES from '../utils/constants/pages'
 
 export interface ProtectedRouteProps {

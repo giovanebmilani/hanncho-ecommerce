@@ -46,17 +46,23 @@
 		}
 
 		.left-content {
+			align-items: center;
+			display: flex;
 			width: 10%;
 		}
 
 		.middle-content {
+			display: flex;
+			align-items: center;
 			width: 50%;
 		}
 
 		.right-content {
+			align-items: center;
 			display: flex;
+			gap: 2rem;
 			width: 40%;
-			justify-content: space-evenly;
+			justify-content: flex-end;
 
 			.icon-button-container {
 				img {

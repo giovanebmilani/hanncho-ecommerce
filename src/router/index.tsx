@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Blur from '../components/Blur'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
+import Modal from '../components/Modal'
 import { ProtectedRoute } from './ProtectedRoute'
 import { routes } from './routes'
 
@@ -28,6 +30,8 @@ const Router: React.FC = () => {
 					})}
 				</Routes>
 			</Layout>
+			<Blur />
+			<Modal />
 		</BrowserRouter>
 	)
 }
