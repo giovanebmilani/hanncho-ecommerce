@@ -14,6 +14,10 @@ const Dashboard: React.FC = () => {
 		navigate(PAGES.color)
 	}
 
+	const onCategoryClick = () => {
+		navigate(PAGES.category)
+	}
+
 	return (
 		<div className='dashboard-container'>
 			<div className='content'>
@@ -25,7 +29,7 @@ const Dashboard: React.FC = () => {
 					<Button type='secondary' onClick={onColorClick}>
 						CORES
 					</Button>
-					<Button type='tertiary' onClick={onStockClick}>
+					<Button type='tertiary' onClick={onCategoryClick}>
 						CATEGORIAS
 					</Button>
 				</div>
