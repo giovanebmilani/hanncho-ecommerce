@@ -6,5 +6,5 @@ import QUERY_KEYS from '../../../utils/constants/queries'
 export const useGetAllColors = () =>
 	useQuery({
 		queryKey: [QUERY_KEYS.color],
-		queryFn: () => colorApi.get<ColorDto[]>('').then((res) => res.data)
+		queryFn: async () => (await colorApi.get<ColorDto[]>('')).data
 	})

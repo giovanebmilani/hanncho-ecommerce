@@ -16,8 +16,8 @@ export const useColorUpdateMutation = (payload: ColorDto) =>
 		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.color] })
 	})
 
-export const useColoDeleteMutation = (colorId: number) =>
+export const useColorDeleteMutation = () =>
 	useMutation({
-		mutationFn: () => colorApi.delete(`/${colorId}`).then((res) => res.data as ColorDto),
+		mutationFn: (colorId: number) => colorApi.delete(`/${colorId}`).then((res) => res.data as ColorDto),
 		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.color] })
 	})

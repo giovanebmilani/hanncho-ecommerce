@@ -5,7 +5,7 @@ import Input from '../../components/Input'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
 import { useLoginMutation } from '../../api/core/account/mutations'
-import { useAuth } from '../../providers/auth/AuthProvider'
+import { useAuth } from '../../providers/Auth/AuthProvider'
 
 const Login: React.FC = () => {
 	const navigate = useNavigate()

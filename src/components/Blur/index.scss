@@ -1,0 +1,17 @@
+@import '../../sass/index.scss';
+
+.blur {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	backdrop-filter: blur(5px);
+	transition: all 0.4s ease-in-out;
+
+	&.hidden {
+		visibility: hidden;
+		opacity: 0;
+	}
+}
