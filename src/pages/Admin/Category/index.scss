@@ -1,6 +1,6 @@
 @import '../../../sass/index.scss';
 
-.color-dashboard-container {
+.category-dashboard-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -28,15 +28,15 @@
 		gap: 3rem;
 	}
 
-	.color-list {
+	.category-list {
 		display: flex;
 		flex-direction: column;
-		width: 40rem;
+		width: 30rem;
 		overflow-y: scroll;
 		height: 25rem;
 	}
 
-	.color-list-item {
+	.category-list-item {
 		display: flex;
 		padding: .5rem 2rem;
 		width: 100%;
@@ -53,14 +53,14 @@
 		.left-content {
 			align-items: center;
 			display: flex;
-			width: 30%;
+			width: 10%;
 			gap: 1rem;
 		}
 
 		.middle-content {
 			display: flex;
 			align-items: center;
-			width: 30%;
+			width: 50%;
 		}
 
 		.right-content {

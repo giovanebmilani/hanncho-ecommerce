@@ -3,6 +3,7 @@ const PAGES = {
 	login: '/login',
 	admin: '/admin',
 	color: '/cores',
+	category: '/categorias',
 	stock: '/estoque',
 	shop: '/loja',
 	cart: '/carrinho'
