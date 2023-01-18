@@ -7,12 +7,14 @@ interface AuthProviderProps {
 	loggedAccount: AccountDto | null
 	isLogged: (() => boolean) | null
 	setAuthToken: ((token?: string) => void) | null
+	logout: (() => void) | null
 }
 
 const AuthContext = createContext<AuthProviderProps>({
 	loggedAccount: null,
 	isLogged: null,
-	setAuthToken: null
+	setAuthToken: null,
+	logout: null
 })
 
 const AuthProvider: React.FC<{ children?: ReactNode }> = ({ children }) => {
@@ -38,10 +40,16 @@ const AuthProvider: React.FC<{ children?: ReactNode }> = ({ children }) => {
 		}
 	}
 
+	const logout = () => {
+		authStorage.removeAuthToken()
+		window.location.reload()
+	}
+
 	const value = {
 		loggedAccount,
 		isLogged,
-		setAuthToken
+		setAuthToken,
+		logout
 	}
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
