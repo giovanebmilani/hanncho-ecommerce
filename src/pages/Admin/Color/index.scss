@@ -31,30 +31,36 @@
 	.color-list {
 		display: flex;
 		flex-direction: column;
-		width: 30rem
+		width: 40rem;
+		overflow-y: scroll;
+		height: 25rem;
 	}
 
 	.color-list-item {
 		display: flex;
 		padding: .5rem 2rem;
 		width: 100%;
+		border-radius: 1rem;
 		text-align: left;
 		align-items: center;
+		transition: all .2s ease-in-out;
+		animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
 		&:hover {
-			background-color: rgb(24, 24, 24);
+			background-color: #181818;
 		}
 
 		.left-content {
 			align-items: center;
 			display: flex;
-			width: 10%;
+			width: 30%;
+			gap: 1rem;
 		}
 
 		.middle-content {
 			display: flex;
 			align-items: center;
-			width: 50%;
+			width: 30%;
 		}
 
 		.right-content {

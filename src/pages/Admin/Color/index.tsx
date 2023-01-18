@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useColorDeleteMutation } from '../../../api/admin/color/mutations'
 import { useGetAllColors } from '../../../api/admin/color/queries'
 import Button from '../../../components/Button'
 import ColorViewer from '../../../components/ColorViewer'
 import IconButton from '../../../components/IconButton'
+import TextButton from '../../../components/TextButton'
 import { ColorDto } from '../../../dtos/Color'
 import { useModal } from '../../../providers/Modal/ModalProvider'
+import PAGES from '../../../utils/constants/pages'
 import ColorModal from './components/ColorModal'
 import './index.scss'
 
 const ColorDashboard: React.FC = () => {
+	const navigate = useNavigate()
 	const [colors, setColors] = useState<ColorDto[]>([])
 	const [idToDelete, setIdToDelete] = useState<number | undefined>()
 	const { isLoading, data } = useGetAllColors()
 	const { setVisibility, setModalContent } = useModal()
-	const { isLoading: isDeleteLoading, mutate: deleteMutate} = useColorDeleteMutation()
+	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useColorDeleteMutation()
 
 	useEffect(() => {
 		if (!data) return
@@ -40,9 +44,16 @@ const ColorDashboard: React.FC = () => {
 		setIdToDelete(id)
 	}
 
+	const onBackClick = () => {
+		navigate(PAGES.admin)
+	}
+
 	return (
 		<div className='color-dashboard-container'>
 			<div className='content'>
+				<TextButton type='secondary' onClick={onBackClick}>
+					VOLTAR
+				</TextButton>
 				<p className='title'>Cores</p>
 				<div className='row-wrapper'>
 					<div className='color-list'>
@@ -50,6 +61,7 @@ const ColorDashboard: React.FC = () => {
 							<div key={index} className='color-list-item'>
 								<div className='left-content'>
 									<ColorViewer hex={color.hex} />
+									<p>#{color.hex}</p>
 								</div>
 								<div className='middle-content'>
 									<p>{color.name}</p>
