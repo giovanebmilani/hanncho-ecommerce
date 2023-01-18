@@ -12,6 +12,7 @@ import { useModal } from '../../../providers/Modal/ModalProvider'
 import CategoryModal from './components/CategoryModal'
 import { useCategoryDeleteMutation } from '../../../api/admin/category/mutations'
 import Loader from '../../../components/Loader'
+import ConfirmationModal from '../../../components/ConfirmationModal'
 
 const CategoryDashboard: React.FC = () => {
 	const navigate = useNavigate()
@@ -41,8 +42,15 @@ const CategoryDashboard: React.FC = () => {
 		setVisibility?.(true)
 	}
 
-	const onDeleteClick = (id: number) => {
-		setIdToDelete(id)
+	const onDeleteClick = (category: CategoryDto) => {
+		setModalContent?.(
+			<ConfirmationModal
+				title='Deletar categoria?'
+				text={`Tem certeza que deseja deletar a categoria ${category.name}?`}
+				confirmHandler={() => setIdToDelete(category.id)}
+			/>
+		)
+		setVisibility?.(true)
 	}
 
 	const onBackClick = () => {
@@ -75,7 +83,7 @@ const CategoryDashboard: React.FC = () => {
 										<IconButton onClick={() => onEditClick(category)}>
 											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(category.id)}>
+										<IconButton onClick={() => onDeleteClick(category)}>
 											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
 										</IconButton>
 									</div>

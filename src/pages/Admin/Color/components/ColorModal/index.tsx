@@ -9,6 +9,8 @@ import {
 	useColorUpdateMutation
 } from '../../../../../api/admin/color/mutations'
 import Loader from '../../../../../components/Loader'
+import { ChromePicker, Color } from 'react-color'
+import ColorViewer from '../../../../../components/ColorViewer'
 
 export interface ColorModalProps {
 	color?: ColorDto
@@ -19,6 +21,7 @@ export interface ColorModalProps {
 export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHandler }) => {
 	const { hidden, setVisibility } = useModal()
 	const [name, setName] = useState<string>(color?.name || '')
+	const [pickedColor, setPickedColor] = useState<Color | undefined>()
 	const [hex, setHex] = useState<string>(color?.hex || '')
 	const {
 		isLoading: isCreationLoading,
@@ -38,6 +41,22 @@ export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHa
 		hex
 	})
 
+	const hexToRgb = (hex: string) => {
+		const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
+		hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+			return r + r + g + g + b + b
+		})
+
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+		return result
+			? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16)
+			  }
+			: undefined
+	}
+
 	useEffect(() => {
 		if (isUpdateSuccess || isCreationSuccess) {
 			setName('')
@@ -50,18 +69,21 @@ export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHa
 		if (!color) {
 			setName('')
 			setHex('')
+			setPickedColor(undefined)
 			return
 		}
 		setName(color.name)
 		setHex(color.hex)
+		setPickedColor(hexToRgb(color.hex))
 	}, [hidden])
 
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value)
 	}
 
-	const handleHexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setHex(e.target.value)
+	const handleHexChange = (color: any) => {
+		setHex(color.hex.replace('#', ''))
+		setPickedColor(color)
 	}
 
 	const handleCancelClick = () => {
@@ -74,7 +96,13 @@ export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHa
 		<div className={'color-modal'}>
 			<p className='title'>{isEdit ? 'Editar Cor' : 'Adicionar Cor'}</p>
 			<Input label='NOME' value={name} onChange={handleNameChange} />
-			<Input label='HEX' value={hex} onChange={handleHexChange} />
+			<div className='color-pick-area'>
+				<ChromePicker onChange={handleHexChange} disableAlpha={true} color={pickedColor} />
+				<div className='color-view'>
+					<ColorViewer hex={hex} />
+				</div>
+			</div>
+
 			<div className='buttons'>
 				<Button type='danger' onClick={handleCancelClick}>
 					CANCELAR
