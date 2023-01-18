@@ -16,6 +16,25 @@
 		font-weight: 800;
 	}
 
+	.color-pick-area {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		.color-view {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 50%;
+
+			.color-viewer-container {
+				width: 10rem;
+				height: 10rem;
+			}
+		}
+	}
+
 	.buttons {
 		display: flex;
 		width: 100%;
@@ -29,7 +48,6 @@
 			justify-content: center;
 			width: 100%;
 		}
-
 
 		& button {
 			width: 100%;
