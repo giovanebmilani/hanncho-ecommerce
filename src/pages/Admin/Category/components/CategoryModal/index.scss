@@ -23,6 +23,13 @@
 		gap: 2rem;
 		justify-content: flex-start;
 
+		.loader-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+		}
+
 		& button {
 			width: 100%;
 		}

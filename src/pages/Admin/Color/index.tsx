@@ -5,6 +5,7 @@ import { useGetAllColors } from '../../../api/admin/color/queries'
 import Button from '../../../components/Button'
 import ColorViewer from '../../../components/ColorViewer'
 import IconButton from '../../../components/IconButton'
+import Loader from '../../../components/Loader'
 import TextButton from '../../../components/TextButton'
 import { ColorDto } from '../../../dtos/Color'
 import { useModal } from '../../../providers/Modal/ModalProvider'
@@ -48,6 +49,8 @@ const ColorDashboard: React.FC = () => {
 		navigate(PAGES.admin)
 	}
 
+	const isAddButtonDisabled = isLoading || isDeleteLoading
+
 	return (
 		<div className='color-dashboard-container'>
 			<div className='content'>
@@ -57,28 +60,32 @@ const ColorDashboard: React.FC = () => {
 				<p className='title'>Cores</p>
 				<div className='row-wrapper'>
 					<div className='color-list'>
-						{colors.map((color, index) => (
-							<div key={index} className='color-list-item'>
-								<div className='left-content'>
-									<ColorViewer hex={color.hex} />
-									<p>#{color.hex}</p>
+						{isLoading || isDeleteLoading ? (
+							<Loader />
+						) : (
+							colors.map((color, index) => (
+								<div key={index} className='color-list-item'>
+									<div className='left-content'>
+										<ColorViewer hex={color.hex} />
+										<p>#{color.hex}</p>
+									</div>
+									<div className='middle-content'>
+										<p>{color.name}</p>
+									</div>
+									<div className='right-content'>
+										<IconButton onClick={() => onEditClick(color)}>
+											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+										</IconButton>
+										<IconButton onClick={() => onDeleteClick(color.id)}>
+											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+										</IconButton>
+									</div>
 								</div>
-								<div className='middle-content'>
-									<p>{color.name}</p>
-								</div>
-								<div className='right-content'>
-									<IconButton onClick={() => onEditClick(color)}>
-										<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
-									</IconButton>
-									<IconButton onClick={() => onDeleteClick(color.id)}>
-										<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
-									</IconButton>
-								</div>
-							</div>
-						))}
+							))
+						)}
 					</div>
 					<div className='buttons'>
-						<Button type='primary' onClick={onAddClick} disabled={isDeleteLoading}>
+						<Button type='primary' onClick={onAddClick} disabled={isAddButtonDisabled}>
 							+ ADICIONAR
 						</Button>
 					</div>

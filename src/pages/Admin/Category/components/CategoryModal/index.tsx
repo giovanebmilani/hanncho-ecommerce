@@ -8,6 +8,7 @@ import {
 	useCategoryCreateMutation,
 	useCategoryUpdateMutation
 } from '../../../../../api/admin/category/mutations'
+import Loader from '../../../../../components/Loader'
 
 export interface CategoryModalProps {
 	category?: CategoryDto
@@ -71,13 +72,17 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
 				<Button type='danger' onClick={handleCancelClick}>
 					CANCELAR
 				</Button>
-				<Button
-					type='primary'
-					onClick={isEdit ? updateMutate : creationMutate}
-					disabled={isConfirmButtonDisabled}
-				>
-					{isEdit ? 'EDITAR' : 'CRIAR'}
-				</Button>
+				{isCreationLoading || isUpdateLoading ? (
+					<div className='loader-container'><Loader /></div>
+				) : (
+					<Button
+						type='primary'
+						onClick={isEdit ? updateMutate : creationMutate}
+						disabled={isConfirmButtonDisabled}
+					>
+						{isEdit ? 'EDITAR' : 'CRIAR'}
+					</Button>
+				)}
 			</div>
 		</div>
 	)
