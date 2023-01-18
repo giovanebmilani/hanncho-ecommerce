@@ -4,6 +4,7 @@ import { useColorDeleteMutation } from '../../../api/admin/color/mutations'
 import { useGetAllColors } from '../../../api/admin/color/queries'
 import Button from '../../../components/Button'
 import ColorViewer from '../../../components/ColorViewer'
+import ConfirmationModal from '../../../components/ConfirmationModal'
 import IconButton from '../../../components/IconButton'
 import Loader from '../../../components/Loader'
 import TextButton from '../../../components/TextButton'
@@ -41,8 +42,15 @@ const ColorDashboard: React.FC = () => {
 		setVisibility?.(true)
 	}
 
-	const onDeleteClick = (id: number) => {
-		setIdToDelete(id)
+	const onDeleteClick = (color: ColorDto) => {
+		setModalContent?.(
+			<ConfirmationModal
+				title='Deletar cor?'
+				text={`Tem certeza que deseja deletar a cor ${color.name}?`}
+				confirmHandler={() => setIdToDelete(color.id)}
+			/>
+		)
+		setVisibility?.(true)
 	}
 
 	const onBackClick = () => {
@@ -76,7 +84,7 @@ const ColorDashboard: React.FC = () => {
 										<IconButton onClick={() => onEditClick(color)}>
 											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(color.id)}>
+										<IconButton onClick={() => onDeleteClick(color)}>
 											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
 										</IconButton>
 									</div>
