@@ -8,6 +8,7 @@ import {
 	useColorCreateMutation,
 	useColorUpdateMutation
 } from '../../../../../api/admin/color/mutations'
+import Loader from '../../../../../components/Loader'
 
 export interface ColorModalProps {
 	color?: ColorDto
@@ -78,13 +79,19 @@ export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHa
 				<Button type='danger' onClick={handleCancelClick}>
 					CANCELAR
 				</Button>
-				<Button
-					type='primary'
-					onClick={isEdit ? updateMutate : creationMutate}
-					disabled={isConfirmButtonDisabled}
-				>
-					{isEdit ? 'EDITAR' : 'CRIAR'}
-				</Button>
+				{isCreationLoading || isUpdateLoading ? (
+					<div className='loader-container'>
+						<Loader />
+					</div>
+				) : (
+					<Button
+						type='primary'
+						onClick={isEdit ? updateMutate : creationMutate}
+						disabled={isConfirmButtonDisabled}
+					>
+						{isEdit ? 'EDITAR' : 'CRIAR'}
+					</Button>
+				)}
 			</div>
 		</div>
 	)

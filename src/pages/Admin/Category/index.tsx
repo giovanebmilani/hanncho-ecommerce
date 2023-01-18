@@ -11,6 +11,7 @@ import Button from '../../../components/Button'
 import { useModal } from '../../../providers/Modal/ModalProvider'
 import CategoryModal from './components/CategoryModal'
 import { useCategoryDeleteMutation } from '../../../api/admin/category/mutations'
+import Loader from '../../../components/Loader'
 
 const CategoryDashboard: React.FC = () => {
 	const navigate = useNavigate()
@@ -48,6 +49,8 @@ const CategoryDashboard: React.FC = () => {
 		navigate(PAGES.admin)
 	}
 
+	const isAddButtonDisabled = isLoading || isDeleteLoading
+
 	return (
 		<div className='category-dashboard-container'>
 			<div className='content'>
@@ -57,27 +60,31 @@ const CategoryDashboard: React.FC = () => {
 				<p className='title'>Categorias</p>
 				<div className='row-wrapper'>
 					<div className='category-list'>
-						{categories.map((category, index) => (
-							<div key={index} className='category-list-item'>
-								<div className='left-content'>
-									<p>{category.id}</p>
+						{isLoading || isDeleteLoading ? (
+							<Loader />
+						) : (
+							categories.map((category, index) => (
+								<div key={index} className='category-list-item'>
+									<div className='left-content'>
+										<p>{category.id}</p>
+									</div>
+									<div className='middle-content'>
+										<p>{category.name}</p>
+									</div>
+									<div className='right-content'>
+										<IconButton onClick={() => onEditClick(category)}>
+											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+										</IconButton>
+										<IconButton onClick={() => onDeleteClick(category.id)}>
+											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+										</IconButton>
+									</div>
 								</div>
-								<div className='middle-content'>
-									<p>{category.name}</p>
-								</div>
-								<div className='right-content'>
-									<IconButton onClick={() => onEditClick(category)}>
-										<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
-									</IconButton>
-									<IconButton onClick={() => onDeleteClick(category.id)}>
-										<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
-									</IconButton>
-								</div>
-							</div>
-						))}
+							))
+						)}
 					</div>
 					<div className='buttons'>
-						<Button type='primary' onClick={onAddClick} disabled={isDeleteLoading}>
+						<Button type='primary' onClick={onAddClick} disabled={isAddButtonDisabled}>
 							+ ADICIONAR
 						</Button>
 					</div>
