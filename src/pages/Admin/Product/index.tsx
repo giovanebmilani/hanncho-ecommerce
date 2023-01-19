@@ -12,6 +12,7 @@ import TextButton from '../../../components/TextButton'
 import { CategoryDto } from '../../../dtos/Category'
 import { ProductDto } from '../../../dtos/Product'
 import { useModal } from '../../../providers/Modal/ModalProvider'
+import IMAGES from '../../../utils/constants/images'
 import PAGES from '../../../utils/constants/pages'
 import ProductModal from './components/ProductModal'
 import './index.scss'
@@ -117,10 +118,10 @@ const ProductDashboard: React.FC = () => {
 									</div>
 									<div className='right-content'>
 										<IconButton onClick={() => onEditClick(product)}>
-											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+											<img src={IMAGES.editIcon} />
 										</IconButton>
 										<IconButton onClick={() => onDeleteClick(product)}>
-											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>
 								</div>
