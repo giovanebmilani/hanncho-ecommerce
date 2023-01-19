@@ -1,0 +1,157 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useGetAllCategories } from '../../../api/admin/category/queries'
+import { useProductDeleteMutation } from '../../../api/admin/product/mutations'
+import { useGetAllProducts } from '../../../api/admin/product/queries'
+import Button from '../../../components/Button'
+import ConfirmationModal from '../../../components/ConfirmationModal'
+import IconButton from '../../../components/IconButton'
+import Loader from '../../../components/Loader'
+import SelectInput from '../../../components/SelectInput'
+import TextButton from '../../../components/TextButton'
+import { CategoryDto } from '../../../dtos/Category'
+import { ProductDto } from '../../../dtos/Product'
+import { useModal } from '../../../providers/Modal/ModalProvider'
+import PAGES from '../../../utils/constants/pages'
+import ProductModal from './components/ProductModal'
+import './index.scss'
+
+const ProductDashboard: React.FC = () => {
+	const navigate = useNavigate()
+	const [products, setProducts] = useState<ProductDto[]>([])
+	const [idToDelete, setIdToDelete] = useState<number | undefined>()
+	const [page, setPage] = useState<number>(1)
+	const [categories, setCategories] = useState<CategoryDto[]>([])
+	const [category, setCategory] = useState<CategoryDto>()
+	const { setModalContent, setVisibility } = useModal()
+	const { data: categoriesData } = useGetAllCategories()
+	const { isLoading, data } = useGetAllProducts({ categoryId: category?.id }, page, 8)
+	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useProductDeleteMutation()
+
+	useEffect(() => {
+		setPage(1)
+	}, [category])
+
+	useEffect(() => {
+		if (!categoriesData) return
+		setCategories([{ id: -1, name: 'TODAS' }, ...categoriesData])
+	}, [categoriesData])
+
+	useEffect(() => {
+		if (!data) return
+		setProducts(data.data)
+	}, [data])
+
+	useEffect(() => {
+		if (!idToDelete) return
+		deleteMutate(idToDelete)
+	}, [idToDelete])
+
+	const handleCategoryChange = (cat?: CategoryDto) => {
+		if (cat?.id === -1) return setCategory(undefined)
+		setCategory(cat)
+	}
+
+	const onAddClick = () => {
+		setModalContent?.(<ProductModal />)
+		setVisibility?.(true)
+	}
+
+	const onEditClick = (product: ProductDto) => {
+		setModalContent?.(<ProductModal product={product} isEdit />)
+		setVisibility?.(true)
+	}
+
+	const onDeleteClick = (product: ProductDto) => {
+		setModalContent?.(
+			<ConfirmationModal
+				title='Deletar produto?'
+				text={`Tem certeza que deseja deletar o produto ${product.name}?`}
+				confirmHandler={() => setIdToDelete(product.id)}
+			/>
+		)
+		setVisibility?.(true)
+	}
+
+	const onBackClick = () => {
+		navigate(PAGES.admin)
+	}
+
+	const previousPage = () => {
+		setPage((prev) => {
+			if (prev - 1 > 0) return prev - 1
+			return prev
+		})
+	}
+
+	const nextPage = () => {
+		setPage((prev) => {
+			if (data?.total && page * 8 < data?.total) return prev + 1
+			return prev
+		})
+	}
+
+	const isAddButtonDisabled = isLoading || isDeleteLoading
+
+	return (
+		<div className='product-dashboard-container'>
+			<div className='content'>
+				<TextButton type='secondary' onClick={onBackClick}>
+					VOLTAR
+				</TextButton>
+				<p className='title'>Produtos</p>
+
+				<div className='row-wrapper'>
+					<div className='product-list'>
+						{isLoading || isDeleteLoading ? (
+							<Loader />
+						) : (
+							products.map((product, index) => (
+								<div key={index} className='product-list-item'>
+									<div className='left-content'>
+										<p>{product.id}</p>
+										<p className='long-text'>{product.name}</p>
+									</div>
+									<div className='middle-content'>
+										<p>{product.category.name}</p>
+									</div>
+									<div className='right-content'>
+										<IconButton onClick={() => onEditClick(product)}>
+											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+										</IconButton>
+										<IconButton onClick={() => onDeleteClick(product)}>
+											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+										</IconButton>
+									</div>
+								</div>
+							))
+						)}
+					</div>
+					<div className='buttons'>
+						<Button type='primary' onClick={onAddClick} disabled={isAddButtonDisabled}>
+							+ ADICIONAR
+						</Button>
+
+						<SelectInput
+							value={category?.name}
+							autoCompletion={categories.map((cat) => ({ label: cat.name, value: cat }))}
+							onSelectItem={handleCategoryChange}
+							label='CATEGORIAS'
+						/>
+					</div>
+				</div>
+				<div className='pagination-buttons'>
+					<TextButton type='secondary' onClick={previousPage}>
+						ANTERIOR
+					</TextButton>
+					<p>{page}</p>
+					<TextButton type='secondary' onClick={nextPage}>
+						PRÓXIMA
+					</TextButton>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default ProductDashboard

@@ -7,7 +7,6 @@ export const Modal: React.FC = () => {
 
 	useEffect(() => {
 		window.addEventListener('keydown', (e) => {
-			console.log(e.key)
 			if (e.key === 'Escape') setVisibility?.(false)
 		})
 	}, [])

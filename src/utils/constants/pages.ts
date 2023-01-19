@@ -2,9 +2,10 @@ const PAGES = {
 	home: '/',
 	login: '/login',
 	admin: '/admin',
-	color: '/cores',
-	category: '/categorias',
-	stock: '/estoque',
+	color: '/admin/cores',
+	category: '/admin/categorias',
+	adminProduct: '/admin/produtos',
+	stock: '/admin/estoque',
 	shop: '/loja',
 	cart: '/carrinho'
 }

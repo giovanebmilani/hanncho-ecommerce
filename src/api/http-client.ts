@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
+import applyCaseMiddleware from 'axios-case-converter'
 import authStorage from '../utils/stores/auth'
 
 export interface HttpClient extends AxiosInstance {
@@ -14,6 +15,8 @@ export const createHttpClient = (url: string, parent?: HttpClient) => {
 			'Content-Type': 'application/json'
 		}
 	}) as HttpClient
+
+	applyCaseMiddleware(httpClient)
 
 	httpClient.url = baseUrl
 

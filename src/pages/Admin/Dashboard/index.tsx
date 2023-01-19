@@ -29,8 +29,8 @@ const Dashboard: React.FC = () => {
 		setVisibility?.(true)
 	}
 
-	const onStockClick = () => {
-		navigate(PAGES.stock)
+	const onProductClick = () => {
+		navigate(PAGES.adminProduct)
 	}
 
 	const onColorClick = () => {
@@ -49,8 +49,8 @@ const Dashboard: React.FC = () => {
 				</TextButton>
 				<p className='title'>Dashboard</p>
 				<div className='buttons'>
-					<Button type='primary' onClick={onStockClick}>
-						ESTOQUE
+					<Button type='primary' onClick={onProductClick}>
+						PRODUTOS
 					</Button>
 					<Button type='secondary' onClick={onColorClick}>
 						CORES
