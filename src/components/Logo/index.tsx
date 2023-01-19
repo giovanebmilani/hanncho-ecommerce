@@ -1,4 +1,5 @@
 import React from 'react'
+import IMAGES from '../../utils/constants/images'
 import './index.scss'
 
 export interface LogoProps {
@@ -9,7 +10,7 @@ export interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ variant = 'primary', onClick }) => {
 	return (
 		<button className={`logo ${variant}`} onClick={onClick}>
-			<img src={process.env.PUBLIC_URL + './assets/logo.png'} />
+			<img src={IMAGES.mainLogo} />
 		</button>
 	)
 }

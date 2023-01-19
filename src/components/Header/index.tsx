@@ -4,6 +4,7 @@ import TextButton from '../TextButton'
 import IconButton from '../IconButton'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
+import IMAGES from '../../utils/constants/images'
 
 const Header: React.FC = () => {
 	const navigate = useNavigate()
@@ -29,7 +30,7 @@ const Header: React.FC = () => {
 			<Logo variant='primary' onClick={onLogoClick} />
 			<div className='right-content'>
 				<IconButton onClick={onCartClick}>
-					<img src={process.env.PUBLIC_URL + './assets/cart-icon.png'}/>
+					<img src={IMAGES.cartIcon}/>
 				</IconButton>
 			</div>
 		</div>

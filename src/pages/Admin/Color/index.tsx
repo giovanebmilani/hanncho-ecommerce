@@ -10,6 +10,7 @@ import Loader from '../../../components/Loader'
 import TextButton from '../../../components/TextButton'
 import { ColorDto } from '../../../dtos/Color'
 import { useModal } from '../../../providers/Modal/ModalProvider'
+import IMAGES from '../../../utils/constants/images'
 import PAGES from '../../../utils/constants/pages'
 import ColorModal from './components/ColorModal'
 import './index.scss'
@@ -82,10 +83,10 @@ const ColorDashboard: React.FC = () => {
 									</div>
 									<div className='right-content'>
 										<IconButton onClick={() => onEditClick(color)}>
-											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+											<img src={IMAGES.editIcon} />
 										</IconButton>
 										<IconButton onClick={() => onDeleteClick(color)}>
-											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>
 								</div>

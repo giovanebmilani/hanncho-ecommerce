@@ -13,6 +13,7 @@ import CategoryModal from './components/CategoryModal'
 import { useCategoryDeleteMutation } from '../../../api/admin/category/mutations'
 import Loader from '../../../components/Loader'
 import ConfirmationModal from '../../../components/ConfirmationModal'
+import IMAGES from '../../../utils/constants/images'
 
 const CategoryDashboard: React.FC = () => {
 	const navigate = useNavigate()
@@ -81,10 +82,10 @@ const CategoryDashboard: React.FC = () => {
 									</div>
 									<div className='right-content'>
 										<IconButton onClick={() => onEditClick(category)}>
-											<img src={process.env.PUBLIC_URL + './assets/edit-icon.png'} />
+											<img src={IMAGES.editIcon} />
 										</IconButton>
 										<IconButton onClick={() => onDeleteClick(category)}>
-											<img src={process.env.PUBLIC_URL + './assets/trash-icon.png'} />
+											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>
 								</div>
