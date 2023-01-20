@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGetAllCategories } from '../../../api/admin/category/queries'
 import { useProductDeleteMutation } from '../../../api/admin/product/mutations'
 import { useGetAllProducts } from '../../../api/admin/product/queries'
+import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import ConfirmationModal from '../../../components/ConfirmationModal'
 import IconButton from '../../../components/IconButton'
@@ -22,16 +23,21 @@ const ProductDashboard: React.FC = () => {
 	const [products, setProducts] = useState<ProductDto[]>([])
 	const [idToDelete, setIdToDelete] = useState<number | undefined>()
 	const [page, setPage] = useState<number>(1)
+	const [name, setName] = useState<string | undefined>()
 	const [categories, setCategories] = useState<CategoryDto[]>([])
 	const [category, setCategory] = useState<CategoryDto>()
 	const { setModalContent, setVisibility } = useModal()
 	const { data: categoriesData } = useGetAllCategories()
-	const { isLoading, data } = useGetAllProducts({ categoryId: category?.id }, page, 8)
+	const { isLoading, data } = useGetAllProducts(
+		{ categoryId: category?.id, name: { contains: name } },
+		page,
+		8
+	)
 	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useProductDeleteMutation()
 
 	useEffect(() => {
 		setPage(1)
-	}, [category])
+	}, [category, name])
 
 	useEffect(() => {
 		if (!categoriesData) return
@@ -51,6 +57,10 @@ const ProductDashboard: React.FC = () => {
 	const handleCategoryChange = (cat?: CategoryDto) => {
 		if (cat?.id === -1) return setCategory(undefined)
 		setCategory(cat)
+	}
+
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setName(e.target.value)
 	}
 
 	const onAddClick = () => {
@@ -106,6 +116,8 @@ const ProductDashboard: React.FC = () => {
 					<div className='product-list'>
 						{isLoading || isDeleteLoading ? (
 							<Loader />
+						) : products.length <= 0 ? (
+							<p>Nenhum resultado encontrado...</p>
 						) : (
 							products.map((product, index) => (
 								<div key={index} className='product-list-item'>
@@ -132,7 +144,7 @@ const ProductDashboard: React.FC = () => {
 						<Button type='primary' onClick={onAddClick} disabled={isAddButtonDisabled}>
 							+ ADICIONAR
 						</Button>
-
+						<Input label='NOME' value={name} onChange={handleNameChange} />
 						<SelectInput
 							value={category?.name}
 							autoCompletion={categories.map((cat) => ({ label: cat.name, value: cat }))}
