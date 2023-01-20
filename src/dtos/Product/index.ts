@@ -20,6 +20,12 @@ export interface ProductDto {
 	category: CategoryDto
 }
 
+export class FilterStringParam {
+	contains?: string
+	eq?: string
+}
+
 export interface ProductFilterDto {
+	name?: FilterStringParam
 	categoryId?: number
 }
