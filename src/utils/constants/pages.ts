@@ -5,7 +5,7 @@ const PAGES = {
 	color: '/admin/cores',
 	category: '/admin/categorias',
 	adminProduct: '/admin/produtos',
-	stock: '/admin/estoque',
+	stock: (id: string | number = ':productId') => `/admin/${id}/estoque`,
 	shop: '/loja',
 	cart: '/carrinho'
 }

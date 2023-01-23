@@ -1,0 +1,90 @@
+@import '../../../../../sass/index.scss';
+
+.variant-modal {
+	display: flex;
+	width: 40rem;
+	flex-direction: column;
+	gap: 2rem;
+	background-color: $dark-grey;
+	padding: 4rem;
+	border-radius: 2rem;
+
+	.title {
+		color: $white;
+		text-align: left;
+		font-size: 30px;
+		font-weight: 800;
+	}
+
+	.discount-range-input {
+		width: 100%;
+
+		.discount-display {
+			display: flex;
+			flex-direction: row;
+			gap: 0.5rem;
+		}
+
+		.value {
+			font-weight: 800;
+			color: $yellow;
+		}
+	}
+
+	.highlight-input {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+
+		.emoji {
+			font-size: 25px;
+		}
+	}
+
+	.size-stock-content {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		justify-content: center;
+		gap: 1rem;
+
+		.size-stock {
+			display: flex;
+			flex-direction: row;
+			font-weight: 800;
+			align-items: center;
+			gap: .5rem;
+			
+			.stock-input {
+				background-color: $grey;
+				color: white;
+				border: none;
+				outline: none;
+				width: 2.5rem;
+				border-radius: .3rem;
+				padding: .1rem;
+
+			}
+		}
+	}
+
+	.buttons {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		gap: 2rem;
+		justify-content: flex-start;
+
+		.loader-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+		}
+
+		& button {
+			width: 100%;
+		}
+	}
+}

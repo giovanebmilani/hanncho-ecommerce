@@ -73,3 +73,26 @@ $animation-timing: 0.25s;
 		transform: scale(1);
 	}
 }
+
+@-webkit-keyframes border-blink {
+	from,
+	to {
+		outline-color: transparent;
+		box-shadow: 0 0 10px transparent, inset 0 0 10px transparent;
+	}
+	50% {
+		outline-color: $yellow;
+		box-shadow: 0 0 10px $yellow, inset 0 0 10px $yellow;
+	}
+}
+@keyframes border-blink {
+	from,
+	to {
+		outline-color: transparent;
+		box-shadow: 0 0 10px transparent, inset 0 0 10px transparent;
+	}
+	50% {
+		outline-color: $yellow;
+		box-shadow: 0 0 10px $yellow, inset 0 0 10px $yellow;
+	}
+}

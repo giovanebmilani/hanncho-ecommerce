@@ -31,7 +31,7 @@ export const routes: RouteConfig[] = [
 	},
 	{
 		component: <Stock />,
-		path: PAGES.stock,
+		path: PAGES.stock(),
 		requireAuth: true
 	},
 	{
