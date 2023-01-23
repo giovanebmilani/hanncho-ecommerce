@@ -84,6 +84,10 @@ const ProductDashboard: React.FC = () => {
 		setVisibility?.(true)
 	}
 
+	const onDetailClick = (product: ProductDto) => {
+		navigate(PAGES.stock(product.id))
+	}
+
 	const onBackClick = () => {
 		navigate(PAGES.admin)
 	}
@@ -134,6 +138,9 @@ const ProductDashboard: React.FC = () => {
 										</IconButton>
 										<IconButton onClick={() => onDeleteClick(product)}>
 											<img src={IMAGES.trashIcon} />
+										</IconButton>
+										<IconButton onClick={() => onDetailClick(product)}>
+											<img src={IMAGES.menuIcon} />
 										</IconButton>
 									</div>
 								</div>

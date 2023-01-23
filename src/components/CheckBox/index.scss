@@ -1,0 +1,31 @@
+@import '../../sass/index.scss';
+
+.checkbox-container {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  background-color: $grey;
+  border-radius: .5rem;
+  vertical-align: middle;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  transition: all 0.4s ease-in-out;
+
+  @mixin checked-icon($color) {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23#{str-slice("#{$color}", 2)}" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
+  }
+
+  &:checked {
+    @include checked-icon($green);
+  }
+
+  &:checked:disabled {
+    @include checked-icon($grey);
+  }
+}

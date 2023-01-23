@@ -2,6 +2,7 @@ import { useQuery } from 'react-query'
 import { productApi } from '.'
 import { PaginatedDto } from '../../../dtos/Pagination'
 import { ProductDto, ProductFilterDto } from '../../../dtos/Product'
+import { VariantDto } from '../../../dtos/Variant'
 import QUERY_KEYS from '../../../utils/constants/queries'
 
 export const useGetAllProducts = (filters: ProductFilterDto, page: number, perPage = 10) =>
@@ -12,5 +13,19 @@ export const useGetAllProducts = (filters: ProductFilterDto, page: number, perPa
 				await productApi.get<PaginatedDto<ProductDto>>('', {
 					params: { ...filters, page, perPage }
 				})
-			).data,
+			).data
+	})
+
+export const useGetProduct = (productId?: number) =>
+	useQuery({
+		enabled: !!productId,
+		queryKey: [QUERY_KEYS.product, productId],
+		queryFn: async () => (await productApi.get<ProductDto>(`/${productId}`)).data
+	})
+
+	export const useGetProductVariants = (productId?: number) =>
+	useQuery({
+		enabled: !!productId,
+		queryKey: [QUERY_KEYS.variant, QUERY_KEYS.product, productId],
+		queryFn: async () => (await productApi.get<VariantDto[]>(`/${productId}/variants`)).data
 	})
