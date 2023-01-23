@@ -1,7 +1,12 @@
 import { useMutation } from 'react-query'
 import { productApi } from '.'
 import { ProductCreateDto, ProductDto, ProductUpdateDto } from '../../../dtos/Product'
-import { VariantCreateDto, VariantDto, VariantUpdateDto } from '../../../dtos/Variant'
+import {
+	VariantCreateDto,
+	VariantDto,
+	VariantImageDto,
+	VariantUpdateDto
+} from '../../../dtos/Variant'
 import QUERY_KEYS from '../../../utils/constants/queries'
 import { queryClient } from '../../query-client'
 
@@ -59,8 +64,34 @@ export const useProductVariantDeleteMutation = () =>
 
 export const useProductVariantImageUploadMutation = (productId: number, variantId: number) =>
 	useMutation({
-		mutationFn: () =>
-			productApi.post(`/${productId}/variants/${variantId}/images`).then((res) => res.data as VariantDto),
+		mutationFn: (formData: FormData) =>
+			productApi
+				.post(`/${productId}/variants/${variantId}/images`, formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then((res) => res.data as VariantDto),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.variant, QUERY_KEYS.product] })
+	})
+
+export const useProductVariantImageDeleteMutation = () =>
+	useMutation({
+		mutationFn: (params: { productId: number; variantId: number; imageId: number }) =>
+			productApi
+				.delete(`/${params.productId}/variants/${params.variantId}/images/${params.imageId}`)
+				.then((res) => res.data as VariantImageDto),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.variant, QUERY_KEYS.product] })
+	})
+
+export const useProductVariantImageHighlightMutation = () =>
+	useMutation({
+		mutationFn: (params: { productId: number; variantId: number; imageId: number }) =>
+			productApi
+				.put(`/${params.productId}/variants/${params.variantId}/images/${params.imageId}/highlight`)
+				.then((res) => res.data as VariantImageDto),
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.variant, QUERY_KEYS.product] })
 	})

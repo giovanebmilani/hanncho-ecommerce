@@ -140,7 +140,7 @@ const ProductDashboard: React.FC = () => {
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 										<IconButton onClick={() => onDetailClick(product)}>
-											<img src={IMAGES.menuIcon} />
+											<img src={IMAGES.viewIcon} />
 										</IconButton>
 									</div>
 								</div>
