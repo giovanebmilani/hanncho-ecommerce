@@ -9,6 +9,7 @@
 	justify-content: center;
 
 	.gallery-grid {
+		width: 100%;
 		display: flex;
 		flex-flow: wrap;
 		gap: 0.3rem;
@@ -23,6 +24,7 @@
 			aspect-ratio: 1/1;
 			align-items: center;
 			overflow: hidden;
+			transition: all .2s ease-in-out;
 
 			&.highlighted {
 				outline: solid 2px $yellow;
