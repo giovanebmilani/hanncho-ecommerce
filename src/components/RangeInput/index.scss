@@ -16,6 +16,8 @@
 		background: linear-gradient(to right, $yellow, $red);
 		height: 0.3rem;
 		border-radius: 1rem;
+		box-shadow: $box-shadow;
+
 	}
 
 	&::-webkit-slider-thumb {
@@ -26,7 +28,7 @@
 		height: 1rem;
 		width: 1rem;
 		border-radius: 50%;
-		box-shadow: 1px 1px 1px black;
+		box-shadow: $box-shadow;
 		transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
 }

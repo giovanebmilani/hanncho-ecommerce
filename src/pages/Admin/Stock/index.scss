@@ -62,6 +62,7 @@
 			.main-image-container {
 				display: flex;
 				height: 8rem;
+				box-shadow: $box-shadow;
 
 				.main-image {
 					width: 8rem;
