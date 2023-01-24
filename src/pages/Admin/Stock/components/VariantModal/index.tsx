@@ -95,7 +95,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	}, [basePrice, discount])
 
 	const calculateDiscount = (basePrice: number, price: number) => {
-		return (price / basePrice) * 100
+		return 100 - (100 * price / basePrice)
 	}
 
 	const calculatePrice = (basePrice: number, discount: number) => {

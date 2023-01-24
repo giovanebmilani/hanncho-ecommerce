@@ -180,6 +180,19 @@ const Stock: React.FC = () => {
 									0
 								)}
 							</p>
+							<p>
+								Valor do estoque: R$
+								{variants.reduce(
+									(prev, current) =>
+										prev +
+										current.stocks.reduce(
+											(stockPrev, stockCurrent) =>
+												stockPrev + stockCurrent.quantity * current.price,
+											0
+										),
+									0
+								).toFixed(2)}
+							</p>
 						</div>
 						<div className='buttons'>
 							<Button type='primary' onClick={onAddClick} disabled={isAddButtonDisabled}>
