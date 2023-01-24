@@ -7,6 +7,8 @@
 	flex-direction: column;
 	justify-content: center;
 	vertical-align: bottom;
+	border-radius: 12px;
+	box-shadow: $box-shadow;
 
 	> .label {
 		color: $white;

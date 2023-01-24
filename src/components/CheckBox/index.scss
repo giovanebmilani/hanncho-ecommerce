@@ -16,6 +16,7 @@
   background-repeat: no-repeat;
   margin: 0;
   transition: all 0.4s ease-in-out;
+  box-shadow: $box-shadow;
 
   @mixin checked-icon($color) {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23#{str-slice("#{$color}", 2)}" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
