@@ -57,7 +57,7 @@
 
 			.show-all {
 				display: flex;
-				min-width: 20vw;
+				min-width: max(12rem, 20vw);
 				align-items: center;
 				justify-content: center;
 				text-align: center;

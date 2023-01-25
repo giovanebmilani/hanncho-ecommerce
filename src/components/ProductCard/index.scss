@@ -2,7 +2,7 @@
 
 .product-card-container {
 	display: flex;
-	min-width: 20vw;
+	min-width: max(12rem, 20vw);
 	flex-direction: column;
 	background-color: $blue;
 	background-image: url(../../../public/assets/header-container.png);
@@ -31,16 +31,16 @@
 	}
 
 	img {
-		width: 20vw;
-		height: 20vw;
+		width: max(12rem, 20vw);
+		height: max(12rem, 20vw);
 		box-shadow: $box-shadow;
 	}
 
 	.product-info {
 		display: flex;
 		flex-direction: column;
-		padding: 0.5vw 0.6vw 0.3vw;
-		gap: 2vw;
+		padding: max(.3rem, 0.5vw) max(.4rem, .6vw) 0.3vw;
+		gap: max(1.5rem, 2vw);
 		justify-content: space-between;
 
 		.product-price-container {

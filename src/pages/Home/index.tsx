@@ -7,6 +7,7 @@ import ProductCard from '../../components/ProductCard'
 import TextButton from '../../components/TextButton'
 import { PublicProductListDto } from '../../dtos/Product'
 import IMAGES from '../../utils/constants/images'
+import PAGES from '../../utils/constants/pages'
 import './index.scss'
 
 const Home: React.FC = () => {
@@ -16,27 +17,6 @@ const Home: React.FC = () => {
 		{ highlighted: true },
 		5
 	)
-	const loaderRef = useRef<HTMLDivElement>(null)
-
-	useEffect(() => {
-		const options = {
-			root: null,
-			rootMargin: '20px',
-			threshold: 1.0
-		}
-
-		const observer = new IntersectionObserver((entities) => {
-			const target = entities[0]
-
-			if (target.isIntersecting) {
-				fetchNextPage()
-			}
-		}, options)
-
-		if (loaderRef.current) {
-			observer.observe(loaderRef.current)
-		}
-	}, [])
 
 	useEffect(() => {
 		if (!data) return
@@ -46,7 +26,7 @@ const Home: React.FC = () => {
 	return (
 		<div className='home-container'>
 			<div className='images-container'>
-				<div className='sale-image-container' onClick={() => navigate('/loja')}>
+				<div className='sale-image-container' onClick={() => navigate(PAGES.shop)}>
 					<img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} />
 				</div>
 				<ConcreteBeam />
@@ -59,10 +39,14 @@ const Home: React.FC = () => {
 						<ProductCard key={index} product={prod} />
 					))}
 					<div className='show-all'>
-						{hasNextPage ? (
-							<div className='loader' ref={loaderRef}></div>
+						{isLoading ? (
+							<Loader />
+						) : hasNextPage ? (
+							<TextButton onClick={fetchNextPage} type='secondary'>
+								Carregar mais
+							</TextButton>
 						) : (
-							<TextButton type='secondary'>Ver tudo</TextButton>
+							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>Ver na loja</TextButton>
 						)}
 					</div>
 				</div>
