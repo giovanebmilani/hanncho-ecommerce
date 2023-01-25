@@ -25,7 +25,7 @@ const Home: React.FC = () => {
 						exclusivos da marca.
 					</p>
 				</div>
-				{/* <img className='image' src={IMAGES.knowHannchoImage}/> */}
+				<img className='image' src={IMAGES.knowHannchoImage}/>
 			</div>
 		</div>
 	)

@@ -15,6 +15,7 @@
 	background-size: 100%;
 	background-position: 100% 100%;
 	animation: appear-down .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	
 
 
 	@media screen and (max-width: 500px) {
@@ -23,15 +24,19 @@
 
 	.left-content {
 		width: 100%;
-		padding: 1rem 0 1rem 4rem;
+		padding: 1vw 0 1vw 4vw;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
+
+		.text-button-container {
+			font-size: max(1rem, 1.5vw);
+		}
 	}
 
 	.right-content {
 		width: 100%;
-		padding: 1rem 4rem 1rem 0;
+		padding: 1vw 4vw 1vw 0;
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
