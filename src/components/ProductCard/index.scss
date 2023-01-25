@@ -1,0 +1,59 @@
+@import '../../sass/index.scss';
+
+.product-card-container {
+	display: flex;
+	min-width: 20vw;
+	flex-direction: column;
+	background-color: $blue;
+	background-image: url(../../../public/assets/header-container.png);
+	background-size: 250% 100%;
+	background-position: 50%;
+	border-radius: 4px;
+	overflow: hidden;
+
+	&.sale {
+		background-color: $green;
+	}
+
+	.sale-tag {
+		display: flex;
+		width: 20vw;
+		position: absolute;
+		align-items: center;
+		justify-content: flex-end;
+
+		.inner-tag {
+			background-color: $red;
+			font-weight: 800;
+			padding: .2rem 0.5rem;
+			font-size: 1.5vw;
+		}
+	}
+
+	img {
+		width: 20vw;
+		height: 20vw;
+		box-shadow: $box-shadow;
+	}
+
+	.product-info {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5vw 0.6vw 0.3vw;
+		gap: 2vw;
+		justify-content: space-between;
+
+		.product-price-container {
+			display: flex;
+			flex-direction: row;
+			gap: 1vw;
+			color: $yellow;
+			font-weight: 800;
+			text-shadow: 1px 1px 2px black;
+
+			.base-price {
+				text-decoration: line-through;
+			}
+		}
+	}
+}

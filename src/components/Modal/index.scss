@@ -12,6 +12,7 @@
 	justify-content: center;
 	transition: all 0.2s ease-in-out;
 	pointer-events: auto;
+	z-index: 4;
 
 	&.hidden {
 		visibility: hidden;

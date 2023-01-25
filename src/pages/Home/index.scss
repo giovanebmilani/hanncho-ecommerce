@@ -9,11 +9,7 @@
 	margin-bottom: 8rem;
 
 	.sale-image-container {
-		// width: 100%;
-		// height: 8rem;
-		// background-image: url(../../../public/assets/hanncho-sale.png);
-		// background-size: 100%;
-		// background-position: 100% 100%;
+		cursor: pointer;
 		max-height: 40vw;
 		overflow: hidden;
 		img {
@@ -44,7 +40,33 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		padding: 0 6vw 10rem;
+		padding: 0 0 5vw 6vw;
+		overflow: hidden;
+		gap: 2vw;
+
+		.product-slider {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: flex-start;
+			flex-direction: row;
+			gap: 2vw;
+			overflow-x: scroll;
+			white-space: nowrap;
+			padding-right: 2vw;
+
+			.show-all {
+				display: flex;
+				min-width: 20vw;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+			}
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
 	}
 
 	.hanncho-info {
