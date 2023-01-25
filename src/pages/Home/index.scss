@@ -32,7 +32,7 @@
 	.title {
 		color: $white;
 		text-align: left;
-		font-size: 3.5vw;
+		font-size: max(1.5rem, 3.5vw);
 		font-weight: 800;
 	}
 
@@ -52,23 +52,35 @@
 		display: flex;
 		flex-direction: row;
 		padding: 0 6vw;
-		gap: 6rem;
-		@media screen and (max-width: 500px) {
-		}
-		// flex-flow: wrap;
+		gap: 5vw;
 
 		.text-container {
 			display: flex;
 			flex-direction: column;
-			gap: 6rem;
+			gap: 3vw;
 
 			.text {
-				font-size: 18px;
+				font-size: max(.9rem, 1.3vw);
 			}
 		}
 
 		img {
-			max-width: 45rem;
+			width: 45vw;
+			height: 100%;
+		}
+
+		@media screen and (max-width: 700px) {
+			flex-flow: wrap;
+			padding: 0;
+
+			.text-container {
+				padding: 0 6vw;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 }
