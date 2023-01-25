@@ -4,7 +4,29 @@
 	border: none;
 	background: none;
 	cursor: pointer;
-	
+
+	.helper-label {
+		opacity: 0;
+		margin-left: .5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		visibility: hidden;
+		color: $white;
+		background-color: $grey;
+		border-radius: 1rem;
+		font-size: 10px;
+		padding: 0 0.2rem;
+		transform: translate(-50%, -50%);
+		transition: all .2s ease-in-out;
+	}
+
+	&:hover .helper-label {
+		opacity: 1;
+		visibility: visible;
+	}
+
 	img {
 		height: 100%;
 		max-height: 30px;

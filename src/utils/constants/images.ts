@@ -7,6 +7,7 @@ import ArrowIcon from '../../assets/icons/arrow-icon.png'
 import ViewIcon from '../../assets/icons/view-icon.png'
 import MainLogo from '../../assets/logos/logo.png'
 import ImagePlaceholder from '../../assets/images/image-placeholder.png'
+import KnowHannchoImage from '../../assets/images/know-hanncho.png'
 
 const IMAGES = {
 	editIcon: EditIcon,
@@ -17,7 +18,8 @@ const IMAGES = {
 	arrowIcon: ArrowIcon,
 	viewIcon: ViewIcon,
 	mainLogo: MainLogo,
-	imagePlaceholder: ImagePlaceholder
+	imagePlaceholder: ImagePlaceholder,
+	knowHannchoImage: KnowHannchoImage
 }
 
 export default IMAGES
