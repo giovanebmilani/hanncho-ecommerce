@@ -10,6 +10,19 @@
 	background-position: 50%;
 	border-radius: 4px;
 	overflow: hidden;
+	cursor: pointer;
+	transition: all .2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transform: scale(0.5);
+	opacity: 0;
+	
+	&.active {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	&:hover {
+		transform: scale(1.05);
+	}
 
 	&.sale {
 		background-color: $green;
@@ -25,7 +38,7 @@
 		.inner-tag {
 			background-color: $red;
 			font-weight: 800;
-			padding: .2rem 0.5rem;
+			padding: 0.2rem 0.5rem;
 			font-size: 1.5vw;
 		}
 	}
@@ -39,7 +52,7 @@
 	.product-info {
 		display: flex;
 		flex-direction: column;
-		padding: max(.3rem, 0.5vw) max(.4rem, .6vw) 0.3vw;
+		padding: max(0.3rem, 0.5vw) max(0.4rem, 0.6vw) 0.3vw;
 		gap: max(1.5rem, 2vw);
 		justify-content: space-between;
 

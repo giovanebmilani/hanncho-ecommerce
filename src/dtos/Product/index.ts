@@ -53,12 +53,8 @@ export interface ProductFilterDto {
 }
 
 export interface PublicProductFilterDto {
-	name?: FilterStringParam
-	categoryId?: number
-}
-
-export interface PublicProductFilterDto {
 	categoryId?: number
 	colorId?: number
 	highlighted?: boolean
+	sale?: boolean
 }

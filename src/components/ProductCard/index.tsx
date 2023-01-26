@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { PublicProductListDto } from '../../dtos/Product'
 import IMAGES from '../../utils/constants/images'
 import './index.scss'
@@ -9,6 +9,12 @@ export interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+	const [force, setForce] = useState<number>(0)
+
+	useEffect(() => {
+		setTimeout(() => setForce(1), 50)
+	}, [])
+
 	const calculateDiscount = (basePrice: number, price: number) => {
 		return 100 - (100 * price) / basePrice
 	}
@@ -16,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 	const isInSale = () => product.basePrice !== product.price
 
 	return (
-		<div className={`product-card-container ${isInSale() ? 'sale' : ''}`}>
+		<div className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}>
 			{/* <div className='sale-tag'>
 				<div className='inner-tag'>
 					{calculateDiscount(product.basePrice, product.price).toFixed(0)}% OFF

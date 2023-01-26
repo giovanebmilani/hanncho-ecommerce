@@ -12,16 +12,31 @@ import './index.scss'
 
 const Home: React.FC = () => {
 	const navigate = useNavigate()
-	const [products, setProducts] = useState<PublicProductListDto[]>([])
-	const { isLoading, data, fetchNextPage, hasNextPage } = usePublicGetAllProducts(
-		{ highlighted: true },
-		5
-	)
+	const [highlightedProducts, setHighlightedProducts] = useState<PublicProductListDto[]>([])
+	const [saleProducts, setSaleProducts] = useState<PublicProductListDto[]>([])
+	const {
+		isLoading: isHighlightedLoading,
+		data: highlightedData,
+		fetchNextPage: fetchNextHighlighted,
+		hasNextPage: hasNextHighlighted
+	} = usePublicGetAllProducts({ highlighted: true }, 5)
+
+	const {
+		isLoading: isSaleLoading,
+		data: saleData,
+		fetchNextPage: fetchNextSale,
+		hasNextPage: hasNextSale
+	} = usePublicGetAllProducts({ sale: true }, 5)
 
 	useEffect(() => {
-		if (!data) return
-		setProducts(data.pages.flatMap((group) => group.data.map((prod) => prod)))
-	}, [data])
+		if (!highlightedData) return
+		setHighlightedProducts(highlightedData.pages.flatMap((group) => group.data.map((prod) => prod)))
+	}, [highlightedData])
+
+	useEffect(() => {
+		if (!saleData) return
+		setSaleProducts(saleData.pages.flatMap((group) => group.data.map((prod) => prod)))
+	}, [saleData])
 
 	return (
 		<div className='home-container'>
@@ -32,21 +47,45 @@ const Home: React.FC = () => {
 				<ConcreteBeam />
 			</div>
 
-			<div className='highlighted-products'>
+			<div className='products-container'>
 				<p className='title'>Destaques</p>
 				<div className='product-slider'>
-					{products.map((prod, index) => (
+					{highlightedProducts.map((prod, index) => (
 						<ProductCard key={index} product={prod} />
 					))}
 					<div className='show-all'>
-						{isLoading ? (
+						{isHighlightedLoading ? (
 							<Loader />
-						) : hasNextPage ? (
-							<TextButton onClick={fetchNextPage} type='secondary'>
+						) : hasNextHighlighted ? (
+							<TextButton onClick={fetchNextHighlighted} type='secondary'>
 								Carregar mais
 							</TextButton>
 						) : (
-							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>Ver na loja</TextButton>
+							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>
+								Ver na loja
+							</TextButton>
+						)}
+					</div>
+				</div>
+			</div>
+
+			<div className='products-container'>
+				<p className='title'>Em promoção</p>
+				<div className='product-slider'>
+					{saleProducts.map((prod, index) => (
+						<ProductCard key={index} product={prod} />
+					))}
+					<div className='show-all'>
+						{isSaleLoading ? (
+							<Loader />
+						) : hasNextSale ? (
+							<TextButton onClick={fetchNextSale} type='secondary'>
+								Carregar mais
+							</TextButton>
+						) : (
+							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>
+								Ver na loja
+							</TextButton>
 						)}
 					</div>
 				</div>
