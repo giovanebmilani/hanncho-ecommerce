@@ -9,6 +9,7 @@
 	margin-bottom: 8rem;
 
 	.sale-image-container {
+		animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		cursor: pointer;
 		max-height: 40vw;
 		overflow: hidden;
