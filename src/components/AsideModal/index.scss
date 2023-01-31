@@ -1,0 +1,28 @@
+@import '../../sass/index.scss';
+
+.aside-modal-container {
+	position: fixed;
+	width: 600px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	pointer-events: auto;
+	z-index: 4;
+	background-color: $dark-grey;
+
+	@media screen and (max-width: 600px) {
+		width: 100%;
+	}
+
+	&.hidden {
+		visibility: hidden;
+		transform: translate(-100%);
+		opacity: 1;
+		pointer-events: none;
+	}
+}

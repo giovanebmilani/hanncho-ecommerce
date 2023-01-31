@@ -6,16 +6,22 @@ export interface ButtonProps {
 	onClick?: VoidFunction
 	type?: 'primary' | 'secondary' | 'tertiary' | 'danger'
 	disabled?: boolean
+	animating?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({
 	children,
 	onClick,
 	type = 'primary',
-	disabled = false
+	disabled = false,
+	animating = false
 }) => {
 	return (
-		<button className={`button-container ${type}`} onClick={onClick} disabled={disabled}>
+		<button
+			className={`button-container ${type} ${animating ? 'animating' : ''}`}
+			onClick={onClick}
+			disabled={disabled}
+		>
 			{children}
 		</button>
 	)

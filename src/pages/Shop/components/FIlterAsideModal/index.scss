@@ -1,0 +1,78 @@
+@import '../../../../sass/index.scss';
+
+.filter-aside-modal {
+	display: flex;
+	width: 40rem;
+	flex-direction: column;
+	gap: 2rem;
+	background-color: $dark-grey;
+	padding: 4rem;
+	border-radius: 2rem;
+
+	.filters-header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		.title {
+			color: $white;
+			text-align: left;
+			font-size: 30px;
+			font-weight: 800;
+		}
+
+		.exit-button {
+			cursor: pointer;
+			width: 1rem;
+			height: 1rem;
+			align-items: center;
+
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+
+	.filter-inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		.clear-button {
+			width: auto;
+			align-self: flex-start;
+		}
+
+		.double-filter-input {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			gap: 1rem;
+		}
+
+		.check-box-filter-input {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+
+			.emoji {
+				font-size: 25px;
+			}
+		}
+	}
+
+	.buttons {
+		padding-top: 2rem;
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+
+		button {
+			width: 50%;
+		}
+	}
+}

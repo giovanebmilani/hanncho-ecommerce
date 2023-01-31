@@ -8,6 +8,7 @@ import { queryClient } from './api/query-client'
 import { AuthProvider } from './providers/Auth/AuthProvider'
 import { ModalProvider } from './providers/Modal/ModalProvider'
 import { BlurProvider } from './providers/Blur/BlurProvider'
+import { AsideModalProvider } from './providers/AsideModal/AsideModalProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -15,9 +16,11 @@ root.render(
 		<QueryClientProvider client={queryClient}>
 			<AuthProvider>
 				<BlurProvider>
-					<ModalProvider>
-						<Router />
-					</ModalProvider>
+					<AsideModalProvider>
+						<ModalProvider>
+							<Router />
+						</ModalProvider>
+					</AsideModalProvider>
 				</BlurProvider>
 			</AuthProvider>
 		</QueryClientProvider>

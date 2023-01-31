@@ -7,6 +7,7 @@ import Stock from '../pages/Admin/Stock'
 import ColorDashboard from '../pages/Admin/Color'
 import CategoryDashboard from '../pages/Admin/Category'
 import ProductDashboard from '../pages/Admin/Product'
+import Shop from '../pages/Shop'
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
 	requireAuth?: boolean
@@ -17,6 +18,11 @@ export const routes: RouteConfig[] = [
 	{
 		component: <Home />,
 		path: PAGES.home,
+		requireAuth: false
+	},
+	{
+		component: <Shop />,
+		path: PAGES.shop,
 		requireAuth: false
 	},
 	{

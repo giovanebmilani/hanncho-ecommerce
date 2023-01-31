@@ -1,5 +1,17 @@
 @import '../../sass/index.scss';
 
+@keyframes bg-moving {
+	from {
+		background-position: 10%;
+	}
+	50% {
+		background-position: 200% 0%;
+	}
+	to {
+		background-position: 10%;
+	}
+}
+
 .product-card-container {
 	display: flex;
 	min-width: max(12rem, 20vw);
@@ -7,7 +19,7 @@
 	background-color: $blue;
 	background-image: url(../../../public/assets/header-container.png);
 	background-size: 250% 100%;
-	background-position: 50%;
+	background-position: 10%;
 	border-radius: 4px;
 	overflow: hidden;
 	cursor: pointer;
@@ -21,11 +33,12 @@
 	}
 
 	&:hover {
-		transform: scale(1.05);
+		transform: scale(1.02);
+		animation: bg-moving 15s linear infinite;
 	}
 
 	&:active {
-		transform: scale(0.95);
+		transform: scale(0.98);
 	}
 
 	&.sale {
@@ -43,17 +56,28 @@
 			background-color: $red;
 			font-weight: 800;
 			padding: 0.2rem 0.5rem;
-			font-size: max(.9rem, 1.5vw);
+			font-size: max(0.9rem, 1.5vw);
 		}
 	}
 
-	img {
+	.image-container {
+		// box-shadow: inset 0px -124px 132px -69px rgba(0,0,0,0.75);
 		width: max(12rem, 20vw);
 		height: max(12rem, 20vw);
+		z-index: -2;
 		box-shadow: $box-shadow;
+
+		img {
+			position: relative;
+			width: max(12rem, 20vw);
+			height: max(12rem, 20vw);
+			z-index: -2;
+		}
 	}
 
 	.product-info {
+		// box-shadow: 0px -3px 39px 43px rgba(0,0,0,0.75);
+		z-index: 1;
 		display: flex;
 		min-width: max(12rem, 20vw);
 		flex-direction: column;
@@ -62,7 +86,7 @@
 		// gap: max(1.5rem, 2vw);
 		justify-content: space-between;
 		font-size: max(0.8rem, 1vw);
-	
+
 		white-space: break-spaces;
 
 		.product-price-container {

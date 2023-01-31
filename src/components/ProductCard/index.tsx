@@ -23,12 +23,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
 	return (
 		<div className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}>
-			{isInSale() && <div className='sale-tag'>
-				<div className='inner-tag'>
-					{calculateDiscount(product.basePrice, product.price).toFixed(0)}% OFF
+			{isInSale() && (
+				<div className='sale-tag'>
+					<div className='inner-tag'>
+						{calculateDiscount(product.basePrice, product.price).toFixed(0)}% OFF
+					</div>
 				</div>
-			</div>}
-			<img src={product.mainImage.url ? product.mainImage.url : IMAGES.imagePlaceholder} />
+			)}
+			<div className='image-container'>
+				<img src={product.mainImage.url ? product.mainImage.url : IMAGES.imagePlaceholder} />
+			</div>
 			<div className='product-info'>
 				<p className='product-name'>{product.name}</p>
 				<div className='product-price-container'>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AsideModal from '../components/AsideModal'
 import Blur from '../components/Blur'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
@@ -32,6 +33,7 @@ const Router: React.FC = () => {
 			</Layout>
 			<Blur />
 			<Modal />
+			<AsideModal />
 		</BrowserRouter>
 	)
 }
