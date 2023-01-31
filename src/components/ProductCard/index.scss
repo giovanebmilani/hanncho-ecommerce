@@ -14,7 +14,8 @@
 
 .product-card-container {
 	display: flex;
-	min-width: max(12rem, 20vw);
+	min-width: max(16rem, 20vw);
+	max-width: max(16rem, 20vw);
 	flex-direction: column;
 	background-color: $blue;
 	background-image: url(../../../public/assets/header-container.png);
@@ -47,7 +48,7 @@
 
 	.sale-tag {
 		display: flex;
-		min-width: max(12rem, 20vw);
+		min-width: max(16rem, 20vw);
 		position: absolute;
 		align-items: center;
 		justify-content: flex-end;
@@ -62,15 +63,15 @@
 
 	.image-container {
 		// box-shadow: inset 0px -124px 132px -69px rgba(0,0,0,0.75);
-		width: max(12rem, 20vw);
-		height: max(12rem, 20vw);
+		width: max(16rem, 20vw);
+		height: max(16rem, 20vw);
 		z-index: -2;
 		box-shadow: $box-shadow;
 
 		img {
 			position: relative;
-			width: max(12rem, 20vw);
-			height: max(12rem, 20vw);
+			width: max(16rem, 20vw);
+			height: max(16rem, 20vw);
 			z-index: -2;
 		}
 	}

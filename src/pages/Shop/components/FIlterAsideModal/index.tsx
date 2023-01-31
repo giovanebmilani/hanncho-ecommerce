@@ -145,7 +145,8 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 						checked={tempParamsState.sale}
 						onChange={handleOnlySaleChange}
 					/>
-					<p>Mostrar apenas produtos em promoção?</p>
+					<p className='sale-long-text'>Mostrar apenas produtos em promoção?</p>
+					<p className='sale-short-text'>Apenas promoções?</p>
 				</div>
 				<SelectInput
 					value={
