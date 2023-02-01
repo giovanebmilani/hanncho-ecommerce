@@ -106,18 +106,19 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 	return (
 		<div className={'filter-aside-modal'}>
 			<div className='filters-header'>
-				<p className='title'>Filtrar e Organizar</p>
-				<div className='exit-button' onClick={() => setAsideModalVisibility?.(false)}>
-					<img src={IMAGES.xIcon} />
+				<div className='header-title-row'>
+					<p className='title'>Filtrar e Organizar</p>
+					<div className='exit-button' onClick={() => setAsideModalVisibility?.(false)}>
+						<img src={IMAGES.xIcon} />
+					</div>
 				</div>
-			</div>
-			<div className='filter-inputs'>
 				<div className='clear-button'>
 					<TextButton type='secondary' onClick={onClearClick}>
 						LIMPAR
 					</TextButton>
 				</div>
-
+			</div>
+			<div className='filter-inputs'>
 				<Input
 					label='PESQUISAR'
 					value={tempParamsState['name[contains]']}

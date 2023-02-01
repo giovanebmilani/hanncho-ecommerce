@@ -50,6 +50,7 @@ export default function SelectInput<T>({
 				readOnly={readOnly}
 				value={item?.label ?? (readOnly ? undefined : value) ?? ''}
 				className='box'
+				onClick={(e) => {e.preventDefault()}}
 				{...props}
 			></Input>
 			{opened && (
