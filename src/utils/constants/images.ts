@@ -6,6 +6,12 @@ import SaveIcon from '../../assets/icons/save-icon.png'
 import ArrowIcon from '../../assets/icons/arrow-icon.png'
 import ViewIcon from '../../assets/icons/view-icon.png'
 import XIcon from '../../assets/icons/x-icon.png'
+import ConfigIcon from '../../assets/icons/config-icon.png'
+import SettingsIcon from '../../assets/icons/settings-icon.png'
+import DisableIcon from '../../assets/icons/disable-icon.png'
+import ActiveIcon from '../../assets/icons/active-icon.png'
+import VisibilityOffIcon from '../../assets/icons/visibility-off-icon.png'
+import GlobeIcon from '../../assets/icons/globe-icon.png'
 import MainLogo from '../../assets/logos/logo.png'
 import ImagePlaceholder from '../../assets/images/image-placeholder.png'
 import KnowHannchoImage from '../../assets/images/know-hanncho.png'
@@ -19,6 +25,12 @@ const IMAGES = {
 	arrowIcon: ArrowIcon,
 	viewIcon: ViewIcon,
 	xIcon: XIcon,
+	configIcon: ConfigIcon,
+	settingsIcon: SettingsIcon,
+	disableIcon: DisableIcon,
+	activeIcon: ActiveIcon,
+	visibilityOffIcon: VisibilityOffIcon,
+	globeIcon: GlobeIcon,
 	mainLogo: MainLogo,
 	imagePlaceholder: ImagePlaceholder,
 	knowHannchoImage: KnowHannchoImage

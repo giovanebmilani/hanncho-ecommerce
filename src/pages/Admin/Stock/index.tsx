@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useProductVariantDeleteMutation } from '../../../api/admin/product/mutations'
+import {
+	useProductVariantDeleteMutation,
+	useProductVariantUpdateMutation
+} from '../../../api/admin/product/mutations'
 import { useGetProduct, useGetProductVariants } from '../../../api/admin/product/queries'
 import Button from '../../../components/Button'
 import ColorViewer from '../../../components/ColorViewer'
@@ -23,6 +26,7 @@ const Stock: React.FC = () => {
 	const { setVisibility, setModalContent } = useModal()
 	const [editingVariantId, setEditingVariantId] = useState<number>(-1)
 	const [idToDelete, setIdToDelete] = useState<number | undefined>()
+	const [variantToToggle, setVariantToToggle] = useState<VariantDto>()
 	const [productId, setProductId] = useState<number>()
 	const [product, setProduct] = useState<ProductDto>()
 	const [variants, setVariants] = useState<VariantDto[]>([])
@@ -30,6 +34,13 @@ const Stock: React.FC = () => {
 	const { isLoading: isProductLoading, data } = useGetProduct(productId)
 	const { isLoading: isVariantsLoading, data: variantsData } = useGetProductVariants(productId)
 	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useProductVariantDeleteMutation()
+	const { isLoading: isUpdateLoading, mutate: updateMutate } = useProductVariantUpdateMutation(
+		productId || 0,
+		variantToToggle?.id || 0,
+		{
+			active: !variantToToggle?.active
+		}
+	)
 
 	useEffect(() => {
 		if (productIdParam) setProductId(parseInt(productIdParam))
@@ -49,6 +60,11 @@ const Stock: React.FC = () => {
 		if (!idToDelete) return
 		deleteMutate({ productId: productId || 0, variantId: idToDelete })
 	}, [idToDelete])
+
+	useEffect(() => {
+		if (!variantToToggle) return
+		updateMutate()
+	}, [variantToToggle])
 
 	const onAddClick = () => {
 		if (!productId) return
@@ -79,11 +95,26 @@ const Stock: React.FC = () => {
 		setVisibility?.(true)
 	}
 
+	const onToggleVisibilityClick = (variant: VariantDto) => {
+		setModalContent?.(
+			<ConfirmationModal
+				title={variant.active ? 'Desativar variante?' : 'Ativar variante?'}
+				text={
+					variant.active
+						? 'Ao desativar, o produto não será mais visível ao público no ecommerce.'
+						: 'Tem certeza de que deseja tornar este produto visível ao público do ecommerce?'
+				}
+				confirmHandler={() => setVariantToToggle(variant)}
+			/>
+		)
+		setVisibility?.(true)
+	}
+
 	const onBackClick = () => {
 		navigate(PAGES.adminProduct)
 	}
 
-	const isAddButtonDisabled = isProductLoading || isVariantsLoading
+	const isAddButtonDisabled = isProductLoading || isVariantsLoading || isUpdateLoading
 
 	return (
 		<div className='stock-dashboard-container'>
@@ -94,7 +125,7 @@ const Stock: React.FC = () => {
 				<p className='title'>Estoque</p>
 				<div className='row-wrapper'>
 					<div className='variant-list'>
-						{isVariantsLoading || isDeleteLoading ? (
+						{isVariantsLoading || isDeleteLoading || isUpdateLoading ? (
 							<Loader />
 						) : variants.length <= 0 ? (
 							<p>Nenhuma variante encontrada...</p>
@@ -147,6 +178,9 @@ const Stock: React.FC = () => {
 									</div>
 
 									<div className='buttons-container'>
+										<IconButton onClick={() => onToggleVisibilityClick(variant)}>
+											<img src={variant.active ? IMAGES.globeIcon : IMAGES.visibilityOffIcon} />
+										</IconButton>
 										<IconButton onClick={() => onEditClick(variant)}>
 											<img
 												src={editingVariantId === variant.id ? IMAGES.saveIcon : IMAGES.editIcon}
@@ -182,16 +216,18 @@ const Stock: React.FC = () => {
 							</p>
 							<p>
 								Valor do estoque: R$
-								{variants.reduce(
-									(prev, current) =>
-										prev +
-										current.stocks.reduce(
-											(stockPrev, stockCurrent) =>
-												stockPrev + stockCurrent.quantity * current.price,
-											0
-										),
-									0
-								).toFixed(2)}
+								{variants
+									.reduce(
+										(prev, current) =>
+											prev +
+											current.stocks.reduce(
+												(stockPrev, stockCurrent) =>
+													stockPrev + stockCurrent.quantity * current.price,
+												0
+											),
+										0
+									)
+									.toFixed(2)}
 							</p>
 						</div>
 						<div className='buttons'>

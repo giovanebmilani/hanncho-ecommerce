@@ -10,11 +10,12 @@ export interface VariantCreateDto {
 }
 
 export interface VariantUpdateDto {
-	price: number
-	basePrice: number
-	colorId: number
-	highlighted: boolean
-	stocks: StockDto[]
+	price?: number
+	basePrice?: number
+	colorId?: number
+	highlighted?: boolean
+	stocks?: StockDto[]
+	active?: boolean
 }
 
 export interface VariantImageDto {
