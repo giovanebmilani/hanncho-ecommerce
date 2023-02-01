@@ -50,7 +50,8 @@ export default function SelectInput<T>({
 				readOnly={readOnly}
 				value={item?.label ?? (readOnly ? undefined : value) ?? ''}
 				className='box'
-				onFocus={(e) => {e.preventDefault()}}
+				// onFocus={(e) => {e.preventDefault()}}
+				inputMode='none'
 				{...props}
 			></Input>
 			{opened && (
