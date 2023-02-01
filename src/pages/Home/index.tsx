@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
 import ConcreteBeam from '../../components/ConcreteBeam'
+import IconButton from '../../components/IconButton'
 import Loader from '../../components/Loader'
 import ProductCard from '../../components/ProductCard'
 import TextButton from '../../components/TextButton'
@@ -14,6 +15,8 @@ const Home: React.FC = () => {
 	const navigate = useNavigate()
 	const [highlightedProducts, setHighlightedProducts] = useState<PublicProductListDto[]>([])
 	const [saleProducts, setSaleProducts] = useState<PublicProductListDto[]>([])
+	const highlightedProductsSliderRef = useRef<HTMLDivElement>(null)
+	const saleProductsSliderRef = useRef<HTMLDivElement>(null)
 	const {
 		isLoading: isHighlightedLoading,
 		data: highlightedData,
@@ -38,18 +41,40 @@ const Home: React.FC = () => {
 		setSaleProducts(saleData.pages.flatMap((group) => group.data.map((prod) => prod)))
 	}, [saleData])
 
+	const handleSliderScroll = (
+		direction: 'left' | 'right',
+		ref: React.RefObject<HTMLDivElement>
+	) => {
+		const scrollValue =
+			direction === 'left' ? -(ref.current?.clientWidth || 0) : ref.current?.clientWidth || 0
+		ref.current?.scroll({
+			left: ref.current?.scrollLeft + scrollValue,
+			behavior: 'smooth'
+		})
+	}
+
 	return (
 		<div className='home-container'>
 			<div className='images-container'>
-				<div className='sale-image-container' onClick={() => navigate(PAGES.shop)}>
+				<div className='sale-image-container' onClick={() => navigate(PAGES.shop + '?sale=true')}>
 					<img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} />
 				</div>
 				<ConcreteBeam />
 			</div>
 
 			<div className='products-container'>
-				<p className='title'>Destaques</p>
-				<div className='product-slider'>
+				<div className='products-container-header'>
+					<p className='title'>Destaques</p>
+					<div className='slider-scroll-buttons'>
+						<IconButton onClick={() => handleSliderScroll('left', highlightedProductsSliderRef)}>
+							<img className='arrow-to-left' src={IMAGES.arrowIcon} />
+						</IconButton>
+						<IconButton onClick={() => handleSliderScroll('right', highlightedProductsSliderRef)}>
+							<img src={IMAGES.arrowIcon} />
+						</IconButton>
+					</div>
+				</div>
+				<div className='product-slider' ref={highlightedProductsSliderRef}>
 					{highlightedProducts.map((prod, index) => (
 						<ProductCard key={index} product={prod} />
 					))}
@@ -70,8 +95,18 @@ const Home: React.FC = () => {
 			</div>
 
 			<div className='products-container'>
-				<p className='title'>Em promoção</p>
-				<div className='product-slider'>
+			<div className='products-container-header'>
+					<p className='title'>Em promoção</p>
+					<div className='slider-scroll-buttons'>
+						<IconButton onClick={() => handleSliderScroll('left', saleProductsSliderRef)}>
+							<img className='arrow-to-left' src={IMAGES.arrowIcon} />
+						</IconButton>
+						<IconButton onClick={() => handleSliderScroll('right', saleProductsSliderRef)}>
+							<img src={IMAGES.arrowIcon} />
+						</IconButton>
+					</div>
+				</div>
+				<div className='product-slider' ref={saleProductsSliderRef}>
 					{saleProducts.map((prod, index) => (
 						<ProductCard key={index} product={prod} />
 					))}
@@ -83,7 +118,7 @@ const Home: React.FC = () => {
 								Carregar mais
 							</TextButton>
 						) : (
-							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>
+							<TextButton onClick={() => navigate(PAGES.shop + '?sale=true')} type='secondary'>
 								Ver na loja
 							</TextButton>
 						)}

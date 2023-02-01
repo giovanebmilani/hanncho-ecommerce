@@ -45,6 +45,36 @@
 		overflow: hidden;
 		gap: 2vw;
 
+		.products-container-header {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			align-items: center;
+			justify-content: space-between;
+			padding-right: 6vw;
+
+			.slider-scroll-buttons {
+				display: flex;
+				flex-direction: row;
+				gap: 5vw;
+				height: 100%;
+				align-items: center;
+
+				.icon-button-container {
+					img {
+						width: max(.8rem, 2vw);
+						height: max(.8rem, 2vw);
+
+						&.arrow-to-left {
+							transform: rotate(180deg);
+						}
+					}
+
+
+				}
+			}
+		}
+
 		.product-slider {
 			display: flex;
 			align-items: center;
