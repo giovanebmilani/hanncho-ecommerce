@@ -56,12 +56,12 @@ const Home: React.FC = () => {
 
 	return (
 		<div className='home-container'>
-			<div className='images-container'>
 				<div className='sale-image-container' onClick={() => navigate(PAGES.shop + '?sale=true')}>
-					<img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} />
+					{/* <img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} /> */}
 				</div>
-				{/* <ConcreteBeam /> */}
-			</div>
+			{/* <div className='images-container'>
+				<ConcreteBeam />
+			</div> */}
 
 			<div className='products-container'>
 				<div className='products-container-header'>

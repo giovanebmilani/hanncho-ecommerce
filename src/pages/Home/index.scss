@@ -9,14 +9,21 @@
 	margin-bottom: 8rem;
 	padding: 0;
 
+	.images-container {
+		width: 100%;
+	}
+
 	.sale-image-container {
-		animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+		animation: popup 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 		cursor: pointer;
-		max-height: 50vw;
+		width: 100%;
+		height: 50vmax;
 		overflow: hidden;
-		img {
-			max-width: 100%;
-		}
+		background-image: url(../../../public/assets/hanncho-sale.png);
+		background-size: 100vmax;
+		background-position: 50% 0;
+		background-repeat: no-repeat;
+		// transform: scale(100vw);
 	}
 
 	.content {
@@ -32,10 +39,6 @@
 		text-align: left;
 		font-size: max(1.5rem, 3.5vw);
 		font-weight: 800;
-	}
-
-	.images-container {
-		max-width: 100%;
 	}
 
 	.products-container {
@@ -63,15 +66,13 @@
 
 				.icon-button-container {
 					img {
-						width: max(.8rem, 2vw);
-						height: max(.8rem, 2vw);
+						width: max(0.8rem, 2vw);
+						height: max(0.8rem, 2vw);
 
 						&.arrow-to-left {
 							transform: rotate(180deg);
 						}
 					}
-
-
 				}
 			}
 		}
@@ -115,7 +116,7 @@
 			gap: 3vw;
 
 			.text {
-				font-size: max(.9rem, 1.3vw);
+				font-size: max(0.9rem, 1.3vw);
 			}
 		}
 

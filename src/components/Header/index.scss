@@ -6,7 +6,7 @@
 	right: 0;
 	left: 0;
 	max-width: 100%;
-	max-height: 7rem;
+	max-height: max(4rem, 7vw);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -37,7 +37,7 @@
 		justify-content: flex-start;
 
 		.text-button-container {
-			font-size: max(1rem, 1.5vw);
+			font-size: max(.8rem, 1.5vw);
 		}
 	}
 
