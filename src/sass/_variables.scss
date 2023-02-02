@@ -57,12 +57,14 @@ $animation-timing: 0.25s;
 @keyframes appear-down {
 	from {
 		clip-path: polygon(0% 0%, 0% 0%, 100% 0%, 100% 0%);
-		opacity: 0;
+		// opacity: 0;
 	}
-
+	50% {
+		clip-path: polygon(0% 0%, 0% 0%, 100% 0%, 100% 0%);
+	}
 	to {
 		clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
-		opacity: 1;
+		// opacity: 1;
 	}
 }
 

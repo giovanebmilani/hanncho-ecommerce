@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import ReactPlaceholder from 'react-placeholder/lib'
 import { Link, useNavigate } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
 import ConcreteBeam from '../../components/ConcreteBeam'
@@ -59,7 +60,7 @@ const Home: React.FC = () => {
 				<div className='sale-image-container' onClick={() => navigate(PAGES.shop + '?sale=true')}>
 					<img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} />
 				</div>
-				<ConcreteBeam />
+				{/* <ConcreteBeam /> */}
 			</div>
 
 			<div className='products-container'>
@@ -95,7 +96,7 @@ const Home: React.FC = () => {
 			</div>
 
 			<div className='products-container'>
-			<div className='products-container-header'>
+				<div className='products-container-header'>
 					<p className='title'>Em promoção</p>
 					<div className='slider-scroll-buttons'>
 						<IconButton onClick={() => handleSliderScroll('left', saleProductsSliderRef)}>
