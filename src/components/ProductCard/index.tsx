@@ -23,6 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
 	return (
 		<div className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}>
+			{product.soldOut && <div className='sold-out-grid'><p>SOLD OUT</p></div>}
 			{isInSale() && (
 				<div className='sale-tag'>
 					<div className='inner-tag'>
@@ -35,10 +36,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 			</div>
 			<div className='product-info'>
 				<p className='product-name'>{product.name}</p>
-				<div className='product-price-container'>
+				{!product.soldOut && <div className='product-price-container'>
 					{isInSale() && <p className='base-price'>R${product.basePrice.toFixed(2)}</p>}
 					<p className='price'>R${product.price.toFixed(2)}</p>
-				</div>
+				</div>}
 			</div>
 		</div>
 	)
