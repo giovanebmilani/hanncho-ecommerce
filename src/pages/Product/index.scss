@@ -20,11 +20,35 @@
 			gap: 5vw;
 			width: 100%;
 
-			.product-images-container {
-				width: 50%;
+			@media screen and (max-width: 700px) {
+				justify-content: center;
+				flex-direction: column;
+			}
 
-				img {
-					max-width: 100%;
+			.product-images-container {
+				@media screen and (max-width: 700px) {
+					width: 100%;
+				}
+				width: 50%;
+				display: flex;
+				flex-direction: column;
+				gap: 1vw;
+
+				.main-image-container {
+					img {
+						max-width: 100%;
+					}
+				}
+
+				.other-images {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+					justify-content: space-between;
+
+					img {
+						max-width: 49%;
+					}
 				}
 			}
 
@@ -32,8 +56,13 @@
 				width: 50%;
 				display: flex;
 				flex-direction: column;
-				// gap: 2vw;
-				justify-content: space-between;
+				gap: max(1rem, 2vw);
+
+				font-size: max(0.7rem, 1vw);
+
+				@media screen and (max-width: 700px) {
+					width: 100%;
+				}
 
 				.infos {
 					display: flex;
@@ -42,7 +71,7 @@
 
 					.title {
 						font-weight: 800;
-						font-size: 3vw;
+						font-size: max(1.4rem, 3vw);
 					}
 
 					.product-price-container {
@@ -50,7 +79,7 @@
 						flex-direction: row;
 						gap: 1vw;
 						font-weight: 800;
-						font-size: 1.5vw;
+						font-size: max(0.9rem, 1.5vw);
 						color: $yellow;
 
 						.base-price {
@@ -63,36 +92,44 @@
 				.product-sizes-container {
 					display: flex;
 					flex-direction: column;
-					gap: 1vw;
+					gap: max(1rem, 1vw);
 
 					.title {
 						font-weight: 800;
+						font-size: max(0.9rem, 1.5vw);
 					}
 
 					.sizes {
 						display: flex;
 						flex-direction: row;
 						gap: 1vw;
+
+						.size-viewer-container {
+							width: max(2.5rem, 3.5vw);
+							height:max(2.5rem, 3.5vw);
+							font-size: max(0.9rem, 1.5vw);
+						}
 					}
 				}
 
 				.other-colors-container {
 					display: flex;
 					flex-direction: column;
-					gap: 1vw;
+					gap: max(1rem, 1vw);
 
 					.title {
 						font-weight: 800;
+						font-size: max(0.9rem, 1.5vw);
 					}
 
 					.colors {
 						display: flex;
 						flex-direction: row;
-						gap: .8vw;
+						gap: 0.8vw;
 
 						.color-viewer-container {
-							width: 3.5vw;
-							height: 3.5vw;
+							width: max(2.5rem, 3.5vw);
+							height: max(2.5rem, 3.5vw);
 						}
 					}
 				}
@@ -102,7 +139,18 @@
 					flex-direction: row;
 					width: 100%;
 					gap: 2vw;
-					min-height: 4vw;
+					margin-top: 5vw;
+
+					@media screen and (max-width: 700px) {
+						justify-content: space-between;
+					}
+
+					.button-container {
+						width: max(8rem, 15vw);
+						@media screen and (max-width: 700px) {
+							width: 100%;
+						}
+					}
 				}
 			}
 		}

@@ -43,7 +43,16 @@ const Product: React.FC = () => {
 				</TextButton>
 				<div className='product-detail-container'>
 					<div className='product-images-container'>
-						<img src={product?.images[0].url} />
+						<div className='main-image-container'>
+							<img src={product?.images.find((img) => img.isMain)?.url || ''} />
+						</div>
+						<div className='other-images'>
+							{product?.images
+								.filter((img) => !img.isMain)
+								.map((img, index) => (
+									<img key={index} src={img.url} />
+								))}
+						</div>
 					</div>
 					<div className='product-info-container'>
 						<div className='infos'>

@@ -3,19 +3,19 @@
 
 .button-container {
 	display: block;
-	padding: 16px 24px;
+	padding: max(.6rem, 1vw) max(1.1rem, 1.5vw);
 	border-radius: 4px;
-	font-size: 16px;
+	font-size: max(.8rem, 1vw);
 	font-weight: bold;
 	cursor: pointer;
 	background-image: url(../../../public/assets/button-container.png);
 	background-size: 100% 100%;
-	animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	animation: popup 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 	box-shadow: $box-shadow;
 
 	&.primary {
 		background-color: $green;
-		color: rgba($white, .7);
+		color: rgba($white, 0.7);
 		border: none;
 
 		&:hover {
@@ -30,7 +30,7 @@
 	&.secondary {
 		background-color: $blue;
 		border: none;
-		color: rgba($white, .7);
+		color: rgba($white, 0.7);
 
 		&:hover {
 			background-color: color.adjust($color: $blue, $saturation: 10%);
@@ -44,7 +44,7 @@
 	&.tertiary {
 		background-color: $yellow;
 		border: none;
-		color: rgba($black, .7);
+		color: rgba($black, 0.7);
 
 		&:hover {
 			background-color: color.adjust($color: $yellow, $saturation: 10%);
@@ -58,7 +58,7 @@
 	&.danger {
 		background-color: $red;
 		border: none;
-		color: rgba($white, .7);
+		color: rgba($white, 0.7);
 
 		&:hover {
 			background-color: color.adjust($color: $red, $saturation: 10%);
