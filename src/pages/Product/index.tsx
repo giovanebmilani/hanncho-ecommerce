@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { PublicProductDto } from '../../dtos/Product'
 import { usePublicGetProduct } from '../../api/public/product/queries'
 import TextButton from '../../components/TextButton'
-import { Size } from '../../dtos/Stock'
 import SizeViewer from '../../components/SizeViewer'
 import ColorViewer from '../../components/ColorViewer'
 import Button from '../../components/Button'
@@ -19,6 +18,10 @@ const Product: React.FC = () => {
 	const [selectedSize, setSelectedSize] = useState<string>()
 
 	const { data, isLoading } = usePublicGetProduct(productId)
+
+	useEffect(() => {
+		setSelectedSize(undefined)
+	}, [productId])
 
 	useEffect(() => {
 		if (!productIdParam) return
@@ -72,15 +75,19 @@ const Product: React.FC = () => {
 							<div className='product-sizes-container'>
 								<p className='title'>Selecione o tamanho:</p>
 								<div className='sizes'>
-									{product?.avaliableSizes && product.avaliableSizes.length <= 0 ? <p>SOLD OUT</p> : product?.avaliableSizes.map((size, index) => (
-										<SizeViewer
-											key={index}
-											onClick={() => setSelectedSize(size)}
-											selected={selectedSize === size}
-										>
-											{size}
-										</SizeViewer>
-									))}
+									{product?.avaliableSizes && product.avaliableSizes.length <= 0 ? (
+										<p>SOLD OUT</p>
+									) : (
+										product?.avaliableSizes.map((size, index) => (
+											<SizeViewer
+												key={index}
+												onClick={() => setSelectedSize(size)}
+												selected={selectedSize === size}
+											>
+												{size}
+											</SizeViewer>
+										))
+									)}
 								</div>
 							</div>
 							<div className='other-colors-container'>
@@ -90,6 +97,7 @@ const Product: React.FC = () => {
 										<ColorViewer
 											key={index}
 											hex={variant.color.hex}
+											colorName={variant.color.name}
 											selected={variant.id === productId}
 											onClick={() => {
 												navigate(PAGES.product(variant.id))
