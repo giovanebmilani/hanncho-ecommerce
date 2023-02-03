@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { usePublicGetAllCategories } from '../../api/public/category/queries'
-import { usePublicGetAllColors } from '../../api/public/color/queries'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
-import Input from '../../components/Input'
 import Loader from '../../components/Loader'
 import ProductCard from '../../components/ProductCard'
-import SelectInput from '../../components/SelectInput'
 import TextButton from '../../components/TextButton'
-import { CategoryDto } from '../../dtos/Category'
-import { ColorDto } from '../../dtos/Color'
 import { PublicProductListDto } from '../../dtos/Product'
 import { useAsideModal } from '../../providers/AsideModal/AsideModalProvider'
 import PAGES from '../../utils/constants/pages'
 import FilterAsideModal from './components/FIlterAsideModal'
 import './index.scss'
 
-type OrderByProductQuery = 'price' | 'discount'
+type OrderByProductQuery = 'price' | 'discount' | string
 
 export interface ProductSearchParams {
-	categoryId?: number
 	colorId?: number
 	sale?: true
 	'orderBy[desc]'?: OrderByProductQuery
 	'orderBy[asc]'?: OrderByProductQuery
-	'name[contains]'?: string
+	product: {
+		'name[contains]'?: string
+		categoryId?: number
+	}
 }
 
 export interface OrderingParam {
 	id: number
 	name: string
 	type: 'asc' | 'desc'
-	value: OrderByProductQuery
+	value?: OrderByProductQuery
 }
 
 const Shop: React.FC = () => {
 	const navigate = useNavigate()
 	const { setAsideModalVisibility, setAsideModalContent } = useAsideModal()
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [filterParams, setFilterParams] = useState<ProductSearchParams>({})
+	const [filterParams, setFilterParams] = useState<ProductSearchParams>({ product: {} })
 
 	const [products, setProducts] = useState<PublicProductListDto[]>([])
 
@@ -50,19 +46,26 @@ const Shop: React.FC = () => {
 	} = usePublicGetAllProducts({ ...filterParams }, 20)
 
 	useEffect(() => {
-		const params: ProductSearchParams = {}
+		const params: ProductSearchParams = { product: {} }
 
-		if (searchParams.has('categoryId'))
-			params.categoryId = parseInt(searchParams.get('categoryId') || '') || undefined
+		if (searchParams.has('product.categoryId'))
+			params.product.categoryId =
+				parseInt(searchParams.get('product.categoryId') || '') || undefined
 
 		if (searchParams.has('colorId'))
 			params.colorId = parseInt(searchParams.get('colorId') || '') || undefined
 
-		if (searchParams.has('name[contains]'))
-			params['name[contains]'] = searchParams.get('name[contains]') || undefined
+		if (searchParams.has('product.name[contains]'))
+			params.product['name[contains]'] = searchParams.get('product.name[contains]') || undefined
 
 		if (searchParams.has('sale'))
 			params.sale = searchParams.get('sale') === 'true' ? true : undefined
+
+		if (searchParams.has('orderBy[desc]'))
+			params['orderBy[desc]'] = searchParams.get('orderBy[desc]') || undefined
+
+		if (searchParams.has('orderBy[asc]'))
+			params['orderBy[asc]'] = searchParams.get('orderBy[asc]') || undefined
 
 		setFilterParams(params)
 	}, [searchParams])
@@ -88,13 +91,27 @@ const Shop: React.FC = () => {
 		let firstFlag = true
 		for (const [key, value] of Object.entries(params)) {
 			if (value) {
-				if (firstFlag) {
-					queryString = queryString.concat('?')
-					firstFlag = false
+				if (typeof value === 'object') {
+					for (const [k, v] of Object.entries(value)) {
+						if (v) {
+							if (firstFlag) {
+								queryString = queryString.concat('?')
+								firstFlag = false
+							} else {
+								queryString = queryString.concat('&')
+							}
+							queryString = queryString.concat(key + '.' + k + '=' + v)
+						}
+					}
 				} else {
-					queryString = queryString.concat('&')
+					if (firstFlag) {
+						queryString = queryString.concat('?')
+						firstFlag = false
+					} else {
+						queryString = queryString.concat('&')
+					}
+					queryString = queryString.concat(key + '=' + value)
 				}
-				queryString = queryString.concat(key + '=' + value)
 			}
 		}
 		return queryString

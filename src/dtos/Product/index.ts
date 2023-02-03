@@ -53,6 +53,10 @@ export interface ProductFilterDto {
 }
 
 export interface PublicProductFilterDto {
+	product?: {
+		categoryId?: number
+		'name[contains]'?: string
+	}
 	categoryId?: number
 	colorId?: number
 	highlighted?: boolean

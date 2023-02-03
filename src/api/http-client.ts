@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, ParamsSerializerOptions } from 'axios'
 import applyCaseMiddleware from 'axios-case-converter'
 import authStorage from '../utils/stores/auth'
 
@@ -13,7 +13,8 @@ export const createHttpClient = (url: string, parent?: HttpClient) => {
 		baseURL: baseUrl,
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		},
+		paramsSerializer: { dots: true }
 	}) as HttpClient
 
 	applyCaseMiddleware(httpClient)

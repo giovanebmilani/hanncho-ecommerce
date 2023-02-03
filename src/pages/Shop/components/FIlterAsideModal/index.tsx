@@ -1,7 +1,6 @@
 import './index.scss'
 import React, { useEffect, useState } from 'react'
 import { useAsideModal } from '../../../../providers/AsideModal/AsideModalProvider'
-import IconButton from '../../../../components/IconButton'
 import IMAGES from '../../../../utils/constants/images'
 import Input from '../../../../components/Input'
 import SelectInput from '../../../../components/SelectInput'
@@ -21,7 +20,7 @@ export interface ProductModalProps {
 }
 
 const orderingParams: OrderingParam[] = [
-	{ id: -1, name: 'Nenhum', type: 'desc', value: 'price' },
+	{ id: -1, name: 'Nenhum', type: 'desc', value: undefined },
 	{ id: 1, name: 'Preço desc.', type: 'desc', value: 'price' },
 	{ id: 2, name: 'Preço cresc.', type: 'asc', value: 'price' },
 	{ id: 3, name: 'Maior desconto', type: 'desc', value: 'discount' },
@@ -52,8 +51,15 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 	}, [categoriesData])
 
 	const handleCategoryChange = (cat?: CategoryDto) => {
-		if (cat?.id === -1) return setTempParamsState((prev) => ({ ...prev, categoryId: undefined }))
-		return setTempParamsState((prev) => ({ ...prev, categoryId: cat?.id }))
+		if (cat?.id === -1)
+			return setTempParamsState((prev) => ({
+				...prev,
+				product: { ...prev.product, categoryId: undefined }
+			}))
+		return setTempParamsState((prev) => ({
+			...prev,
+			product: { ...prev.product, categoryId: cat?.id }
+		}))
 	}
 
 	const handleColorChange = (color?: ColorDto) => {
@@ -63,8 +69,15 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const search = e.target.value
-		if (!search) return setTempParamsState((prev) => ({ ...prev, 'name[contains]': undefined }))
-		return setTempParamsState((prev) => ({ ...prev, 'name[contains]': search }))
+		if (!search)
+			return setTempParamsState((prev) => ({
+				...prev,
+				product: { ...prev.product, 'name[contains]': undefined }
+			}))
+		return setTempParamsState((prev) => ({
+			...prev,
+			product: { ...prev.product, 'name[contains]': search }
+		}))
 	}
 
 	const handleOrderByChange = (ord?: OrderingParam) => {
@@ -93,7 +106,7 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 	}
 
 	const onClearClick = () => {
-		setTempParamsState({})
+		setTempParamsState({ product: { 'name[contains]': '' } })
 		cleanParams()
 		setAsideModalVisibility?.(false)
 	}
@@ -121,12 +134,12 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 			<div className='filter-inputs'>
 				<Input
 					label='PESQUISAR'
-					value={tempParamsState['name[contains]']}
+					value={tempParamsState.product['name[contains]']}
 					onChange={handleSearch}
 				/>
 				<div className='double-filter-input'>
 					<SelectInput
-						value={categories.find((cat) => cat.id === tempParamsState.categoryId)?.name}
+						value={categories.find((cat) => cat.id === tempParamsState.product.categoryId)?.name}
 						autoCompletion={categories.map((cat) => ({ label: cat.name, value: cat }))}
 						onSelectItem={handleCategoryChange}
 						label='CATEGORIAS'
@@ -151,11 +164,12 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 				</div>
 				<SelectInput
 					value={
-						orderingParams.find(
-							(ord) =>
-								ord.value === tempParamsState['orderBy[asc]'] ||
-								ord.value === tempParamsState['orderBy[desc]']
-						)?.name
+						orderingParams.find((ord) => {
+							if (tempParamsState['orderBy[asc]'])
+								return ord.type === 'asc' && ord.value === tempParamsState['orderBy[asc]']
+							if (tempParamsState['orderBy[desc]'])
+								return ord.type === 'desc' && ord.value === tempParamsState['orderBy[desc]']
+						})?.name
 					}
 					autoCompletion={orderingParams.map((ord) => ({ label: ord.name, value: ord }))}
 					onSelectItem={handleOrderByChange}
