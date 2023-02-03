@@ -8,4 +8,18 @@
 	color: $white;
 	box-shadow: $box-shadow;
 	font-weight: 800;
+
+	&.clickable {
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+		&:hover {
+			transform: scale(1.1);
+		}
+
+		&.selected {
+			background-color: $yellow;
+			color: $black;
+		}
+	}
 }

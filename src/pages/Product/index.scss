@@ -107,7 +107,7 @@
 						.size-viewer-container {
 							width: max(2.5rem, 3.5vw);
 							height:max(2.5rem, 3.5vw);
-							font-size: max(0.9rem, 1.5vw);
+							font-size: max(0.9rem, 1.2vw);
 						}
 					}
 				}
@@ -139,10 +139,10 @@
 					flex-direction: row;
 					width: 100%;
 					gap: 2vw;
-					margin-top: 5vw;
 
 					@media screen and (max-width: 700px) {
 						justify-content: space-between;
+						margin-top: 5vw;
 					}
 
 					.button-container {

@@ -6,16 +6,18 @@ export interface ColorViewerProps {
 	onClick?: VoidFunction
 	hex?: string
 	disabled?: boolean
+	selected?: boolean
 }
 
 export const SizeViewer: React.FC<ColorViewerProps> = ({
 	children,
 	onClick,
-	disabled = false
+	disabled = false,
+	selected = false
 }) => {
 	return (
 		<button
-			className={'size-viewer-container'}
+			className={`size-viewer-container ${onClick ? 'clickable' : ''} ${selected ? 'selected' : ''}`}
 			onClick={onClick}
 			disabled={disabled}
 		>

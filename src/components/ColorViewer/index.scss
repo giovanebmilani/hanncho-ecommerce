@@ -6,4 +6,23 @@
 	height: 2rem;
 	border: 1px solid $white;
 	box-shadow: $box-shadow;
+
+	
+	&.clickable {
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+		&:hover {
+			transform: scale(1.1);
+		}
+
+		&.selected {
+			cursor: auto;
+			box-shadow: 0 0 10px $yellow;
+
+			&:hover {
+				transform: scale(1);
+			}
+		}
+	}
 }
