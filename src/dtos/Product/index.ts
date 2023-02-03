@@ -1,5 +1,7 @@
 import { CategoryDto } from '../Category'
 import { ColorDto } from '../Color'
+import { ImageDto } from '../Image'
+import { VariantImageDto } from '../Variant'
 
 export interface ProductCreateDto {
 	name: string
@@ -21,6 +23,16 @@ export interface ProductDto {
 	category: CategoryDto
 }
 
+export interface PublicVariantImageDto {
+	url: string
+	isMain: boolean
+}
+
+export interface ProductResumeDto {
+	id: number
+	color: ColorDto
+}
+
 export interface PublicProductDto {
 	id: number
 	name: string
@@ -31,6 +43,8 @@ export interface PublicProductDto {
 	basePrice: number
 	soldOut: boolean
 	avaliableSizes: string[]
+	images: PublicVariantImageDto[]
+	variants: ProductResumeDto[]
 }
 
 export interface PublicProductListDto {

@@ -3,8 +3,9 @@
 .size-viewer-container {
 	width: 3rem;
 	height: 3rem;
-	border: 1px solid $grey;
+	border: 1px solid $yellow;
 	background-color: transparent;
 	color: $white;
 	box-shadow: $box-shadow;
+	font-weight: 800;
 }

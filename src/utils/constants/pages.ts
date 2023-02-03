@@ -7,6 +7,7 @@ const PAGES = {
 	adminProduct: '/admin/produtos',
 	stock: (id: string | number = ':productId') => `/admin/${id}/estoque`,
 	shop: '/loja',
+	product: (id: string | number = ':productId') => `/produto/${id}`,
 	cart: '/carrinho'
 }
 

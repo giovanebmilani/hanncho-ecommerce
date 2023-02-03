@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { PublicProductListDto } from '../../dtos/Product'
 import IMAGES from '../../utils/constants/images'
+import PAGES from '../../utils/constants/pages'
 import './index.scss'
 
 export interface ProductCardProps {
@@ -9,6 +11,7 @@ export interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+	const navigate = useNavigate()
 	const [force, setForce] = useState<number>(0)
 
 	useEffect(() => {
@@ -21,9 +24,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
 	const isInSale = () => product.basePrice !== product.price
 
+	const handleClick = () => {
+		navigate(PAGES.product(product.id))
+	}
+
 	return (
-		<div className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}>
-			{product.soldOut && <div className='sold-out-grid'><p>SOLD OUT</p></div>}
+		<div
+			onClick={handleClick}
+			className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}
+		>
+			{product.soldOut && (
+				<div className='sold-out-grid'>
+					<p>SOLD OUT</p>
+				</div>
+			)}
 			{isInSale() && (
 				<div className='sale-tag'>
 					<div className='inner-tag'>
@@ -36,10 +50,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 			</div>
 			<div className='product-info'>
 				<p className='product-name'>{product.name}</p>
-				{!product.soldOut && <div className='product-price-container'>
-					{isInSale() && <p className='base-price'>R${product.basePrice.toFixed(2)}</p>}
-					<p className='price'>R${product.price.toFixed(2)}</p>
-				</div>}
+				{!product.soldOut && (
+					<div className='product-price-container'>
+						{isInSale() && <p className='base-price'>R${product.basePrice.toFixed(2)}</p>}
+						<p className='price'>R${product.price.toFixed(2)}</p>
+					</div>
+				)}
 			</div>
 		</div>
 	)
