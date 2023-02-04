@@ -1,0 +1,58 @@
+@import '../../sass/index.scss';
+
+.toast-container {
+	position: fixed;
+	transform: translate(-50%, -50%);
+	display: flex;
+	bottom: 0;
+	left: 50%;
+	flex-direction: row;
+	background-color: $dark-grey;
+	border-radius: 1vh;
+	align-items: center;
+	min-width: 30vh;
+	height: 6vh;
+	overflow: hidden;
+	opacity: 1;
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+	&.hidden {
+		opacity: 0;
+		transform: translate(-50%, 100%);
+	}
+
+	.type-bar {
+		display: flex;
+		width: 1vh;
+		height: 100%;
+	}
+
+	&.neutral .type-bar {
+		background-color: $yellow;
+	}
+
+	&.success .type-bar {
+		background-color: $green;
+	}
+
+	&.error .type-bar {
+		background-color: $red;
+	}
+
+	.toast-content {
+		width: 100%;
+		padding: 1.5vh;
+	}
+
+	.close-button {
+		padding: 1.5vh;
+		display: flex;
+		justify-self: flex-end;
+		cursor: pointer;
+
+		img {
+			width: 1.5vh;
+			height: 1.5vh;
+		}
+	}
+}

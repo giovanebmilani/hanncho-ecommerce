@@ -10,9 +10,11 @@ import Button from '../../components/Button'
 import PAGES from '../../utils/constants/pages'
 import Loader from '../../components/Loader'
 import { useCart } from '../../providers/Cart/CartProvider'
+import { useToast } from '../../providers/Toast/ToastProvider'
 
 const Product: React.FC = () => {
 	const navigate = useNavigate()
+	const { toast } = useToast()
 	const { addProduct } = useCart()
 	const { productId: productIdParam } = useParams()
 	const [productId, setProductId] = useState<number>()
@@ -43,6 +45,7 @@ const Product: React.FC = () => {
 		if (!product || !size) return
 		product.size = size
 		addProduct?.(product)
+		toast?.('Produto adicionado no carrinho.', 'neutral')
 	}
 
 	const isInSale = () => product?.basePrice !== product?.price

@@ -5,6 +5,7 @@ import Blur from '../components/Blur'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Modal from '../components/Modal'
+import Toast from '../components/Toast'
 import { ProtectedRoute } from './ProtectedRoute'
 import { routes } from './routes'
 
@@ -34,6 +35,7 @@ const Router: React.FC = () => {
 			<Blur />
 			<Modal />
 			<AsideModal />
+			<Toast />
 		</BrowserRouter>
 	)
 }
