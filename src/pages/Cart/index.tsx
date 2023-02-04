@@ -12,16 +12,11 @@ import { PublicProductDto } from '../../dtos/Product'
 const Cart: React.FC = () => {
 	const navigate = useNavigate()
 	const { clearCart, products: cartProducts } = useCart()
-	const [products, setProducts] = useState<PublicProductDto[]>([])
 	const results = usePublicGetCartProducts(cartProducts || [])
 
-	useEffect(() => {
-		if (!results) return
-		const data = results
-			.map((res) => res.data)
-			.filter((value) => value !== undefined) as PublicProductDto[]
-		setProducts(data)
-	}, [results])
+	const products = results
+		.map((res) => res.data)
+		.filter((value) => value !== undefined) as PublicProductDto[]
 
 	const onBackClick = () => {
 		navigate(-1)
@@ -35,7 +30,9 @@ const Cart: React.FC = () => {
 				</TextButton>
 				<div className='title-container'>
 					<p className='title'>Seu Carrinho</p>
-					<p className='cart-total'>R${products?.reduce((prev, current) => prev + current.price, 0).toFixed(2)}</p>
+					<p className='cart-total'>
+						R${products?.reduce((prev, current) => prev + current.price, 0).toFixed(2)}
+					</p>
 				</div>
 				<div className='cart-detail-container'>
 					<div className='cart-list-container'>
@@ -53,11 +50,18 @@ const Cart: React.FC = () => {
 							<div className='price-detail'>
 								<div className='value-row'>
 									<p>Produtos</p>
-									<p>R${products?.reduce((prev, current) => prev + current.basePrice, 0).toFixed(2)}</p>
+									<p>
+										R${products?.reduce((prev, current) => prev + current.basePrice, 0).toFixed(2)}
+									</p>
 								</div>
 								<div className='value-row'>
 									<p>Descontos</p>
-									<p>R${products?.reduce((prev, current) => prev + (current.basePrice - current.price), 0).toFixed(2)}</p>
+									<p>
+										R$
+										{products
+											?.reduce((prev, current) => prev + (current.basePrice - current.price), 0)
+											.toFixed(2)}
+									</p>
 								</div>
 								<div className='value-row total'>
 									<p>TOTAL</p>

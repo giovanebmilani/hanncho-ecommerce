@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import PAGES from '../../utils/constants/pages'
 import IMAGES from '../../utils/constants/images'
 import { useEffect, useState } from 'react'
+import { useCart } from '../../providers/Cart/CartProvider'
 
 const Header: React.FC = () => {
 	const navigate = useNavigate()
+	const { products } = useCart()
 	const [scrolling, setScrolling] = useState<boolean>(false)
 
 	useEffect(() => {
@@ -42,6 +44,7 @@ const Header: React.FC = () => {
 
 			<Logo variant='primary' onClick={onLogoClick} />
 			<div className='right-content'>
+				{products && products.length > 0 && <div className='cart-products-count-tag'>{products.length}</div>}
 				<IconButton onClick={onCartClick}>
 					<img src={IMAGES.cartIcon} />
 				</IconButton>

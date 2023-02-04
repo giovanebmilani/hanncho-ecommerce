@@ -15,7 +15,6 @@
 	// background-image: url(../../../public/assets/header-container.png);
 	// background-size: 100%;
 	// background-position: 100% 100%;
-	
 	z-index: 3;
 
 	&.scrolling {
@@ -47,5 +46,20 @@
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
+
+		.cart-products-count-tag {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			width: 1.2rem;
+			height: 1.2rem;
+
+			transform: translate(50%, -100%);
+			border-radius: 50%;
+			background-color: $yellow;
+			color: $black;
+			font-weight: 800;
+		}
 	}
 }

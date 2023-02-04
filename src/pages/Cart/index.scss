@@ -33,17 +33,25 @@
 			gap: 8vw;
 			width: 100%;
 
+			@media screen and (max-width: 1000px) {
+				flex-direction: column;
+			}
+
 			.cart-list-container {
 				width: 55%;
 				display: flex;
 				flex-direction: column;
 				gap: 1vw;
+
+				@media screen and (max-width: 1000px) {
+					width: 100%;
+				}
 			}
 
 			.cart-info-container {
 				display: flex;
 				flex-direction: column;
-				gap: 4vw;
+				gap: max(2rem, 4vw);
 
 				.resume {
 					display: flex;
@@ -74,10 +82,20 @@
 				.finish-container {
 					display: flex;
 					flex-direction: column;
-					gap: 1vw;
+					gap: max(1rem, 1vw);
+					align-self: center;
+
+					@media screen and (max-width: 1000px) {
+						width: 50%;
+					}
+
+					@media screen and (max-width: 500px) {
+						width: 100%;
+						text-align: center;
+					}
 
 					.button-container {
-						height: 5vw;
+						height: max(4rem, 5vw);
 					}
 				}
 			}
