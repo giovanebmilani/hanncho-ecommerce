@@ -9,14 +9,10 @@ import { useNavigate } from 'react-router-dom'
 import PAGES from '../../../../utils/constants/pages'
 
 export interface ProductContainerProps {
-	key?: number
 	product: PublicProductDto
 }
 
-export const ProductContainer: React.FC<ProductContainerProps> = ({
-	key,
-	product
-}) => {
+export const ProductContainer: React.FC<ProductContainerProps> = ({ product }) => {
 	const navigate = useNavigate()
 	const [force, setForce] = useState<number>(0)
 	const { removeProduct } = useCart()
@@ -33,7 +29,7 @@ export const ProductContainer: React.FC<ProductContainerProps> = ({
 	}
 
 	return (
-		<div key={key} className={`cart-product-container ${force ? 'active' : ''} `}>
+		<div className={`cart-product-container ${force ? 'active' : ''} `}>
 			<div className='image-container'>
 				<img src={product?.images.find((img) => img.isMain)?.url || ''} />
 			</div>

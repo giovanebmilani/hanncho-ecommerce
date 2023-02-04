@@ -27,6 +27,7 @@
 	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 	transform: scale(0.5);
 	opacity: 0;
+	box-shadow: $box-shadow;
 
 	&.active {
 		transform: scale(1);

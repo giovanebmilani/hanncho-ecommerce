@@ -10,18 +10,29 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: $bg-color;
 	// backdrop-filter: blur(20px);
 	// background-color: rgba(35, 35, 35, 0.683);
 	// background-image: url(../../../public/assets/header-container.png);
 	// background-size: 100%;
 	// background-position: 100% 100%;
 	z-index: 3;
+	transform: translate(0);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-	&.scrolling {
-		animation: appear-down 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-		// backdrop-filter: blur(20px);
-		background-color: $bg-color;
+	&.scrolling-down {
+		transform: translate(0, -100%);
 	}
+
+	&.page-top {
+		background-color: transparent;
+	}
+
+	// &.scrolling {
+	// 	animation: appear-down 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	// 	// backdrop-filter: blur(20px);
+	// 	background-color: $bg-color;
+	// }
 
 
 	@media screen and (max-width: 500px) {
