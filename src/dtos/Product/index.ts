@@ -45,6 +45,13 @@ export interface PublicProductDto {
 	avaliableSizes: string[]
 	images: PublicVariantImageDto[]
 	variants: ProductResumeDto[]
+	size?: string
+}
+
+export interface ProductCartDto {
+	id: number
+	size?: string
+	quantity: number
 }
 
 export interface PublicProductListDto {

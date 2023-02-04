@@ -1,0 +1,86 @@
+@import '../../sass/index.scss';
+
+.cart-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.content {
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex-direction: column;
+		padding: 4vw 8vw;
+		gap: 2vw;
+
+		.title-container {
+			.title {
+				color: $white;
+				text-align: center;
+				font-size: 40px;
+				font-weight: 800;
+			}
+
+			.cart-total {
+				font-weight: 800;
+			}
+		}
+
+		.cart-detail-container {
+			display: flex;
+			flex-direction: row;
+			gap: 8vw;
+			width: 100%;
+
+			.cart-list-container {
+				width: 55%;
+				display: flex;
+				flex-direction: column;
+				gap: 1vw;
+			}
+
+			.cart-info-container {
+				display: flex;
+				flex-direction: column;
+				gap: 4vw;
+
+				.resume {
+					display: flex;
+					flex-direction: column;
+					gap: 1.5vw;
+
+					.title {
+						font-weight: 800;
+						font-size: max(1rem, 2vw);
+					}
+
+					.price-detail {
+						display: flex;
+						flex-direction: column;
+						gap: 1vw;
+						.value-row {
+							display: flex;
+							flex-direction: row;
+							justify-content: space-between;
+
+							&.total {
+								font-weight: 800;
+							}
+						}
+					}
+				}
+
+				.finish-container {
+					display: flex;
+					flex-direction: column;
+					gap: 1vw;
+
+					.button-container {
+						height: 5vw;
+					}
+				}
+			}
+		}
+	}
+}

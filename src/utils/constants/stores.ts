@@ -1,3 +1,4 @@
 export const STORE_KEYS = {
-	token: 'auth_token'
+	token: 'auth_token',
+	cart: 'cart'
 }

@@ -9,19 +9,22 @@ import { AuthProvider } from './providers/Auth/AuthProvider'
 import { ModalProvider } from './providers/Modal/ModalProvider'
 import { BlurProvider } from './providers/Blur/BlurProvider'
 import { AsideModalProvider } from './providers/AsideModal/AsideModalProvider'
+import { CartProvider } from './providers/Cart/CartProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<AuthProvider>
-				<BlurProvider>
-					<AsideModalProvider>
-						<ModalProvider>
-							<Router />
-						</ModalProvider>
-					</AsideModalProvider>
-				</BlurProvider>
+				<CartProvider>
+					<BlurProvider>
+						<AsideModalProvider>
+							<ModalProvider>
+								<Router />
+							</ModalProvider>
+						</AsideModalProvider>
+					</BlurProvider>
+				</CartProvider>
 			</AuthProvider>
 		</QueryClientProvider>
 	</React.StrictMode>

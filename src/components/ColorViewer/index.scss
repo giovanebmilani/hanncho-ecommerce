@@ -22,7 +22,13 @@
 		opacity: 0;
 		transform: translate(0, -150%);
 	}
-	
+
+	&:hover {
+		.color-name-tag {
+			opacity: 1;
+		}
+	}
+
 	&.clickable {
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);

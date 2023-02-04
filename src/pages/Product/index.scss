@@ -37,6 +37,7 @@
 				.main-image-container {
 					img {
 						max-width: 100%;
+						animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 					}
 				}
 
@@ -48,6 +49,7 @@
 
 					img {
 						max-width: 49%;
+						animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 					}
 				}
 			}
@@ -57,6 +59,7 @@
 				display: flex;
 				flex-direction: column;
 				gap: max(1rem, 2vw);
+				animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
 				font-size: max(0.7rem, 1vw);
 

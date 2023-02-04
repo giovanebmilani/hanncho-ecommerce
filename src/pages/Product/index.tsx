@@ -9,9 +9,11 @@ import ColorViewer from '../../components/ColorViewer'
 import Button from '../../components/Button'
 import PAGES from '../../utils/constants/pages'
 import Loader from '../../components/Loader'
+import { useCart } from '../../providers/Cart/CartProvider'
 
 const Product: React.FC = () => {
 	const navigate = useNavigate()
+	const { addProduct } = useCart()
 	const { productId: productIdParam } = useParams()
 	const [productId, setProductId] = useState<number>()
 	const [product, setProduct] = useState<PublicProductDto>()
@@ -35,6 +37,12 @@ const Product: React.FC = () => {
 
 	const onBackClick = () => {
 		navigate(-1)
+	}
+
+	const onCartAddClick = (product?: PublicProductDto, size?: string) => {
+		if (!product || !size) return
+		product.size = size
+		addProduct?.(product)
 	}
 
 	const isInSale = () => product?.basePrice !== product?.price
@@ -108,7 +116,11 @@ const Product: React.FC = () => {
 							</div>
 							<div className='buttons'>
 								<Button disabled={isButtonsDisabled}>COMPRAR</Button>
-								<Button disabled={isButtonsDisabled} type='secondary'>
+								<Button
+									onClick={() => onCartAddClick(product, selectedSize)}
+									disabled={isButtonsDisabled}
+									type='secondary'
+								>
 									+ CARRINHO
 								</Button>
 							</div>

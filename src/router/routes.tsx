@@ -9,6 +9,7 @@ import CategoryDashboard from '../pages/Admin/Category'
 import ProductDashboard from '../pages/Admin/Product'
 import Shop from '../pages/Shop'
 import Product from '../pages/Product'
+import Cart from '../pages/Cart'
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
 	requireAuth?: boolean
@@ -29,6 +30,11 @@ export const routes: RouteConfig[] = [
 	{
 		component: <Product />,
 		path: PAGES.product(),
+		requireAuth: false
+	},
+	{
+		component: <Cart />,
+		path: PAGES.cart,
 		requireAuth: false
 	},
 	{

@@ -56,9 +56,9 @@ const Home: React.FC = () => {
 
 	return (
 		<div className='home-container'>
-				<div className='sale-image-container' onClick={() => navigate(PAGES.shop + '?sale=true')}>
-					{/* <img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} /> */}
-				</div>
+			<div className='sale-image-container' onClick={() => navigate(PAGES.shop + '?sale=true')}>
+				{/* <img src={process.env.PUBLIC_URL + './assets/hanncho-sale.png'} /> */}
+			</div>
 			{/* <div className='images-container'>
 				<ConcreteBeam />
 			</div> */}
@@ -132,8 +132,8 @@ const Home: React.FC = () => {
 					<p className='title'>Conheça a Hanncho</p>
 					<p className='text'>
 						A Hanncho Clothing é uma marca de roupas cujo nome é inspirado na cultura urbana
-						brasileira. <Link to='/loja'>Visite nossa Loja</Link> de roupas para apostar em peças
-						super estilosas e exclusivos da marca.
+						brasileira. <Link to={PAGES.shop}>Visite nossa Loja</Link> de roupas para apostar em
+						peças super estilosas e exclusivos da marca.
 					</p>
 				</div>
 				<img className='image' src={IMAGES.knowHannchoImage} />

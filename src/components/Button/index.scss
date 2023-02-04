@@ -10,7 +10,8 @@
 	cursor: pointer;
 	background-image: url(../../../public/assets/button-container.png);
 	background-size: 100% 100%;
-	animation: popup 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	// animation: popup 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 	box-shadow: $box-shadow;
 
 	&.primary {
@@ -69,7 +70,15 @@
 		}
 	}
 
+	&:active {
+		transform: scale(0.9);
+	}
+
 	&:disabled {
 		cursor: auto;
+
+		&:active {
+			transform: none;
+		}
 	}
 }
