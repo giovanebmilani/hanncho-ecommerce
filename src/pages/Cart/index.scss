@@ -14,6 +14,10 @@
 		padding: 4vw 8vw;
 		gap: 2vw;
 
+		@media screen and (max-width: 1000px) {
+			padding: 4vw 4vw;
+		}
+
 		.title-container {
 			.title {
 				color: $white;
@@ -35,6 +39,7 @@
 
 			@media screen and (max-width: 1000px) {
 				flex-direction: column;
+				align-items: center;
 			}
 
 			.cart-list-container {
@@ -84,10 +89,6 @@
 					flex-direction: column;
 					gap: max(1rem, 1vw);
 					align-self: center;
-
-					@media screen and (max-width: 1000px) {
-						width: 50%;
-					}
 
 					@media screen and (max-width: 500px) {
 						width: 100%;
