@@ -25,7 +25,7 @@ class WhatsApp {
 
 const config: WhatsAppConfig = {
 	phoneNumber: '555499545092',
-	apiUrl: 'https://api.whatsapp.com/send/'
+	apiUrl: 'https://web.whatsapp.com/send/'
 }
 
 export const whatsapp = new WhatsApp(config)

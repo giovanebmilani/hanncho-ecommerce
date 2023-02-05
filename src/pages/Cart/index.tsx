@@ -24,12 +24,14 @@ const Cart: React.FC = () => {
 	}
 
 	const generateOrderMessage = (products: PublicProductDto[]) => {
-		let message = 'Olá gostaria de realizar o pedido:\n'
+		let message = 'Olá gostaria de realizar o pedido:%0a'
 		for (const prod of products) {
-			message = message.concat(`id${prod.id} - ${prod.name}\n`)
+			message = message.concat(
+				`- ${prod.name} ${prod.color.name} (TAM:${prod.size}) (id${prod.id})%0a`
+			)
 		}
 		message = message.concat(
-			`Total do meu pedido: R$${products
+			`%0aTotal do meu pedido: R$${products
 				?.reduce((prev, current) => prev + current.price, 0)
 				.toFixed(2)}`
 		)
@@ -38,8 +40,9 @@ const Cart: React.FC = () => {
 
 	const finishOrder = () => {
 		const url = whatsapp.getMessageUrl(generateOrderMessage(products))
-		const whatsAppWindow = window.open(url, '_blank')
-		if (whatsAppWindow) whatsAppWindow.focus()
+		const whatsAppWindow = window.open(url)
+		if (!whatsAppWindow) return
+		whatsAppWindow.focus()
 	}
 
 	return (
