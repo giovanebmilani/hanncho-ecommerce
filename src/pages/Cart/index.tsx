@@ -1,5 +1,5 @@
 import './index.scss'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import TextButton from '../../components/TextButton'
 import Button from '../../components/Button'
@@ -12,7 +12,7 @@ import { whatsapp } from '../../utils/whatsapp'
 
 const Cart: React.FC = () => {
 	const navigate = useNavigate()
-	const { clearCart, products: cartProducts } = useCart()
+	const { products: cartProducts } = useCart()
 	const results = usePublicGetCartProducts(cartProducts || [])
 
 	const products = results

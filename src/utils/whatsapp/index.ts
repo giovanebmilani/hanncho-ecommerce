@@ -1,15 +1,20 @@
+import { isMobile } from 'react-device-detect'
+
 export interface WhatsAppConfig {
 	phoneNumber: string
+	webUrl: string
 	apiUrl: string
 }
 
 class WhatsApp {
 	phoneNumber: string
+	webUrl: string
 	apiUrl: string
 
 	constructor(config: WhatsAppConfig) {
 		this.phoneNumber = config.phoneNumber
 		this.apiUrl = config.apiUrl
+		this.webUrl = config.webUrl
 	}
 
 	private formatMessage(message: string) {
@@ -17,7 +22,8 @@ class WhatsApp {
 	}
 
 	public getMessageUrl(message: string) {
-		return `${this.apiUrl}?phone=${this.phoneNumber}&text=${this.formatMessage(
+		const url = isMobile ? this.apiUrl : this.webUrl
+		return `${url}?phone=${this.phoneNumber}&text=${this.formatMessage(
 			message
 		)}&type=phone_number&app_absent=0`
 	}
@@ -25,7 +31,8 @@ class WhatsApp {
 
 const config: WhatsAppConfig = {
 	phoneNumber: '555499545092',
-	apiUrl: 'https://web.whatsapp.com/send/'
+	webUrl: 'https://web.whatsapp.com/send/',
+	apiUrl: 'https://api.whatsapp.com/send/'
 }
 
 export const whatsapp = new WhatsApp(config)
