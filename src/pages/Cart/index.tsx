@@ -8,6 +8,7 @@ import ProductContainer from './components/ProductContainer'
 import PAGES from '../../utils/constants/pages'
 import { usePublicGetCartProducts } from '../../api/public/product/queries'
 import { PublicProductDto } from '../../dtos/Product'
+import { whatsapp } from '../../utils/whatsapp'
 
 const Cart: React.FC = () => {
 	const navigate = useNavigate()
@@ -20,6 +21,25 @@ const Cart: React.FC = () => {
 
 	const onBackClick = () => {
 		navigate(-1)
+	}
+
+	const generateOrderMessage = (products: PublicProductDto[]) => {
+		let message = 'Olá gostaria de realizar o pedido:\n'
+		for (const prod of products) {
+			message = message.concat(`id${prod.id} - ${prod.name}\n`)
+		}
+		message = message.concat(
+			`Total do meu pedido: R$${products
+				?.reduce((prev, current) => prev + current.price, 0)
+				.toFixed(2)}`
+		)
+		return message
+	}
+
+	const finishOrder = () => {
+		const url = whatsapp.getMessageUrl(generateOrderMessage(products))
+		const whatsAppWindow = window.open(url, '_blank')
+		if (whatsAppWindow) whatsAppWindow.focus()
 	}
 
 	return (
@@ -72,7 +92,7 @@ const Cart: React.FC = () => {
 
 						<div className='finish-container'>
 							<p>Entre em contato para finalizar o pedido</p>
-							<Button>FINALIZAR O PEDIDO PELO WHATSAPP</Button>
+							<Button onClick={finishOrder}>FINALIZAR O PEDIDO PELO WHATSAPP</Button>
 						</div>
 					</div>
 				</div>
