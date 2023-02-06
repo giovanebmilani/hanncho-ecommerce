@@ -60,6 +60,8 @@ export interface PublicProductListDto {
 	price: number
 	basePrice: number
 	soldOut: boolean
+	description: string
+	images: PublicVariantImageDto[]
 	mainImage: { url: string }
 }
 

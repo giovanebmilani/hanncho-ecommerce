@@ -1,8 +1,8 @@
 import React from 'react'
-import { PublicProductDto } from '../../../../dtos/Product'
+import { PublicProductDto, PublicProductListDto } from '../../dtos/Product'
 
 export interface ProductStructuredDataProps {
-	product: PublicProductDto
+	product: PublicProductDto | PublicProductListDto
 }
 
 const ProductStructureData: React.FC<ProductStructuredDataProps> = ({ product }) => {

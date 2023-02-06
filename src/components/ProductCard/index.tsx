@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { PublicProductListDto } from '../../dtos/Product'
 import IMAGES from '../../utils/constants/images'
 import PAGES from '../../utils/constants/pages'
+import ProductStructureData from '../ProductStructuredData'
 import './index.scss'
 
 export interface ProductCardProps {
@@ -33,6 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 			onClick={handleClick}
 			className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}
 		>
+			<ProductStructureData product={product} />
 			{product.soldOut && (
 				<div className='sold-out-grid'>
 					<p>SOLD OUT</p>
