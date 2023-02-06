@@ -32,6 +32,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 		<div
 			onClick={handleClick}
 			className={`product-card-container ${isInSale() ? 'sale' : ''} ${force ? 'active' : ''}`}
+			itemScope
+			itemType='http://schema.org/Product'
 		>
 			{product.soldOut && (
 				<div className='sold-out-grid'>
@@ -46,12 +48,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 				</div>
 			)}
 			<div className='image-container'>
-				<img src={product.mainImage.url ? product.mainImage.url : IMAGES.imagePlaceholder} />
+				<img
+					itemProp='image'
+					src={product.mainImage.url ? product.mainImage.url : IMAGES.imagePlaceholder}
+				/>
 			</div>
 			<div className='product-info'>
-				<p className='product-name'>{product.name}</p>
+				<p className='product-name' itemProp='name'>
+					{product.name}
+				</p>
 				{!product.soldOut && (
-					<div className='product-price-container'>
+					<div
+						className='product-price-container'
+						itemProp='offers'
+						itemScope
+						itemType='http://schema.org/Offer'
+					>
+						<meta itemProp='priceCurrency' content='BRL' />
+						<meta itemProp='price' content={product.price.toFixed(2)} />
 						{isInSale() && <p className='base-price'>R${product.basePrice.toFixed(2)}</p>}
 						<p className='price'>R${product.price.toFixed(2)}</p>
 					</div>
