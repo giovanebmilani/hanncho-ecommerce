@@ -11,6 +11,7 @@ import PAGES from '../../utils/constants/pages'
 import Loader from '../../components/Loader'
 import { useCart } from '../../providers/Cart/CartProvider'
 import { useToast } from '../../providers/Toast/ToastProvider'
+import ProductStructureData from './components/ProductStructuredData'
 
 const Product: React.FC = () => {
 	const navigate = useNavigate()
@@ -54,6 +55,7 @@ const Product: React.FC = () => {
 
 	return (
 		<div className='product-container'>
+			{product && <ProductStructureData product={product} />}
 			<div className='content'>
 				<TextButton type='secondary' onClick={onBackClick}>
 					VOLTAR
