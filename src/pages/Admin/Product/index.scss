@@ -63,7 +63,9 @@
 		animation: popup 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
 		&:hover {
-			background-color: #181818;
+			background-color: #1f1f1f;
+			box-shadow: $box-shadow;
+			
 		}
 
 		.left-content {
@@ -78,7 +80,6 @@
 				text-overflow: ellipsis;
 				margin-right: 1rem;
 				width: 100%;
-				
 			}
 		}
 

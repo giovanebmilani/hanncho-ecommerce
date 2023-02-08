@@ -31,7 +31,7 @@
 	.variant-list {
 		display: flex;
 		flex-direction: column;
-		width: 55rem;
+		width: 70rem;
 		align-items: center;
 		overflow-y: scroll;
 		height: 28rem;
@@ -56,7 +56,17 @@
 			}
 
 			&:hover {
-				background-color: #181818;
+				background-color: #1f1f1f;
+				box-shadow: $box-shadow;
+				.buttons-container {
+					opacity: 1;
+					.icon-button-container {
+						img {
+							transform: scale(1);
+							opacity: 1;
+						}
+					}
+				}
 			}
 
 			.main-image-container {
@@ -146,7 +156,7 @@
 			.size-stock-content {
 				display: flex;
 				align-items: center;
-				width: 40%;
+				width: 60%;
 				justify-content: center;
 				gap: 0.3rem;
 
@@ -166,12 +176,17 @@
 				width: 5%;
 				justify-content: space-evenly;
 				align-items: flex-end;
+				opacity: 0;
+				transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
 				.icon-button-container {
 					img {
 						margin-top: 0.3rem;
 						width: 1.3rem;
 						height: 1.3rem;
+						transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+						transform: scale(0.7);
+						opacity: 0;
 					}
 				}
 			}
