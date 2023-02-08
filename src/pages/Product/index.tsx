@@ -120,7 +120,7 @@ const Product: React.FC = () => {
 								</div>
 							</div>
 							<div className='buttons'>
-								<Button disabled={isButtonsDisabled}>COMPRAR</Button>
+								{/* <Button disabled={isButtonsDisabled}>COMPRAR</Button> */}
 								<Button
 									onClick={() => onCartAddClick(product, selectedSize)}
 									disabled={isButtonsDisabled}
