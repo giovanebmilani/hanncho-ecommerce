@@ -1,21 +1,21 @@
 # Hanncho
 
-https://hannchoclothing.com
+#### 👉 https://hannchoclothing.com
 
 ## About this project
 
-This repository is the frontend of Hanncho Clothing e-commerce project.
-This project also has an backend (in private repo) that implements integration with Google Merchant Service for promoting the brand's products.
+This repository is the frontend of Hanncho Clothing e-commerce project. \
+This project also has an backend (in private repo) that implements integration with Google Merchant Service for promoting the brand's products. \
 The entire infrastructure was defined using AWS.
 
 This project is part of my personal portfolio.
 
-Email: giovanebmilani@hotmail.com
+Email: giovanebmilani@hotmail.com \
 Connect with me at [LinkedIn](https://linkedin.com/in/giovanebmilani).
 
 ## Screenshots
 
-<img src="/docs/assets/screenshots/admin_dashboard1.png" alt="Admin Dashboard screenshot" style="height: 400px;"/>
+<img src="/docs/assets/screenshots/admin_dashboard1.png" alt="Admin Dashboard screenshot" style="width: 100%;"/>
 
 ## Main features
 
