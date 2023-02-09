@@ -1,6 +1,6 @@
 # Hanncho
 
-http://hannchoclothing.com
+https://hannchoclothing.com
 
 ## About this project
 
@@ -13,11 +13,15 @@ This project is part of my personal portfolio.
 Email: giovanebmilani@hotmail.com
 Connect with me at [LinkedIn](https://linkedin.com/in/giovanebmilani).
 
+## Screenshots
+
+<img src="/docs/assets/screenshots/admin_dashboard1.png" alt="Admin Dashboard screenshot" style="height: 400px;"/>
+
 ## Main features
 
-- Admin dashboard to manage the e-commerce;
+- Admin dashboard to manage the e-commerce and products stock;
 - Integration with Google Merchant Service;
-- Shop containing product filtering and cart system ;
+- Shop containing product filtering and cart system;
 
 ## Tecnologies
 
@@ -30,11 +34,11 @@ Connect with me at [LinkedIn](https://linkedin.com/in/giovanebmilani).
 
 #### Server-Side
 - [Flask RESTX](https://flask-restx.readthedocs.io/en/latest/) - For building RESTAPIs with Python
-- [SQLAlchemy](https://www.sqlalchemy.org/) - For defining SQL
-- [Alembic](https://alembic.sqlalchemy.org/en/latest/) - For database migrations
+- [SQLAlchemy](https://www.sqlalchemy.org/) - For defining SQL using Python
+- [Alembic](https://alembic.sqlalchemy.org/en/latest/) - For database migrations using Python
 - [Zappa](https://github.com/zappa/Zappa) - For serveless application deployment
-- [Botocore](https://github.com/boto/botocore) - To comunicate with AWS
-- [Google Api Core](https://pypi.org/project/google-api-core/) - For Google Merchant Service integration
+- [Botocore](https://github.com/boto/botocore) - To comunicate with AWS using Python
+- [Google Api Core](https://pypi.org/project/google-api-core/) - For Google Merchant Service integration using Python
 
 #### Database
 - [PostgreSQL](https://www.postgresql.org/) - Database system
@@ -54,14 +58,14 @@ To run this project you need to install the prerequisites:
 
 ## ⚙️ Installation
 
-Clone the repository
+##### Clone the repository
 
 ```bash
 git clone https://github.com/giovanebmilani/hanncho-ecommerce.git
 cd hanncho-ecommerce
 ```
 
-Installing dependencies
+##### Install dependencies
 
 ```bash
 yarn
@@ -71,17 +75,19 @@ _or_
 npm install
 ```
 
-Create and archive called `.env` in the root directory
+##### Create a file called `.env` in the root directory
 
 ```bash
 touch .env
 ```
 
-Set up environment variables as shown below
+##### Set up environment variables as shown below
 
 ```
 REACT_APP_API_BASE_URL=your-api-url-goes-here
 ```
+
+> _**Tip -** you can use production API in the url: https://aqjj5vsxu0.execute-api.us-east-1.amazonaws.com/prod/api, but you won't have access to admin dashboard._
 
 ## 🚀 Run
 
@@ -93,7 +99,7 @@ yarn start
 _or_
 
 ```bash
-nom start
+npm start
 ```
 
 
