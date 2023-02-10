@@ -45,6 +45,17 @@
 			column-gap: 1vw;
 			row-gap: 3vw;
 		}
+
+		.products-loader-container {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+
+			&.hidden {
+				visibility: hidden;
+			}
+		}
 	}
 
 	.title {
