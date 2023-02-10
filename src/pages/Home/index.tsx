@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ReactPlaceholder from 'react-placeholder/lib'
 import { Link, useNavigate } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
@@ -17,7 +17,9 @@ const Home: React.FC = () => {
 	const [highlightedProducts, setHighlightedProducts] = useState<PublicProductListDto[]>([])
 	const [saleProducts, setSaleProducts] = useState<PublicProductListDto[]>([])
 	const highlightedProductsSliderRef = useRef<HTMLDivElement>(null)
+	const highlightedLoaderRef = useRef<HTMLDivElement>(null)
 	const saleProductsSliderRef = useRef<HTMLDivElement>(null)
+	const saleLoaderRef = useRef<HTMLDivElement>(null)
 	const {
 		isLoading: isHighlightedLoading,
 		data: highlightedData,
@@ -31,6 +33,34 @@ const Home: React.FC = () => {
 		fetchNextPage: fetchNextSale,
 		hasNextPage: hasNextSale
 	} = usePublicGetAllProducts({ sale: true }, 5)
+
+	const hightlightedObserver = useMemo(
+		() =>
+			new IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) fetchNextHighlighted()
+			}),
+		[highlightedLoaderRef]
+	)
+
+	useEffect(() => {
+		if (!highlightedLoaderRef.current) return
+		hightlightedObserver.observe(highlightedLoaderRef.current)
+		return () => hightlightedObserver.disconnect()
+	}, [])
+
+	const saleObserver = useMemo(
+		() =>
+			new IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) fetchNextSale()
+			}),
+		[saleLoaderRef]
+	)
+
+	useEffect(() => {
+		if (!saleLoaderRef.current) return
+		saleObserver.observe(saleLoaderRef.current)
+		return () => saleObserver.disconnect()
+	}, [])
 
 	useEffect(() => {
 		if (!highlightedData) return
@@ -75,22 +105,22 @@ const Home: React.FC = () => {
 						</IconButton>
 					</div>
 				</div>
-				<div className='product-slider' ref={highlightedProductsSliderRef}>
+				<div ref={highlightedProductsSliderRef} className='product-slider'>
 					{highlightedProducts.map((prod, index) => (
 						<ProductCard key={index} product={prod} />
 					))}
-					<div className='show-all'>
-						{isHighlightedLoading ? (
-							<Loader />
-						) : hasNextHighlighted ? (
-							<TextButton onClick={fetchNextHighlighted} type='secondary'>
-								Carregar mais
-							</TextButton>
-						) : (
+					{!isHighlightedLoading && !hasNextHighlighted && (
+						<div className='show-all'>
 							<TextButton onClick={() => navigate(PAGES.shop)} type='secondary'>
 								Ver na loja
 							</TextButton>
-						)}
+						</div>
+					)}
+					<div
+						ref={highlightedLoaderRef}
+						className={`show-all ${hasNextHighlighted ? '' : 'hidden'}`}
+					>
+						<Loader />
 					</div>
 				</div>
 			</div>
@@ -111,18 +141,15 @@ const Home: React.FC = () => {
 					{saleProducts.map((prod, index) => (
 						<ProductCard key={index} product={prod} />
 					))}
-					<div className='show-all'>
-						{isSaleLoading ? (
-							<Loader />
-						) : hasNextSale ? (
-							<TextButton onClick={fetchNextSale} type='secondary'>
-								Carregar mais
-							</TextButton>
-						) : (
+					{!isSaleLoading && !hasNextSale && (
+						<div className='show-all'>
 							<TextButton onClick={() => navigate(PAGES.shop + '?sale=true')} type='secondary'>
 								Ver na loja
 							</TextButton>
-						)}
+						</div>
+					)}
+					<div ref={saleLoaderRef} className={`show-all ${hasNextSale ? '' : 'hidden'}`}>
+						<Loader />
 					</div>
 				</div>
 			</div>

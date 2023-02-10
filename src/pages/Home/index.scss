@@ -96,6 +96,11 @@
 				align-items: center;
 				justify-content: center;
 				text-align: center;
+
+				&.hidden {
+					visibility: hidden;
+					display: none;
+				}
 			}
 
 			&::-webkit-scrollbar {
