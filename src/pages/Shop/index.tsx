@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
 import Loader from '../../components/Loader'
@@ -35,6 +35,7 @@ const Shop: React.FC = () => {
 	const { setAsideModalVisibility, setAsideModalContent } = useAsideModal()
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [filterParams, setFilterParams] = useState<ProductSearchParams>({ product: {} })
+	const ref = useRef<HTMLDivElement>(null)
 
 	const [products, setProducts] = useState<PublicProductListDto[]>([])
 
@@ -43,7 +44,21 @@ const Shop: React.FC = () => {
 		data: productsData,
 		fetchNextPage: fetchNextProducts,
 		hasNextPage: hasNextProducts
-	} = usePublicGetAllProducts({ ...filterParams }, 20)
+	} = usePublicGetAllProducts({ ...filterParams }, 8)
+
+	const observer = useMemo(
+		() =>
+			new IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting) fetchNextProducts()
+			}),
+		[ref]
+	)
+
+	useEffect(() => {
+		if (!ref.current) return
+		observer.observe(ref.current)
+		return () => observer.disconnect()
+	}, [])
 
 	useEffect(() => {
 		const params: ProductSearchParams = { product: {} }
@@ -141,13 +156,14 @@ const Shop: React.FC = () => {
 				</TextButton>
 
 				<div className='products-catalog'>
-					{isProductsLoading ? (
-						<Loader />
-					) : products.length <= 0 ? (
+					{products.length <= 0 ? (
 						<p>Nenhum produto encontrado...</p>
 					) : (
 						products.map((prod, index) => <ProductCard key={index} product={prod} />)
 					)}
+				</div>
+				<div ref={ref} className={`products-loader-container ${hasNextProducts ? '' : 'hidden'}`}>
+					<div className='loader'></div>
 				</div>
 			</div>
 		</div>
