@@ -28,7 +28,7 @@ Connect with me at [LinkedIn](https://linkedin.com/in/giovanebmilani).
 #### Cliend-Side
 - [React](https://reactjs.org/) - For user interfaces
 - [Typescript](https://www.typescriptlang.org/) - For better code quality and maintence
-- [Sass](https://sass-lang.com/) - For better defining styles
+- [Sass](https://sass-lang.com/) - For defining better responsive styles
 - [Axios](https://axios-http.com/docs/intro) - HTTP Client
 - [React Query](https://react-query-v3.tanstack.com/) - For data fetching and caching
 
