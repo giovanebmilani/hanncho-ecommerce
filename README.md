@@ -5,7 +5,7 @@
 ## About this project
 
 This repository is the frontend of Hanncho Clothing e-commerce project. \
-This project also has an backend (in private repo) that implements integration with Google Merchant Service for promoting the brand's products. \
+This project also has an backend (in private repo) built with the concepts of Clean Architecture, and has as one of its features the integration with Google Merchant Service for promoting the brand's products. \
 The entire infrastructure was defined using AWS.
 
 This project is part of my personal portfolio.
@@ -19,7 +19,7 @@ Connect with me at [LinkedIn](https://linkedin.com/in/giovanebmilani).
 
 ## Main features
 
-- Admin dashboard to manage the e-commerce and products stock;
+- Auth protected Admin dashboard to manage the e-commerce and products stock;
 - Integration with Google Merchant Service;
 - Shop containing product filtering and cart system;
 
