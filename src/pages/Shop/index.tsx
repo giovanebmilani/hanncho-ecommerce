@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { usePublicGetAllProducts } from '../../api/public/product/queries'
-import Loader from '../../components/Loader'
 import ProductCard from '../../components/ProductCard'
+import ProductCardPlaceholder from '../../components/ProductCard/Placeholder'
 import TextButton from '../../components/TextButton'
 import { PublicProductListDto } from '../../dtos/Product'
 import { useAsideModal } from '../../providers/AsideModal/AsideModalProvider'
@@ -41,6 +41,7 @@ const Shop: React.FC = () => {
 
 	const {
 		isLoading: isProductsLoading,
+		isRefetching: isProductRefetching,
 		data: productsData,
 		fetchNextPage: fetchNextProducts,
 		hasNextPage: hasNextProducts
@@ -144,6 +145,8 @@ const Shop: React.FC = () => {
 		navigate(PAGES.home)
 	}
 
+	const isPlaceholderVisible = isProductsLoading && !isProductRefetching
+
 	return (
 		<div className='shop-container'>
 			<div className='content'>
@@ -156,7 +159,14 @@ const Shop: React.FC = () => {
 				</TextButton>
 
 				<div className='products-catalog'>
-					{products.length <= 0 ? (
+					{isPlaceholderVisible ? (
+						<>
+							<ProductCardPlaceholder />
+							<ProductCardPlaceholder />
+							<ProductCardPlaceholder />
+							<ProductCardPlaceholder />
+						</>
+					) : products.length <= 0 ? (
 						<p>Nenhum produto encontrado...</p>
 					) : (
 						products.map((prod, index) => <ProductCard key={index} product={prod} />)
