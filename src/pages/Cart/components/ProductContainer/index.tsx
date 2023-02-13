@@ -42,7 +42,8 @@ export const ProductContainer: React.FC<ProductContainerProps> = ({ product }) =
 				</div>
 				<div className='variant-detail'>
 					<p>Tamanho: {product?.size}</p>
-					<ColorViewer hex={product?.color.hex} colorName={product?.color.name} />
+					<p>Cor: {product.color.name}</p>
+					{/* <ColorViewer hex={product?.color.hex} colorName={product?.color.name} /> */}
 				</div>
 			</div>
 			<div className='buttons'>
