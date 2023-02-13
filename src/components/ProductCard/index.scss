@@ -24,7 +24,7 @@
 	border-radius: 4px;
 	overflow: hidden;
 	cursor: pointer;
-	transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 	transform: scale(0.5);
 	opacity: 0;
 	box-shadow: $box-shadow;
@@ -36,7 +36,7 @@
 
 	&:hover {
 		transform: scale(1.02);
-		animation: bg-moving 15s linear infinite;
+		animation: bg-moving 20s linear infinite;
 	}
 
 	&:active {
@@ -56,7 +56,7 @@
 		height: 100%;
 		background-color: #0000006c;
 		background-image: url(../../../public/assets/grid-texture.png);
-		background-size: 75%;
+		background-size: 60%;
 		z-index: 2;
 		backdrop-filter: blur(3px);
 		box-shadow: inset 0px 0px 30px -3px rgba(0,0,0,0.75);

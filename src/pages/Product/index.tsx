@@ -15,7 +15,7 @@ import { useToast } from '../../providers/Toast/ToastProvider'
 const Product: React.FC = () => {
 	const navigate = useNavigate()
 	const { toast } = useToast()
-	const { addProduct } = useCart()
+	const { addProduct, products } = useCart()
 	const { productId: productIdParam } = useParams()
 	const [productId, setProductId] = useState<number>()
 	const [product, setProduct] = useState<PublicProductDto>()
@@ -51,6 +51,10 @@ const Product: React.FC = () => {
 	const isInSale = () => product?.basePrice !== product?.price
 
 	const isButtonsDisabled = !selectedSize
+
+	const isProductInCart = !!products?.find(
+		(prod) => prod.id === productId && selectedSize === prod.size
+	)
 
 	return (
 		<div className='product-container'>
@@ -105,27 +109,31 @@ const Product: React.FC = () => {
 							<div className='other-colors-container'>
 								<p className='title'>Outras cores:</p>
 								<div className='colors'>
-									{product?.variants.map((variant, index) => (
-										<ColorViewer
-											key={index}
-											hex={variant.color.hex}
-											colorName={variant.color.name}
-											selected={variant.id === productId}
-											onClick={() => {
-												navigate(PAGES.product(variant.id))
-											}}
-										/>
-									))}
+									{product?.variants
+										.filter((variant) => variant.id !== productId)
+										.map((variant, index) => (
+											<ColorViewer
+												key={index}
+												hex={variant.color.hex}
+												colorName={variant.color.name}
+												selected={variant.id === productId}
+												onClick={() => {
+													navigate(PAGES.product(variant.id))
+												}}
+											/>
+										))}
 								</div>
 							</div>
 							<div className='buttons'>
 								{/* <Button disabled={isButtonsDisabled}>COMPRAR</Button> */}
 								<Button
-									onClick={() => onCartAddClick(product, selectedSize)}
+									onClick={
+										isProductInCart ? undefined : () => onCartAddClick(product, selectedSize)
+									}
 									disabled={isButtonsDisabled}
-									type='secondary'
+									type={isProductInCart ? 'primary' : 'secondary'}
 								>
-									+ CARRINHO
+									{isProductInCart ? '👌 NO CARRINHO' : '+ CARRINHO'}
 								</Button>
 							</div>
 						</div>
