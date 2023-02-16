@@ -75,6 +75,7 @@ export class FilterStringParam {
 export interface ProductFilterDto {
 	name?: FilterStringParam
 	categoryId?: number
+	collectionId?: number | null
 }
 
 export interface PublicProductFilterDto {
