@@ -4,6 +4,7 @@ const PAGES = {
 	admin: '/admin',
 	color: '/admin/cores',
 	category: '/admin/categorias',
+	collection: '/admin/colecoes',
 	adminProduct: '/admin/produtos',
 	stock: (id: string | number = ':productId') => `/admin/${id}/estoque`,
 	shop: '/loja',
