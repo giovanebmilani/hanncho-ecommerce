@@ -11,9 +11,12 @@ import PAGES from '../../utils/constants/pages'
 import Loader from '../../components/Loader'
 import { useCart } from '../../providers/Cart/CartProvider'
 import { useToast } from '../../providers/Toast/ToastProvider'
+import Gradient from '../../components/Gradient'
+import { useBackground } from '../../providers/Background/BackgroundProvider'
 
 const Product: React.FC = () => {
 	const navigate = useNavigate()
+	const { setGradientWith } = useBackground()
 	const { toast } = useToast()
 	const { addProduct, products } = useCart()
 	const { productId: productIdParam } = useParams()
@@ -34,6 +37,7 @@ const Product: React.FC = () => {
 
 	useEffect(() => {
 		if (!data) return
+		setGradientWith?.(data.collection.highlightColorHex)
 		setProduct(data)
 	}, [data])
 
@@ -58,6 +62,7 @@ const Product: React.FC = () => {
 
 	return (
 		<div className='product-container'>
+			<Gradient />
 			{/* {product && <ProductStructureData product={product} />} */}
 			<div className='content'>
 				<TextButton type='secondary' onClick={onBackClick}>

@@ -40,6 +40,7 @@ export interface PublicProductDto {
 	name: string
 	description: string
 	category: CategoryDto
+	collection: CollectionDto
 	color: ColorDto
 	price: number
 	basePrice: number
