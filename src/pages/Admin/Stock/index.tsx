@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
 	useProductVariantDeleteMutation,
@@ -8,12 +8,14 @@ import { useGetProduct, useGetProductVariants } from '../../../api/admin/product
 import Button from '../../../components/Button'
 import ColorViewer from '../../../components/ColorViewer'
 import ConfirmationModal from '../../../components/ConfirmationModal'
+import Gradient from '../../../components/Gradient'
 import IconButton from '../../../components/IconButton'
 import Loader from '../../../components/Loader'
 import SizeViewer from '../../../components/SizeViewer'
 import TextButton from '../../../components/TextButton'
 import { ProductDto } from '../../../dtos/Product'
 import { VariantDto } from '../../../dtos/Variant'
+import { useBackground } from '../../../providers/Background/BackgroundProvider'
 import { useModal } from '../../../providers/Modal/ModalProvider'
 import IMAGES from '../../../utils/constants/images'
 import PAGES from '../../../utils/constants/pages'
@@ -24,6 +26,7 @@ import './index.scss'
 const Stock: React.FC = () => {
 	const navigate = useNavigate()
 	const { setVisibility, setModalContent } = useModal()
+	const { setGradientWith } = useBackground()
 	const [editingVariantId, setEditingVariantId] = useState<number>(-1)
 	const [idToDelete, setIdToDelete] = useState<number | undefined>()
 	const [variantToToggle, setVariantToToggle] = useState<VariantDto>()
@@ -42,12 +45,15 @@ const Stock: React.FC = () => {
 		}
 	)
 
+
+
 	useEffect(() => {
 		if (productIdParam) setProductId(parseInt(productIdParam))
 	}, [productIdParam])
 
 	useEffect(() => {
 		if (!data) return
+		setGradientWith?.(data.collection.highlightColorHex)
 		setProduct(data)
 	}, [data])
 
@@ -118,6 +124,7 @@ const Stock: React.FC = () => {
 
 	return (
 		<div className='stock-dashboard-container'>
+			<Gradient />
 			<div className='content'>
 				<TextButton type='secondary' onClick={onBackClick}>
 					VOLTAR
@@ -238,6 +245,7 @@ const Stock: React.FC = () => {
 					</div>
 				</div>
 			</div>
+
 		</div>
 	)
 }

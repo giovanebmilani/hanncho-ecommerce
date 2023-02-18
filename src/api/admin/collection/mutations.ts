@@ -7,18 +7,18 @@ import { queryClient } from '../../query-client'
 export const useCollectionCreateMutation = (payload: CollectionCreateDto) =>
 	useMutation({
 		mutationFn: async () => (await collectionApi.post('', payload)).data as CollectionDto,
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection] })
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection, QUERY_KEYS.product] })
 	})
 
 export const useCollectionUpdateMutation = (payload: CollectionDto) =>
 	useMutation({
 		mutationFn: async () => (await collectionApi.put(`/${payload.id}`, payload)).data as CollectionDto,
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection] })
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection, QUERY_KEYS.product] })
 	})
 
 export const useCollectionDeleteMutation = () =>
 	useMutation({
 		mutationFn: async (collectionId: number) =>
 			(await collectionApi.delete(`/${collectionId}`)).data as CollectionDto,
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection] })
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.collection, QUERY_KEYS.product] })
 	})

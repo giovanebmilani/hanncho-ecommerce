@@ -4,6 +4,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 2;
+	background-color: transparent;
 
 	.content {
 		width: 100%;
@@ -12,6 +14,8 @@
 		justify-content: flex-start;
 		flex-direction: column;
 		margin: 2rem 4rem;
+		background-color: transparent;
+		z-index: 2;
 	}
 
 	.title {
