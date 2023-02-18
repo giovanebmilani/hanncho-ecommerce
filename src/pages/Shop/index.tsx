@@ -20,6 +20,7 @@ export interface ProductSearchParams {
 	product: {
 		'name[contains]'?: string
 		categoryId?: number
+		collectionId?: number
 	}
 }
 
@@ -67,6 +68,10 @@ const Shop: React.FC = () => {
 		if (searchParams.has('product.categoryId'))
 			params.product.categoryId =
 				parseInt(searchParams.get('product.categoryId') || '') || undefined
+
+		if (searchParams.has('product.collectionId'))
+			params.product.collectionId =
+				parseInt(searchParams.get('product.collectionId') || '') || undefined
 
 		if (searchParams.has('colorId'))
 			params.colorId = parseInt(searchParams.get('colorId') || '') || undefined
