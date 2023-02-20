@@ -73,7 +73,7 @@ const CollectionDashboard: React.FC = () => {
 							<Loader />
 						) : (
 							collections.map((collection, index) => (
-								<div key={index} className='category-list-item'>
+								<div key={index} className='collection-list-item'>
 									<div className='left-content'>
 										<p>{collection.id}</p>
 									</div>
