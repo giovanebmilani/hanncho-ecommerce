@@ -12,6 +12,8 @@ import { usePublicGetAllCategories } from '../../../../api/public/category/queri
 import TextButton from '../../../../components/TextButton'
 import CheckBox from '../../../../components/CheckBox'
 import Button from '../../../../components/Button'
+import { usePublicGetAllCollections } from '../../../../api/public/collection/queries'
+import { CollectionDto } from '../../../../dtos/Collection'
 
 export interface ProductModalProps {
 	filterParams: ProductSearchParams
@@ -35,10 +37,12 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 	const { hidden, setAsideModalVisibility } = useAsideModal()
 	const [colors, setColors] = useState<ColorDto[]>([])
 	const [categories, setCategories] = useState<CategoryDto[]>([])
+	const [collections, setCollections] = useState<CollectionDto[]>([])
 	const [tempParamsState, setTempParamsState] = useState<ProductSearchParams>({ ...filterParams })
 
 	const { data: colorsData } = usePublicGetAllColors()
 	const { data: categoriesData } = usePublicGetAllCategories()
+	const { data: collectionsData } = usePublicGetAllCollections()
 
 	useEffect(() => {
 		if (!colorsData) return
@@ -50,6 +54,14 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 		setCategories([{ id: -1, name: 'TODAS' }, ...categoriesData])
 	}, [categoriesData])
 
+	useEffect(() => {
+		if (!collectionsData) return
+		setCollections([
+			{ id: -1, name: 'TODAS', description: '', highlightColorHex: '' },
+			...collectionsData
+		])
+	}, [collectionsData])
+
 	const handleCategoryChange = (cat?: CategoryDto) => {
 		if (cat?.id === -1)
 			return setTempParamsState((prev) => ({
@@ -59,6 +71,18 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 		return setTempParamsState((prev) => ({
 			...prev,
 			product: { ...prev.product, categoryId: cat?.id }
+		}))
+	}
+
+	const handleCollectionChange = (col?: CollectionDto) => {
+		if (col?.id === -1)
+			return setTempParamsState((prev) => ({
+				...prev,
+				product: { ...prev.product, collectionId: undefined }
+			}))
+		return setTempParamsState((prev) => ({
+			...prev,
+			product: { ...prev.product, collectionId: col?.id }
 		}))
 	}
 
@@ -151,6 +175,12 @@ export const FilterAsideModal: React.FC<ProductModalProps> = ({
 						label='CORES'
 					/>
 				</div>
+				<SelectInput
+					value={collections.find((col) => col.id === tempParamsState.product.collectionId)?.name}
+					autoCompletion={collections.map((col) => ({ label: col.name, value: col }))}
+					onSelectItem={handleCollectionChange}
+					label='COLEÇÕES'
+				/>
 				<div className='check-box-filter-input'>
 					<p className='emoji'>🏷️</p>
 					<CheckBox

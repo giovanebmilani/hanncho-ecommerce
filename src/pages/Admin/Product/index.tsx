@@ -17,6 +17,8 @@ import IMAGES from '../../../utils/constants/images'
 import PAGES from '../../../utils/constants/pages'
 import ProductModal from './components/ProductModal'
 import './index.scss'
+import { CollectionDto } from '../../../dtos/Collection'
+import { useGetAllCollections } from '../../../api/admin/collection/queries'
 
 const ProductDashboard: React.FC = () => {
 	const navigate = useNavigate()
@@ -26,10 +28,13 @@ const ProductDashboard: React.FC = () => {
 	const [name, setName] = useState<string | undefined>()
 	const [categories, setCategories] = useState<CategoryDto[]>([])
 	const [category, setCategory] = useState<CategoryDto>()
+	const [collections, setCollections] = useState<CollectionDto[]>([])
+	const [collection, setCollection] = useState<CollectionDto | null>()
 	const { setModalContent, setVisibility } = useModal()
 	const { data: categoriesData } = useGetAllCategories()
+	const { data: collectionsData } = useGetAllCollections()
 	const { isLoading, data } = useGetAllProducts(
-		{ categoryId: category?.id, name: { contains: name } },
+		{ collectionId: collection?.id || null, categoryId: category?.id, name: { contains: name } },
 		page,
 		8
 	)
@@ -45,6 +50,14 @@ const ProductDashboard: React.FC = () => {
 	}, [categoriesData])
 
 	useEffect(() => {
+		if (!collectionsData) return
+		setCollections([
+			{ id: -1, name: 'NENHUMA', description: '', highlightColorHex: '' },
+			...collectionsData
+		])
+	}, [collectionsData])
+
+	useEffect(() => {
 		if (!data) return
 		setProducts(data.data)
 	}, [data])
@@ -57,6 +70,11 @@ const ProductDashboard: React.FC = () => {
 	const handleCategoryChange = (cat?: CategoryDto) => {
 		if (cat?.id === -1) return setCategory(undefined)
 		setCategory(cat)
+	}
+
+	const handleCollectionChange = (col?: CollectionDto) => {
+		if (col?.id === -1) return setCollection(null)
+		setCollection(col)
 	}
 
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,13 +151,13 @@ const ProductDashboard: React.FC = () => {
 										<p>{product.category.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(product)}>
+										<IconButton onClick={() => onEditClick(product)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(product)}>
+										<IconButton onClick={() => onDeleteClick(product)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDetailClick(product)}>
+										<IconButton onClick={() => onDetailClick(product)} helperLabel='Visualizar'>
 											<img src={IMAGES.viewIcon} />
 										</IconButton>
 									</div>
@@ -157,6 +175,12 @@ const ProductDashboard: React.FC = () => {
 							autoCompletion={categories.map((cat) => ({ label: cat.name, value: cat }))}
 							onSelectItem={handleCategoryChange}
 							label='CATEGORIAS'
+						/>
+						<SelectInput
+							value={collection?.name}
+							autoCompletion={collections.map((col) => ({ label: col.name, value: col }))}
+							onSelectItem={handleCollectionChange}
+							label='COLEÇÕES'
 						/>
 					</div>
 				</div>

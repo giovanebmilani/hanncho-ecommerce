@@ -12,6 +12,8 @@ import {
 } from '../../../../../api/admin/product/mutations'
 import SelectInput from '../../../../../components/SelectInput'
 import { useGetAllCategories } from '../../../../../api/admin/category/queries'
+import { CollectionDto } from '../../../../../dtos/Collection'
+import { useGetAllCollections } from '../../../../../api/admin/collection/queries'
 
 export interface ProductModalProps {
 	product?: ProductDto
@@ -25,7 +27,12 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 	const [description, setDescription] = useState<string>(product?.name || '')
 	const [categories, setCategories] = useState<CategoryDto[]>([])
 	const [category, setCategory] = useState<CategoryDto | undefined>(product?.category)
+	const [collections, setCollections] = useState<CollectionDto[]>([])
+	const [collection, setCollection] = useState<CollectionDto | undefined | null>(
+		product?.collection
+	)
 	const { data: categoriesData } = useGetAllCategories()
+	const { data: collectionsData } = useGetAllCollections()
 	const {
 		isLoading: isCreationLoading,
 		isSuccess: isCreationSuccess,
@@ -33,7 +40,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 	} = useProductCreateMutation({
 		name,
 		description,
-		categoryId: category?.id || 0
+		categoryId: category?.id || 0,
+		collectionId: collection?.id || null
 	})
 	const {
 		isLoading: isUpdateLoading,
@@ -43,7 +51,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 		id: product?.id || 0,
 		name,
 		description,
-		categoryId: category?.id || 0
+		categoryId: category?.id || 0,
+		collectionId: collection?.id || null
 	})
 
 	useEffect(() => {
@@ -52,10 +61,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 	}, [categoriesData])
 
 	useEffect(() => {
+		if (!collectionsData) return
+		setCollections([
+			{ id: -1, name: 'NENHUMA', description: '', highlightColorHex: '' },
+			...collectionsData
+		])
+	}, [collectionsData])
+
+	useEffect(() => {
 		if (isUpdateSuccess || isCreationSuccess) {
 			setName('')
 			setDescription('')
 			setCategory(undefined)
+			setCollection(null)
 			setVisibility?.(false)
 		}
 	}, [isUpdateSuccess, isCreationSuccess])
@@ -64,11 +82,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 		if (!product) {
 			setName('')
 			setDescription('')
+			setCollection(null)
 			setCategory(undefined)
 			return
 		}
 		setName(product.name)
 		setDescription(product.description)
+		setCollection(product.collection)
 		setCategory(product.category)
 	}, [hidden])
 
@@ -82,6 +102,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 
 	const handleCategoryChange = (cat?: CategoryDto) => {
 		setCategory(cat)
+	}
+
+	const handleCollectionChange = (col?: CollectionDto) => {
+		if (col?.id === -1) return setCollection(null)
+		setCollection(col)
 	}
 
 	const handleCancelClick = () => {
@@ -100,6 +125,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isEdit, con
 				autoCompletion={categories.map((cat) => ({ label: cat.name, value: cat }))}
 				onSelectItem={handleCategoryChange}
 				label='CATEGORIA'
+				required
+			/>
+			<SelectInput
+				value={collection?.name}
+				autoCompletion={collections.map((col) => ({ label: col.name, value: col }))}
+				onSelectItem={handleCollectionChange}
+				label='COLEÇÃO'
 				required
 			/>
 			<div className='buttons'>

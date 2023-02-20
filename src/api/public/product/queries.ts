@@ -15,7 +15,7 @@ export const usePublicGetAllProducts = (filters: PublicProductFilterDto, perPage
 		queryKey: [QUERY_KEYS.product, QUERY_KEYS.variant, filters],
 		queryFn: async ({ pageParam }) =>
 			(
-				await productApi.get<PaginatedDto<PublicProductListDto>>('', {
+				await productApi.get<PaginatedDto<PublicProductListDto>>('/1', {
 					params: { ...filters, page: pageParam, perPage }
 				})
 			).data,
@@ -27,7 +27,7 @@ export const usePublicGetProduct = (productId?: number, size?: string) =>
 	useQuery({
 		enabled: !!productId,
 		queryKey: [QUERY_KEYS.product, productId, size],
-		queryFn: async () => (await productApi.get<PublicProductDto>(`/${productId}`)).data
+		queryFn: async () => (await productApi.get<PublicProductDto>(`/1/${productId}`)).data
 	})
 
 export const usePublicGetCartProducts = (products: ProductCartDto[]) =>
@@ -35,7 +35,7 @@ export const usePublicGetCartProducts = (products: ProductCartDto[]) =>
 		products.map((prod) => ({
 			queryKey: [QUERY_KEYS.product, prod.id, prod.size],
 			queryFn: async () => {
-				const data = (await productApi.get<PublicProductDto>(`/${prod.id}`)).data
+				const data = (await productApi.get<PublicProductDto>(`/1/${prod.id}`)).data
 				data.size = prod.size
 				return data
 			}

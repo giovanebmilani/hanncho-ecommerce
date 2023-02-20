@@ -1,12 +1,12 @@
 import { CategoryDto } from '../Category'
+import { CollectionDto } from '../Collection'
 import { ColorDto } from '../Color'
-import { ImageDto } from '../Image'
-import { VariantImageDto } from '../Variant'
 
 export interface ProductCreateDto {
 	name: string
 	description: string
 	categoryId: number
+	collectionId: number | null
 }
 
 export interface ProductUpdateDto {
@@ -14,6 +14,7 @@ export interface ProductUpdateDto {
 	name: string
 	description: string
 	categoryId: number
+	collectionId: number | null
 }
 
 export interface ProductDto {
@@ -21,6 +22,7 @@ export interface ProductDto {
 	name: string
 	description: string
 	category: CategoryDto
+	collection: CollectionDto
 }
 
 export interface PublicVariantImageDto {
@@ -38,6 +40,7 @@ export interface PublicProductDto {
 	name: string
 	description: string
 	category: CategoryDto
+	collection: CollectionDto
 	color: ColorDto
 	price: number
 	basePrice: number
@@ -73,6 +76,7 @@ export class FilterStringParam {
 export interface ProductFilterDto {
 	name?: FilterStringParam
 	categoryId?: number
+	collectionId?: number | null
 }
 
 export interface PublicProductFilterDto {

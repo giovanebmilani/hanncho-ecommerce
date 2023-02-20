@@ -29,10 +29,11 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: row;
-		column-gap: 2rem;
+		gap: 2rem;
+		flex-wrap: wrap;
 
 		& button {
-			width: 100%;
+			width: 30%;
 			height: 100%;
 		}
 	}

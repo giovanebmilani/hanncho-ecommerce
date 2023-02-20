@@ -1,4 +1,5 @@
 export interface AccountLoginDto {
+	storeId: number
 	username: string
 	password: string
 }

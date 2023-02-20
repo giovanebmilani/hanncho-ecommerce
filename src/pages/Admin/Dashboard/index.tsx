@@ -41,6 +41,10 @@ const Dashboard: React.FC = () => {
 		navigate(PAGES.category)
 	}
 
+	const onCollectionClick = () => {
+		navigate(PAGES.collection)
+	}
+
 	return (
 		<div className='dashboard-container'>
 			<div className='content'>
@@ -57,6 +61,9 @@ const Dashboard: React.FC = () => {
 					</Button>
 					<Button type='tertiary' onClick={onCategoryClick}>
 						CATEGORIAS
+					</Button>
+					<Button type='tertiary' onClick={onCollectionClick}>
+						COLEÇÕES
 					</Button>
 				</div>
 			</div>

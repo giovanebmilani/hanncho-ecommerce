@@ -3,29 +3,29 @@ import './index.scss'
 import { useNavigate } from 'react-router-dom'
 import PAGES from '../../../utils/constants/pages'
 import TextButton from '../../../components/TextButton'
-import { CategoryDto } from '../../../dtos/Category'
 import { useEffect, useState } from 'react'
-import { useGetAllCategories } from '../../../api/admin/category/queries'
 import IconButton from '../../../components/IconButton'
 import Button from '../../../components/Button'
 import { useModal } from '../../../providers/Modal/ModalProvider'
-import CategoryModal from './components/CategoryModal'
-import { useCategoryDeleteMutation } from '../../../api/admin/category/mutations'
+import { CollectionModal } from './components/CollectionModal'
 import Loader from '../../../components/Loader'
 import ConfirmationModal from '../../../components/ConfirmationModal'
 import IMAGES from '../../../utils/constants/images'
+import { CollectionDto } from '../../../dtos/Collection'
+import { useGetAllCollections } from '../../../api/admin/collection/queries'
+import { useCollectionDeleteMutation } from '../../../api/admin/collection/mutations'
 
-const CategoryDashboard: React.FC = () => {
+const CollectionDashboard: React.FC = () => {
 	const navigate = useNavigate()
-	const [categories, setCategories] = useState<CategoryDto[]>([])
+	const [collections, setCollections] = useState<CollectionDto[]>([])
 	const [idToDelete, setIdToDelete] = useState<number | undefined>()
 	const { setModalContent, setVisibility } = useModal()
-	const { isLoading, data } = useGetAllCategories()
-	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useCategoryDeleteMutation()
+	const { isLoading, data } = useGetAllCollections()
+	const { isLoading: isDeleteLoading, mutate: deleteMutate } = useCollectionDeleteMutation()
 
 	useEffect(() => {
 		if (!data) return
-		setCategories(data)
+		setCollections(data)
 	}, [data])
 
 	useEffect(() => {
@@ -34,21 +34,21 @@ const CategoryDashboard: React.FC = () => {
 	}, [idToDelete])
 
 	const onAddClick = () => {
-		setModalContent?.(<CategoryModal />)
+		setModalContent?.(<CollectionModal />)
 		setVisibility?.(true)
 	}
 
-	const onEditClick = (category: CategoryDto) => {
-		setModalContent?.(<CategoryModal category={category} isEdit />)
+	const onEditClick = (collection: CollectionDto) => {
+		setModalContent?.(<CollectionModal collection={collection} isEdit />)
 		setVisibility?.(true)
 	}
 
-	const onDeleteClick = (category: CategoryDto) => {
+	const onDeleteClick = (collection: CollectionDto) => {
 		setModalContent?.(
 			<ConfirmationModal
-				title='Deletar categoria?'
-				text={`Tem certeza que deseja deletar a categoria ${category.name}?`}
-				confirmHandler={() => setIdToDelete(category.id)}
+				title='Deletar coleção?'
+				text={`Tem certeza que deseja deletar a coleção ${collection.name}?`}
+				confirmHandler={() => setIdToDelete(collection.id)}
 			/>
 		)
 		setVisibility?.(true)
@@ -61,30 +61,30 @@ const CategoryDashboard: React.FC = () => {
 	const isAddButtonDisabled = isLoading || isDeleteLoading
 
 	return (
-		<div className='category-dashboard-container'>
+		<div className='collection-dashboard-container'>
 			<div className='content'>
 				<TextButton type='secondary' onClick={onBackClick}>
 					VOLTAR
 				</TextButton>
-				<p className='title'>Categorias</p>
+				<p className='title'>Coleções</p>
 				<div className='row-wrapper'>
-					<div className='category-list'>
+					<div className='collection-list'>
 						{isLoading || isDeleteLoading ? (
 							<Loader />
 						) : (
-							categories.map((category, index) => (
-								<div key={index} className='category-list-item'>
+							collections.map((collection, index) => (
+								<div key={index} className='collection-list-item'>
 									<div className='left-content'>
-										<p>{category.id}</p>
+										<p>{collection.id}</p>
 									</div>
 									<div className='middle-content'>
-										<p>{category.name}</p>
+										<p>{collection.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(category)} helperLabel='Editar'>
+										<IconButton onClick={() => onEditClick(collection)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(category)} helperLabel='Excluir'>
+										<IconButton onClick={() => onDeleteClick(collection)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>
@@ -103,4 +103,4 @@ const CategoryDashboard: React.FC = () => {
 	)
 }
 
-export default CategoryDashboard
+export default CollectionDashboard

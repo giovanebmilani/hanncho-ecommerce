@@ -11,23 +11,26 @@ import { BlurProvider } from './providers/Blur/BlurProvider'
 import { AsideModalProvider } from './providers/AsideModal/AsideModalProvider'
 import { CartProvider } from './providers/Cart/CartProvider'
 import { ToastProvider } from './providers/Toast/ToastProvider'
+import { BackgroundProvider } from './providers/Background/BackgroundProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<AuthProvider>
-				<ToastProvider>
-					<CartProvider>
-						<BlurProvider>
-							<AsideModalProvider>
-								<ModalProvider>
-									<Router />
-								</ModalProvider>
-							</AsideModalProvider>
-						</BlurProvider>
-					</CartProvider>
-				</ToastProvider>
+				<BackgroundProvider>
+					<ToastProvider>
+						<CartProvider>
+							<BlurProvider>
+								<AsideModalProvider>
+									<ModalProvider>
+										<Router />
+									</ModalProvider>
+								</AsideModalProvider>
+							</BlurProvider>
+						</CartProvider>
+					</ToastProvider>
+				</BackgroundProvider>
 			</AuthProvider>
 		</QueryClientProvider>
 	</React.StrictMode>

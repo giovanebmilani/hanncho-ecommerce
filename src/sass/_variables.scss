@@ -9,10 +9,11 @@ $grey: #9f9f9f;
 $dark-grey: #2d2d2d;
 
 $bg-color: #161616;	
-$bg-gradient: linear-gradient(180deg, rgba(22,22,22,1) 0%, rgb(50, 50, 50) 100%);
+$bg-gradient: linear-gradient(180deg, #161616 0%, #323232 100%);
 
 $box-shadow: #00000080 0px 16px 24px 0px;
 
+$default-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
 // Timing
 $animation-timing: 0.25s;

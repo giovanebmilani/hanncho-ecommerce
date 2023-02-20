@@ -11,11 +11,14 @@ import PAGES from '../../utils/constants/pages'
 import Loader from '../../components/Loader'
 import { useCart } from '../../providers/Cart/CartProvider'
 import { useToast } from '../../providers/Toast/ToastProvider'
+import Gradient from '../../components/Gradient'
+import { useBackground } from '../../providers/Background/BackgroundProvider'
 
 const Product: React.FC = () => {
 	const navigate = useNavigate()
+	const { setGradientWith } = useBackground()
 	const { toast } = useToast()
-	const { addProduct } = useCart()
+	const { addProduct, products } = useCart()
 	const { productId: productIdParam } = useParams()
 	const [productId, setProductId] = useState<number>()
 	const [product, setProduct] = useState<PublicProductDto>()
@@ -34,6 +37,7 @@ const Product: React.FC = () => {
 
 	useEffect(() => {
 		if (!data) return
+		setGradientWith?.(data.collection.highlightColorHex)
 		setProduct(data)
 	}, [data])
 
@@ -52,8 +56,13 @@ const Product: React.FC = () => {
 
 	const isButtonsDisabled = !selectedSize
 
+	const isProductInCart = !!products?.find(
+		(prod) => prod.id === productId && selectedSize === prod.size
+	)
+
 	return (
 		<div className='product-container'>
+			<Gradient />
 			{/* {product && <ProductStructureData product={product} />} */}
 			<div className='content'>
 				<TextButton type='secondary' onClick={onBackClick}>
@@ -105,27 +114,31 @@ const Product: React.FC = () => {
 							<div className='other-colors-container'>
 								<p className='title'>Outras cores:</p>
 								<div className='colors'>
-									{product?.variants.map((variant, index) => (
-										<ColorViewer
-											key={index}
-											hex={variant.color.hex}
-											colorName={variant.color.name}
-											selected={variant.id === productId}
-											onClick={() => {
-												navigate(PAGES.product(variant.id))
-											}}
-										/>
-									))}
+									{product?.variants
+										.filter((variant) => variant.id !== productId)
+										.map((variant, index) => (
+											<ColorViewer
+												key={index}
+												hex={variant.color.hex}
+												colorName={variant.color.name}
+												selected={variant.id === productId}
+												onClick={() => {
+													navigate(PAGES.product(variant.id))
+												}}
+											/>
+										))}
 								</div>
 							</div>
 							<div className='buttons'>
 								{/* <Button disabled={isButtonsDisabled}>COMPRAR</Button> */}
 								<Button
-									onClick={() => onCartAddClick(product, selectedSize)}
+									onClick={
+										isProductInCart ? undefined : () => onCartAddClick(product, selectedSize)
+									}
 									disabled={isButtonsDisabled}
-									type='secondary'
+									type={isProductInCart ? 'primary' : 'secondary'}
 								>
-									+ CARRINHO
+									{isProductInCart ? '👌 NO CARRINHO' : '+ CARRINHO'}
 								</Button>
 							</div>
 						</div>

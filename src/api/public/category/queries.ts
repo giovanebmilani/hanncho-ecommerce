@@ -6,5 +6,5 @@ import QUERY_KEYS from '../../../utils/constants/queries'
 export const usePublicGetAllCategories = () =>
 	useQuery({
 		queryKey: [QUERY_KEYS.category],
-		queryFn: async () => (await categoryApi.get<CategoryDto[]>('')).data
+		queryFn: async () => (await categoryApi.get<CategoryDto[]>('/1')).data
 	})
