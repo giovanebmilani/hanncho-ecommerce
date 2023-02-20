@@ -35,14 +35,16 @@
 		border-color: $dark-grey transparent transparent transparent;
 	}
 
-	&:hover {
-		.color-name-tag {
-			visibility: visible;
-			opacity: 1;
-			transform: translate(0, -150%) scale(1);
-			&:hover {
-				opacity: 0;
-				visibility: hidden;
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			.color-name-tag {
+				visibility: visible;
+				opacity: 1;
+				transform: translate(0, -150%) scale(1);
+				&:hover {
+					opacity: 0;
+					visibility: hidden;
+				}
 			}
 		}
 	}
