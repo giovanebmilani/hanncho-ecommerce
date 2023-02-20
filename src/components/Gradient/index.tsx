@@ -10,7 +10,7 @@ export const Gradient: React.FC = () => {
 			style={
 				gradientHex
 					? {
-							backgroundImage: `linear-gradient(225deg, #${gradientHex} 0%, #161616 100%)`
+							backgroundImage: `linear-gradient(180deg, #${gradientHex} 0%, #161616 100%)`
 					  }
 					: {}	
 			}

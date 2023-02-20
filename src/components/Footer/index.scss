@@ -1,6 +1,7 @@
 @import '../../sass/index.scss';
 
 .footer {
+	position: sticky;
 	display: flex;
 	flex-direction: row;
 	padding: max(2rem, 6vw);
