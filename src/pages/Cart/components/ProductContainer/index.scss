@@ -3,7 +3,7 @@
 .cart-product-container {
 	display: flex;
 	flex-direction: row;
-	padding: max(.7rem, 1vw);
+	padding: max(0.7rem, 1vw);
 	gap: 2vw;
 	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 	border-radius: 1rem;
@@ -17,9 +17,11 @@
 		opacity: 1;
 	}
 
-	&:hover {
-		background-color: #1e1e1e;
-		transform: scale(1.015);
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			background-color: #1e1e1e;
+			transform: scale(1.015);
+		}
 	}
 
 	.image-container {
@@ -80,8 +82,8 @@
 		width: 5%;
 
 		img {
-			width: max(.7rem, 1.2vw);
-			height: max(.7rem, 1.2vw);
+			width: max(0.7rem, 1.2vw);
+			height: max(0.7rem, 1.2vw);
 		}
 	}
 }
