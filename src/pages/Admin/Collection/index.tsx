@@ -81,10 +81,10 @@ const CollectionDashboard: React.FC = () => {
 										<p>{collection.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(collection)}>
+										<IconButton onClick={() => onEditClick(collection)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(collection)}>
+										<IconButton onClick={() => onDeleteClick(collection)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>

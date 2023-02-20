@@ -81,10 +81,10 @@ const CategoryDashboard: React.FC = () => {
 										<p>{category.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(category)}>
+										<IconButton onClick={() => onEditClick(category)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(category)}>
+										<IconButton onClick={() => onDeleteClick(category)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>

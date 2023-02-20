@@ -185,15 +185,15 @@ const Stock: React.FC = () => {
 									</div>
 
 									<div className='buttons-container'>
-										<IconButton onClick={() => onToggleVisibilityClick(variant)}>
+										<IconButton onClick={() => onToggleVisibilityClick(variant)} helperLabel='Ativar'>
 											<img src={variant.active ? IMAGES.globeIcon : IMAGES.visibilityOffIcon} />
 										</IconButton>
-										<IconButton onClick={() => onEditClick(variant)}>
+										<IconButton onClick={() => onEditClick(variant)} helperLabel='Editar'>
 											<img
 												src={editingVariantId === variant.id ? IMAGES.saveIcon : IMAGES.editIcon}
 											/>
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(variant)}>
+										<IconButton onClick={() => onDeleteClick(variant)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>
