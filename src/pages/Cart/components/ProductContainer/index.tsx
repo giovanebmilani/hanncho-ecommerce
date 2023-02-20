@@ -47,7 +47,7 @@ export const ProductContainer: React.FC<ProductContainerProps> = ({ product }) =
 				</div>
 			</div>
 			<div className='buttons'>
-				<IconButton type='secondary' onClick={onRemoveClick}>
+				<IconButton type='secondary' onClick={onRemoveClick} helperLabel='Remover'>
 					<img src={IMAGES.xIcon} />
 				</IconButton>
 			</div>

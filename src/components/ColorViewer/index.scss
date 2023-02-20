@@ -16,11 +16,11 @@
 		position: absolute;
 		color: $white;
 		background-color: $dark-grey;
-		padding: 2px 4px;
+		padding: 6px 8px;
 		border-radius: 4px;
 		transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 		opacity: 0;
-		transform: translate(0, -150%);
+		transform: translate(0, -150%) scale(0.8);
 		visibility: hidden;
 	}
 
@@ -39,6 +39,11 @@
 		.color-name-tag {
 			visibility: visible;
 			opacity: 1;
+			transform: translate(0, -150%) scale(1);
+			&:hover {
+				opacity: 0;
+				visibility: hidden;
+			}
 		}
 	}
 
