@@ -82,10 +82,10 @@ const ColorDashboard: React.FC = () => {
 										<p>{color.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(color)}>
+										<IconButton onClick={() => onEditClick(color)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(color)}>
+										<IconButton onClick={() => onDeleteClick(color)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
 									</div>

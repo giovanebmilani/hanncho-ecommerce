@@ -1,6 +1,9 @@
 @import '../../sass/index.scss';
 
 .icon-button-container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 	border: none;
 	background: none;
 	cursor: pointer;
@@ -13,25 +16,41 @@
 	}
 
 	.helper-label {
-		opacity: 0;
-		margin-left: .5rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		white-space: nowrap;
 		position: absolute;
-		visibility: hidden;
 		color: $white;
-		background-color: $grey;
-		border-radius: 1rem;
-		font-size: 10px;
-		padding: 0 0.2rem;
-		transform: translate(-50%, -50%);
-		transition: all .2s ease-in-out;
+		background-color: $dark-grey;
+		padding: 2px 4px;
+		border-radius: 4px;
+		transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+		opacity: 0;
+		transform: translate(0, 200%);
+		visibility: hidden;
+		z-index: 3;
+	}
+
+	.helper-label::before {
+		content: '';
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: transparent transparent $dark-grey transparent;
+
+		&:hover {
+			visibility: hidden;
+		}
 	}
 
 	&:hover .helper-label {
 		opacity: 1;
 		visibility: visible;
+		&:hover {
+			opacity: 0;
+			visibility: hidden;
+		}
 	}
 
 	img {

@@ -151,13 +151,13 @@ const ProductDashboard: React.FC = () => {
 										<p>{product.category.name}</p>
 									</div>
 									<div className='right-content'>
-										<IconButton onClick={() => onEditClick(product)}>
+										<IconButton onClick={() => onEditClick(product)} helperLabel='Editar'>
 											<img src={IMAGES.editIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDeleteClick(product)}>
+										<IconButton onClick={() => onDeleteClick(product)} helperLabel='Excluir'>
 											<img src={IMAGES.trashIcon} />
 										</IconButton>
-										<IconButton onClick={() => onDetailClick(product)}>
+										<IconButton onClick={() => onDetailClick(product)} helperLabel='Visualizar'>
 											<img src={IMAGES.viewIcon} />
 										</IconButton>
 									</div>

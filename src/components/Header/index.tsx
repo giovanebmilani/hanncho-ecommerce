@@ -54,7 +54,7 @@ const Header: React.FC = () => {
 				{products && products.length > 0 && (
 					<div className='cart-products-count-tag'>{products.length}</div>
 				)}
-				<IconButton onClick={onCartClick}>
+				<IconButton onClick={onCartClick} helperLabel='Carrinho'>
 					<img src={IMAGES.cartIcon} />
 				</IconButton>
 			</div>
