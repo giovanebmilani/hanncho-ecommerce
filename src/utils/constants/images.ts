@@ -15,6 +15,10 @@ import GlobeIcon from '../../assets/icons/globe-icon.png'
 import MainLogo from '../../assets/logos/logo.png'
 import ImagePlaceholder from '../../assets/images/image-placeholder.png'
 import KnowHannchoImage from '../../assets/images/know-hanncho.png'
+import InstagramIcon from '../../assets/social/instagram.png'
+import FacebookIcon from '../../assets/social/facebook.png'
+import TikTokIcon from '../../assets/social/tik-tok.png'
+import TwitterIcon from '../../assets/social/twitter.png'
 
 const IMAGES = {
 	editIcon: EditIcon,
@@ -33,7 +37,13 @@ const IMAGES = {
 	globeIcon: GlobeIcon,
 	mainLogo: MainLogo,
 	imagePlaceholder: ImagePlaceholder,
-	knowHannchoImage: KnowHannchoImage
+	knowHannchoImage: KnowHannchoImage,
+	social: {
+		instagram: InstagramIcon,
+		facebook: FacebookIcon,
+		tiktok: TikTokIcon,
+		twitter: TwitterIcon
+	}
 }
 
 export default IMAGES

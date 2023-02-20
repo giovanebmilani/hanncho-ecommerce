@@ -14,6 +14,7 @@ import CollectionDashboard from '../pages/Admin/Collection'
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
 	requireAuth?: boolean
+	footerEnabled?: boolean
 	component: JSX.Element
 }
 
@@ -21,22 +22,26 @@ export const routes: RouteConfig[] = [
 	{
 		component: <Home />,
 		path: PAGES.home,
-		requireAuth: false
+		requireAuth: false,
+		footerEnabled: true
 	},
 	{
 		component: <Shop />,
 		path: PAGES.shop,
-		requireAuth: false
+		requireAuth: false,
+		footerEnabled: true
 	},
 	{
 		component: <Product />,
 		path: PAGES.product(),
-		requireAuth: false
+		requireAuth: false,
+		footerEnabled: true
 	},
 	{
 		component: <Cart />,
 		path: PAGES.cart,
-		requireAuth: false
+		requireAuth: false,
+		footerEnabled: true
 	},
 	{
 		component: <Login />,

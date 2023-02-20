@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AsideModal from '../components/AsideModal'
 import Blur from '../components/Blur'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Modal from '../components/Modal'
@@ -21,7 +22,18 @@ const Router: React.FC = () => {
 						) : (
 							route.component
 						)
-						return <Route key={index} path={route.path} element={element} />
+						return (
+							<Route
+								key={index}
+								path={route.path}
+								element={
+									<>
+										{element}
+										{route.footerEnabled && <Footer />}
+									</>
+								}
+							/>
+						)
 						// if (!route.requireAuth)
 						// 	return <Route key={index} path={route.path} element={route.component} />
 						// return (

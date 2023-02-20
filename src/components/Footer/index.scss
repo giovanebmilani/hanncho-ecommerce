@@ -1,0 +1,34 @@
+@import '../../sass/index.scss';
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	padding: max(2rem, 6vw);
+	gap: 5vw;
+	flex-wrap: wrap;
+	row-gap: 10vw;
+
+	.content-list {
+
+		.title {
+			font-size: max(1rem, 2vw);
+			font-weight: 800;
+		}
+
+		display: flex;
+		flex-direction: column;
+		gap: max(1rem, 1vw);
+		align-items: flex-start;
+
+		.icon-button-container {
+			img {
+				width: max(2rem, 3vw);
+				height: max(2rem, 3vw);
+			}
+		}
+
+		.text-button-container {
+			font-weight: normal;
+		}
+	}
+}
