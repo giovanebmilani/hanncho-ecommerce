@@ -94,7 +94,7 @@ const Stock: React.FC = () => {
 		setModalContent?.(
 			<ConfirmationModal
 				title='Deletar variante?'
-				text={`Tem certeza que deseja deletar a variante ${variant.color.name} do produto ${product?.name}?`}
+				text={`Tem certeza que deseja deletar a variante ${variant.colors.map(c => c.name).join('/')} do produto ${product?.name}?`}
 				confirmHandler={() => setIdToDelete(variant.id)}
 			/>
 		)
@@ -158,8 +158,8 @@ const Stock: React.FC = () => {
 											</div>
 										</div>
 										<div className='variant-color-content'>
-											<ColorViewer hex={variant.color.hex} />
-											<p>{variant.color.name}</p>
+											<ColorViewer hex={variant.colors[0].hex} />
+											<p>{variant.colors[0].name}</p>
 										</div>
 									</div>
 

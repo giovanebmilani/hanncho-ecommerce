@@ -1,0 +1,73 @@
+@import '../../sass/index.scss';
+
+.select-input-container {
+	position: relative;
+	width: 100%;
+	min-width: 100px;
+	background: url('../../../public/assets/arrow.svg') no-repeat calc(100% - 10px) 50%;
+	background-size: 32px 32px;
+
+	.box {
+		background: transparent;
+		appearance: none;
+		cursor: pointer;
+
+		input,
+		label {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			right: 48px;
+		}
+	}
+
+	.input-container {
+		> .input {
+			&:focus,
+			&.filled {
+				padding: 20px 16px 8px;
+
+				~ .label {
+					transform: translate(-1%, -80%);
+					transition: transform 100ms ease-in-out;
+					font-size: 10px;
+				}
+			}
+		}
+	}
+
+	> .items {
+		background-color: $black;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		border: 1px solid $grey;
+		border-radius: 12px;
+		max-height: 30vh;
+		overflow: auto;
+		z-index: 10;
+		// animation: appear-down .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+
+
+		> div {
+			display: flex;
+			flex-direction: row;
+			gap: 1vw;
+			align-items: center;
+			padding: 8px 16px;
+			border-top: 1px solid transparent;
+			border-color: $grey;
+			cursor: pointer;
+			> p {
+				width: fit-content;
+				margin: 0;
+				animation: popup .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+			}
+
+			&:hover {
+				background-color: $black;
+			}
+		}
+	}
+}

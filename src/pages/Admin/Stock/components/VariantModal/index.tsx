@@ -16,6 +16,7 @@ import CheckBox from '../../../../../components/CheckBox'
 import RangeInput from '../../../../../components/RangeInput'
 import SizeViewer from '../../../../../components/SizeViewer'
 import { StockDto } from '../../../../../dtos/Stock'
+import MultiSelectInput from '../../../../../components/MultiSelectInput'
 
 export interface VariantModalProps {
 	productId: number
@@ -29,8 +30,8 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	const [basePrice, setBasePrice] = useState<number>(variant?.basePrice || 0)
 	const [discount, setDiscount] = useState<number>(0)
 	const [highlighted, setHighlighted] = useState<boolean>(false)
-	const [color, setColor] = useState<ColorDto | undefined>(variant?.color)
 	const [colors, setColors] = useState<ColorDto[]>([])
+	const [variantColors, setVariantColors] = useState<ColorDto[]>(variant?.colors || [])
 	const [stocks, setStocks] = useState<StockDto[]>(variant?.stocks || [])
 	const { data: colorsData } = useGetAllColors()
 	const {
@@ -40,7 +41,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	} = useProductVariantCreateMutation(productId, {
 		price,
 		basePrice,
-		colorId: color?.id || 0,
+		colors: variantColors,
 		highlighted
 	})
 	const {
@@ -50,7 +51,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	} = useProductVariantUpdateMutation(productId, variant?.id || 0, {
 		price,
 		basePrice,
-		colorId: color?.id || 0,
+		colors: variantColors,
 		highlighted,
 		stocks
 	})
@@ -64,7 +65,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 		if (isUpdateSuccess || isCreationSuccess) {
 			setPrice(0)
 			setBasePrice(0)
-			setColor(undefined)
+			setVariantColors([])
 			setHighlighted(false)
 			setDiscount(0)
 			setStocks([])
@@ -76,7 +77,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 		if (!variant) {
 			setPrice(0)
 			setBasePrice(0)
-			setColor(undefined)
+			setVariantColors([])
 			setDiscount(0)
 			setHighlighted(false)
 			setStocks([])
@@ -85,7 +86,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 		setPrice(variant.price)
 		setBasePrice(variant.basePrice)
 		setDiscount(calculateDiscount(variant.basePrice, variant.price))
-		setColor(variant.color)
+		setVariantColors(variant.colors)
 		setHighlighted(variant.highlighted)
 		setStocks(variant.stocks)
 	}, [hidden])
@@ -119,7 +120,12 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	}
 
 	const handleColorChange = (color?: ColorDto) => {
-		setColor(color)
+		let oldColors = [...variantColors]
+		const targetColor = oldColors.find((s) => s.id === color?.id)
+		if (!targetColor && color) oldColors.push(color)
+		else oldColors = oldColors.filter(c => c.id !== targetColor?.id)
+		console.log(oldColors)
+		setVariantColors(oldColors)
 	}
 
 	const handleHighlightedChange = () => {
@@ -139,7 +145,7 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	}
 
 	const isConfirmButtonDisabled =
-		!price || !basePrice || !color || isCreationLoading || isUpdateLoading
+		!price || !basePrice || variantColors.length <= 0 || isCreationLoading || isUpdateLoading
 
 	return (
 		<div className={'variant-modal'}>
@@ -155,13 +161,22 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 				{/* <p>Preço Final</p> */}
 				{/* <p className='value'>R${price.toFixed(2)}</p> */}
 			</div>
-			<SelectInput
+			<MultiSelectInput
+				values={variantColors}
+				autoCompletion={colors.map((color) => ({ label: color.name, value: color }))}
+				onSelectItem={handleColorChange}
+				labelFunction={(items) => items?.map(c => c.name).join(', ') || 'Nenhuma cor selecionada.'}
+				isSelectedFunction={(item) => variantColors.some(c => c.id === item.id)}
+				label='CORES'
+				required
+			/>
+			{/* <SelectInput
 				value={color?.name}
 				autoCompletion={colors.map((color) => ({ label: color.name, value: color }))}
 				onSelectItem={handleColorChange}
 				label='COR'
 				required
-			/>
+			/> */}
 			<div className='highlight-input'>
 				<p className='emoji'>⭐</p>
 				<CheckBox

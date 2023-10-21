@@ -5,14 +5,14 @@ import { StockDto } from '../Stock'
 export interface VariantCreateDto {
 	price: number
 	basePrice: number
-	colorId: number
+	colors: ColorDto[]
 	highlighted: boolean
 }
 
 export interface VariantUpdateDto {
 	price?: number
 	basePrice?: number
-	colorId?: number
+	colors?: ColorDto[]
 	highlighted?: boolean
 	stocks?: StockDto[]
 	active?: boolean
@@ -28,7 +28,7 @@ export interface VariantDto {
 	id: number
 	price: number
 	basePrice: number
-	color: ColorDto
+	colors: ColorDto[]
 	highlighted: boolean
 	active: boolean
 	images: VariantImageDto[]
