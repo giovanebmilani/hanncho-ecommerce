@@ -91,7 +91,8 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 	}, [hidden])
 
 	useEffect(() => {
-		setPrice(calculatePrice(basePrice, discount))
+		const newPrice = parseFloat(calculatePrice(basePrice, discount).toFixed(2))
+		setPrice(newPrice)
 	}, [basePrice, discount])
 
 	const calculateDiscount = (basePrice: number, price: number) => {
@@ -104,6 +105,13 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 
 	const handleBasePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setBasePrice(parseFloat(e.target.value))
+	}
+
+	const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newPrice = parseFloat(parseFloat(e.target.value).toFixed(2))
+		setPrice(newPrice)
+		const newDiscount = calculateDiscount(basePrice, newPrice)
+		setDiscount(newDiscount)
 	}
 
 	const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,8 +151,9 @@ export const VariantModal: React.FC<VariantModalProps> = ({ productId, variant, 
 					<p className='value'>{discount.toFixed(2)}%</p>
 				</div>
 				<RangeInput value={discount} min={0} max={100} step={0.1} onChange={handleDiscountChange} />
-				<p>Preço Final</p>
-				<p className='value'>R${price.toFixed(2)}</p>
+				<Input label='PREÇO FINAL' type='number' value={price} onChange={handlePriceChange} />
+				{/* <p>Preço Final</p> */}
+				{/* <p className='value'>R${price.toFixed(2)}</p> */}
 			</div>
 			<SelectInput
 				value={color?.name}
