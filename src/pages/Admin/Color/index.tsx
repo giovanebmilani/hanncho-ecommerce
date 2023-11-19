@@ -75,7 +75,7 @@ const ColorDashboard: React.FC = () => {
 							colors.map((color, index) => (
 								<div key={index} className='color-list-item'>
 									<div className='left-content'>
-										<ColorViewer hex={color.hex} />
+										<ColorViewer hex={[color.hex]} />
 										<p>#{color.hex}</p>
 									</div>
 									<div className='middle-content'>

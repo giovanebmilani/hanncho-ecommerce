@@ -99,7 +99,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ color, isEdit, confirmHa
 			<div className='color-pick-area'>
 				<ChromePicker onChange={handleHexChange} disableAlpha={true} color={pickedColor} />
 				<div className='color-view'>
-					<ColorViewer hex={hex} />
+					<ColorViewer hex={[hex]} />
 				</div>
 			</div>
 

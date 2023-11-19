@@ -27,7 +27,9 @@ const Cart: React.FC = () => {
 		let message = 'Olá gostaria de realizar o pedido:%0a'
 		for (const prod of products) {
 			message = message.concat(
-				`- ${prod.name} ${prod.color.name} (TAM:${prod.size}) (id${prod.id})%0a`
+				`- ${prod.name} ${prod.colors.map((c) => c.name).join('/')} (TAM:${prod.size}) (id${
+					prod.id
+				})%0a`
 			)
 		}
 		message = message.concat(

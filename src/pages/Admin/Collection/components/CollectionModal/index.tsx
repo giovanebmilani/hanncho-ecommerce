@@ -115,7 +115,7 @@ export const CollectionModal: React.FC<CollectionModalProps> = ({
 			<div className='color-pick-area'>
 				<ChromePicker onChange={handleHexChange} disableAlpha={true} color={pickedColor} />
 				<div className='color-view'>
-					<ColorViewer hex={highlightColorHex} />
+					<ColorViewer hex={[highlightColorHex]} />
 				</div>
 			</div>
 			<div className='buttons'>

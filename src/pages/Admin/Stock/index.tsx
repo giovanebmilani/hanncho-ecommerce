@@ -158,8 +158,8 @@ const Stock: React.FC = () => {
 											</div>
 										</div>
 										<div className='variant-color-content'>
-											<ColorViewer hex={variant.colors[0].hex} />
-											<p>{variant.colors[0].name}</p>
+											<ColorViewer hex={variant.colors.map(c => c.hex)} />
+											<p>{variant.colors.map(c => c.name).join('/')}</p>
 										</div>
 									</div>
 

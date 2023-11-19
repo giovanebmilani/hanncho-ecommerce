@@ -42,7 +42,7 @@ export const ProductContainer: React.FC<ProductContainerProps> = ({ product }) =
 				</div>
 				<div className='variant-detail'>
 					<p>Tamanho: {product?.size}</p>
-					<p>Cor: {product.color.name}</p>
+					<p>Cor: {product.colors.map(c => c.name).join('/')}</p>
 					{/* <ColorViewer hex={product?.color.hex} colorName={product?.color.name} /> */}
 				</div>
 			</div>

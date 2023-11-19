@@ -32,7 +32,7 @@ export interface PublicVariantImageDto {
 
 export interface ProductResumeDto {
 	id: number
-	color: ColorDto
+	colors: ColorDto[]
 }
 
 export interface PublicProductDto {
@@ -41,7 +41,7 @@ export interface PublicProductDto {
 	description: string
 	category: CategoryDto
 	collection: CollectionDto
-	color: ColorDto
+	colors: ColorDto[]
 	price: number
 	basePrice: number
 	soldOut: boolean

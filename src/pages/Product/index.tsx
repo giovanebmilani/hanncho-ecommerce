@@ -119,8 +119,8 @@ const Product: React.FC = () => {
 										.map((variant, index) => (
 											<ColorViewer
 												key={index}
-												hex={variant.color.hex}
-												colorName={variant.color.name}
+												hex={variant.colors.map((c) => c.hex)}
+												colorName={variant.colors.map((c) => c.name).join('/')}
 												selected={variant.id === productId}
 												onClick={() => {
 													navigate(PAGES.product(variant.id))
